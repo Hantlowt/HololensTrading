@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class GraphLine : MonoBehaviour
 {
 
@@ -12,9 +13,18 @@ public class GraphLine : MonoBehaviour
     public double[] data;
     private Vector3 initial_pos;
     private LineRenderer linerender;
+	private Mesh mesh;
+	private Vector2[] vertices2d;
     // Use this for initialization
+
+	void Restart()
+	{
+		StopAllCoroutines();
+		Start();
+	}
     void Start()
     {
+
 		nbr_points_save = nbr_points;
         initial_pos = transform.position;
         linerender = GetComponent<LineRenderer>();
@@ -22,6 +32,8 @@ public class GraphLine : MonoBehaviour
         data = new double[nbr_points];
         for (int i = 0; i < nbr_points; i++)
             data[i] = 0.0f;
+		mesh = new Mesh();
+		vertices2d = new Vector2[nbr_points + 2];
         StartCoroutine("FakeValues");
     }
 
@@ -55,13 +67,9 @@ public class GraphLine : MonoBehaviour
     void Update_points_position()
     {
 		if (nbr_points_save != nbr_points)
-		{
-			StopAllCoroutines();
-			Start();
-		}
-        float first_point_position = 0.0f;
-        float last_point_position = 0.0f;
+			Restart();
         transform.position = initial_pos;
+		vertices2d[0] = transform.position;
         for (int i = 0; i < nbr_points; i++)
         {
             Vector3 newPos = new Vector3();
@@ -69,16 +77,36 @@ public class GraphLine : MonoBehaviour
             if (MoreDistantData() != 0.0)
                 newPos.y = (((float)data[i] / (float)MoreDistantData()) * height);
             newPos.z = 0.0f;
-            if (i == 0)
-                first_point_position = newPos.y;
-            if (i == nbr_points - 1)
-                last_point_position = newPos.y;
+			vertices2d[i + 1] = newPos;
+			if (i == 0)
+			{
+				vertices2d[0] = newPos;
+				vertices2d[0].y = 0.0f;
+				vertices2d[0] = new Vector2(0.0f, 0.0f);
+			}
+			if (i == nbr_points - 1)
+			{
+				vertices2d[nbr_points + 1] = newPos;
+				vertices2d[nbr_points + 1].y = 0.0f;
+			}
             linerender.SetPosition(i, newPos);
         }
-        //transform.position = new Vector3(transform.position.x,
-        //     transform.position.y + (first_point_position - last_point_position) / 2.0f, transform.position.z);
+		Triangulator tr = new Triangulator(vertices2d);
+		int[] indices = tr.Triangulate();
+		Vector3[] vertices = new Vector3[vertices2d.Length];
+		for (int i = 0; i < vertices.Length; i++)
+		{
+			vertices[i] = new Vector3(vertices2d[i].x, vertices2d[i].y, 0);
+		}
+		mesh.vertices = vertices;
+		mesh.triangles = indices;
+		mesh.RecalculateNormals();
+		mesh.RecalculateBounds();
+		GetComponent<MeshFilter>().mesh = mesh;
+		//transform.position = new Vector3(transform.position.x,
+		//     transform.position.y + (first_point_position - last_point_position) / 2.0f, transform.position.z);
 
-    }
+	}
 
     // Update is called once per frame
     void Update()
