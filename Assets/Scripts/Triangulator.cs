@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
+/* Pour trianguler un ensemble de vertex :) */
 public class Triangulator
 {
 	private List<Vector2> m_points = new List<Vector2>();

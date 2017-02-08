@@ -1,5 +1,9 @@
 ## [Input]()
-Scripts that leverage the HoloLens input features namely Gaze, Gesture and Voice.
+Input System Diagrams:
+![alt text](/External/ReadMeImages/InputSystemDiagram.png)
+![alt text](/External/ReadMeImages/CursorSystemDiagram.PNG)
+
+##Scripts that leverage HoloLens input features namely Gaze, Gesture and Voice.
 
 This contains a fully-featured **input module**, which allows you to handle various types of input and send them to any game object being currently gazed at, or any fallback object. It also includes a **cursor** similar to the HoloLens shell cursor that fully leverages the Unity's animation system.
 
@@ -17,6 +21,7 @@ Game objects that want to consume input events can implement one or many **input
 - **IManipulationHandler** for the Windows manipulation gesture.
 - **INavigationnHandler** for the Windows navigation gesture.
 - **ISourceStateHandler** for the source detected and source lost events.
+- **ISpeechHandler** for voice commands.
 
 The **input manager** listens to the various events coming from the input sources, and also takes into account the gaze. Currently, that gaze is always coming from the GazeManager class, but this could be extended to support multiple gaze sources if the need arises.
 
@@ -141,18 +146,6 @@ Event data for an event coming from the navigation gesture.
 ##### SourceStateEventData.cs
 Event data for an event that represents an input source being detected or lost.
 
-#### GestureManipulator.cs
-A component for moving an object via the GestureManager manipulation gesture.
-
-When an active GestureManipulator component is attached to a GameObject it will subscribe 
-to GestureManager's manipulation gestures, and move the GameObject when a ManipulationGesture occurs. 
-If the GestureManipulator is disabled it will not respond to any manipulation gestures. 
- 
-This means that if multiple GestureManipulators are active in a given scene when a manipulation 
-gesture is performed, all the relevant GameObjects will be moved.  If the desired behavior is that only 
-a single object be moved at a time, it is recommended that objects which should not be moved disable 
-their GestureManipulators, then re-enable them when necessary (e.g. the object is focused). 
-
 #### InputSources
 
 ##### BaseInputSource.cs
@@ -189,15 +182,29 @@ or in your Visual Studio Package.appxmanifest capabilities.
 **RecognizerStart** Set this to determine whether the keyword recognizer will start immediately or if it should wait for your code to tell it to start.
 
 #### Voice
-##### KeywordManager.cs
-Allows you to specify keywords and methods in the Unity Inspector, instead of registering them explicitly in code.  
-**IMPORTANT**: Please make sure to add the microphone capability in your app, in Unity under  
+
+**IMPORTANT**: Please make sure to add the Microphone capabilities in your app, in Unity under  
 Edit -> Project Settings -> Player -> Settings for Windows Store -> Publishing Settings -> Capabilities  
 or in your Visual Studio Package.appxmanifest capabilities.
+
+##### KeywordManager.cs
+Allows you to specify keywords and methods in the Unity Inspector, instead of registering them explicitly in code.  
 
 **_KeywordsAndResponses_** Set the size as the number of keywords you'd like to listen for, then specify the keywords and method responses to complete the array.
 
 **RecognizerStart** Set this to determine whether the keyword recognizer will start immediately or if it should wait for your code to tell it to start.
+
+##### SpeechInputSource.cs
+Allows you to specify keywords and keyboard shortcuts in the Unity Inspector, instead of registering them explicitly in code. Keywords are handled by scripts that implement ISpeechHandler.cs.
+
+Check out Assets/HoloToolkit/Input/Tests/Scripts/SphereKeywords.cs and Assets/HoloToolkit/Input/Tests/Scripts/SphereGlobalKeywords.cs for an example of implementing these features, which is used in the demo scene at Assets/HoloToolkit/Input/Tests/SpeechInputSource.unity.
+
+**_KeywordsAndKeys_** Set the size as the number of keywords you'd like to listen for, then specify the keywords to complete the array.
+
+**RecognizerStart** Set this to determine whether the keyword recognizer will start immediately or if it should wait for your code to tell it to start.
+
+##### ISpeechHandler.cs
+Interface that a game object can implement to react to speech keywords.
 
 ### [Test Prefabs](TestPrefabs)
 
@@ -230,7 +237,15 @@ In this particular implementation, selected object color it toggled on selecting
 A grid of dynamic objects to illustrate sending messages to prefab instances created at runtime as opposed
 to only static objects that already exist in the scene.
 
-### [Tests](Tests)
+#### GazeResponder.cs
+This class implements IFocusable to respond to gaze changes.
+It highlights the object being gazed at.
+
+#### TapResponder.cs
+This class implements IInputClickHandler to handle the tap gesture.
+It increases the scale of the object when tapped.
+
+### [Tests](Tests/Scenes)
 Tests related to the input features. To use the scene:
 
 1. Navigate to the Tests folder.
@@ -251,6 +266,10 @@ Shows the cursor hugging the test sphere in the scene and displays hand detected
 #### FocusedObjectKeywords.unity
 Example on how to send keyword messages to currently focused dynamically instantiated object.
 Gazing on an object and saying "Make Smaller" and "Make Bigger" will adjust object size.
+
+#### InputTapTest.unity
+Test scene shows you in a simple way, how to respond to user's gaze using the Input module.
+It also shows you how to respond to the user's tap gesture.
 
 #### KeywordManager.unity
 Shows how to use the KeywordManager.cs script to add keywords to your scene.
@@ -275,6 +294,19 @@ Example on how to send keyword messages to currently selected dynamically instan
 Gazing on an object and saying "Select Object" will persistently select that object for interaction with voice commands,
 after which the user can also adjust object size with "Make Smaller" and "Make Bigger" voice commands and finally clear
 currently selected object by saying "Clear Selection".
+
+#### SpeechInputSource.unity
+
+Shows how to use the SpeechInputSource.cs script to add keywords to your scene.
+
+1. Select whether you want the recognizer to start automatically or when you manually start it.
+2. Specify the number of keywords you want.
+3. Type the word or phrase you'd like to register as the keyword and, if you want, set a key code to use in the Editor. You can also use an attached microphone with the Editor.
+4. Attach a script that implements ISpeechHandler.cs to the object in the scene that will require the gaze focus to execute the command. You should register this script with the InputManager.cs as a global listener to handle keywords that don't require a focused object.
+
+When you start the scene, your keywords will automatically be registered on a KeywordRecognizer, and the recognizer will be started (or not) based on your Recognizer Start setting.
+
+#### 
 
 ---
 ##### [Go back up to the table of contents.](../../../README.md)

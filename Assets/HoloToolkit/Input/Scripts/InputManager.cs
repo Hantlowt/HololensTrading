@@ -29,10 +29,11 @@ namespace HoloToolkit.Unity.InputModule
         private int disabledRefCount;
 
         private InputEventData inputEventData;
+        private InputClickedEventData sourceClickedEventData;
         private SourceStateEventData sourceStateEventData;
         private ManipulationEventData manipulationEventData;
-        private NavigationEventData navigationEventData;
         private HoldEventData holdEventData;
+        private NavigationEventData navigationEventData;
 
         /// <summary>
         /// Indicates if input is currently enabled or not.
@@ -162,56 +163,6 @@ namespace HoloToolkit.Unity.InputModule
             }
         }
 
-        /// <summary>
-        /// Register an input source with the input manager to make it start listening
-        /// to events from it.
-        /// </summary>
-        /// <param name="inputSource">The input source to register</param>
-        public void RegisterInputSource(IInputSource inputSource)
-        {
-            inputSource.HoldCanceled += InputSource_HoldCanceled;
-            inputSource.HoldCompleted += InputSource_HoldCompleted;
-            inputSource.HoldStarted += InputSource_HoldStarted;
-            inputSource.ManipulationCanceled += InputSource_ManipulationCanceled;
-            inputSource.ManipulationCompleted += InputSource_ManipulationCompleted;
-            inputSource.ManipulationStarted += InputSource_ManipulationStarted;
-            inputSource.ManipulationUpdated += InputSource_ManipulationUpdated;
-            inputSource.SourceDown += InputSource_SourceDown;
-            inputSource.SourceUp += InputSource_SourceUp;
-            inputSource.SourceClicked += InputSource_SourceClicked;
-            inputSource.SourceDetected += InputSource_SourceDetected;
-            inputSource.SourceLost += InputSource_SourceLost;
-            inputSource.NavigationCanceled += InputSource_NavigationCanceled;
-            inputSource.NavigationCompleted += InputSource_NavigationCompleted;
-            inputSource.NavigationStarted += InputSource_NavigationStarted;
-            inputSource.NavigationUpdated += InputSource_NavigationUpdated;
-        }
-
-        /// <summary>
-        /// Unregister an input source from the input manager. Will stop listening to events
-        /// from the source.
-        /// </summary>
-        /// <param name="inputSource">The input source to unregister</param>
-        public void UnregisterInputSource(IInputSource inputSource)
-        {
-            inputSource.HoldCanceled -= InputSource_HoldCanceled;
-            inputSource.HoldCompleted -= InputSource_HoldCompleted;
-            inputSource.HoldStarted -= InputSource_HoldStarted;
-            inputSource.ManipulationCanceled -= InputSource_ManipulationCanceled;
-            inputSource.ManipulationCompleted -= InputSource_ManipulationCompleted;
-            inputSource.ManipulationStarted -= InputSource_ManipulationStarted;
-            inputSource.ManipulationUpdated -= InputSource_ManipulationUpdated;
-            inputSource.SourceDown -= InputSource_SourceDown;
-            inputSource.SourceUp -= InputSource_SourceUp;
-            inputSource.SourceClicked -= InputSource_SourceClicked;
-            inputSource.SourceDetected -= InputSource_SourceDetected;
-            inputSource.SourceLost -= InputSource_SourceLost;
-            inputSource.NavigationCanceled -= InputSource_NavigationCanceled;
-            inputSource.NavigationCompleted -= InputSource_NavigationCompleted;
-            inputSource.NavigationStarted -= InputSource_NavigationStarted;
-            inputSource.NavigationUpdated -= InputSource_NavigationUpdated;
-        }
-
         private void Start()
         {
             InitializeEventDatas();
@@ -227,6 +178,7 @@ namespace HoloToolkit.Unity.InputModule
         private void InitializeEventDatas()
         {
             inputEventData = new InputEventData(EventSystem.current);
+            sourceClickedEventData = new InputClickedEventData(EventSystem.current);
             sourceStateEventData = new SourceStateEventData(EventSystem.current);
             manipulationEventData = new ManipulationEventData(EventSystem.current);
             navigationEventData = new NavigationEventData(EventSystem.current);
@@ -248,10 +200,10 @@ namespace HoloToolkit.Unity.InputModule
             UnregisterGazeManager();
         }
 
-        private void HandleEvent<T>(BaseEventData eventData, ExecuteEvents.EventFunction<T> eventHandler)
+        public void HandleEvent<T>(BaseEventData eventData, ExecuteEvents.EventFunction<T> eventHandler)
             where T : IEventSystemHandler
         {
-            if (disabledRefCount > 0)
+            if (!enabled || disabledRefCount > 0)
             {
                 return;
             }
@@ -331,7 +283,7 @@ namespace HoloToolkit.Unity.InputModule
             }
         }
 
-        private static readonly ExecuteEvents.EventFunction<IFocusable> OnFocusEnterEventHadler =
+        private static readonly ExecuteEvents.EventFunction<IFocusable> OnFocusEnterEventHandler =
             delegate (IFocusable handler, BaseEventData eventData)
             {
                 handler.OnFocusEnter();
@@ -352,7 +304,7 @@ namespace HoloToolkit.Unity.InputModule
 
             if (previousObject != null)
             {
-                ExecuteEvents.ExecuteHierarchy(previousObject, null, OnFocusEnterEventHadler);
+                ExecuteEvents.ExecuteHierarchy(previousObject, null, OnFocusExitEventHandler);
                 if (ShouldSendUnityUiEvents)
                 {
                     ExecuteEvents.ExecuteHierarchy(previousObject, GazeManager.Instance.UnityUIPointerEvent, ExecuteEvents.pointerExitHandler);
@@ -361,7 +313,7 @@ namespace HoloToolkit.Unity.InputModule
 
             if (newObject != null)
             {
-                ExecuteEvents.ExecuteHierarchy(newObject, null, OnFocusExitEventHandler);
+                ExecuteEvents.ExecuteHierarchy(newObject, null, OnFocusEnterEventHandler);
                 if (ShouldSendUnityUiEvents)
                 {
                     ExecuteEvents.ExecuteHierarchy(newObject, GazeManager.Instance.UnityUIPointerEvent, ExecuteEvents.pointerEnterHandler);
@@ -372,17 +324,17 @@ namespace HoloToolkit.Unity.InputModule
         private static readonly ExecuteEvents.EventFunction<IInputClickHandler> OnInputClickedEventHandler =
             delegate (IInputClickHandler handler, BaseEventData eventData)
             {
-                InputEventData casted = ExecuteEvents.ValidateEventData<InputEventData>(eventData);
+                InputClickedEventData casted = ExecuteEvents.ValidateEventData<InputClickedEventData>(eventData);
                 handler.OnInputClicked(casted);
             };
 
-        private void InputSource_SourceClicked(object sender, SourceClickEventArgs e)
+        public void RaiseInputClicked(IInputSource source, uint sourceId, int tapCount)
         {
             // Create input event
-            inputEventData.Initialize(e.InputSource, e.SourceId);
+            sourceClickedEventData.Initialize(source, sourceId, tapCount);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
-            HandleEvent(inputEventData, OnInputClickedEventHandler);
+            HandleEvent(sourceClickedEventData, OnInputClickedEventHandler);
 
             // UI events
             if (ShouldSendUnityUiEvents)
@@ -399,10 +351,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnInputUp(casted);
             };
 
-        private void InputSource_SourceUp(object sender, InputSourceEventArgs e)
+        public void RaiseSourceUp(IInputSource source, uint sourceId)
         {
             // Create input event
-            inputEventData.Initialize(e.InputSource, e.SourceId);
+            inputEventData.Initialize(source, sourceId);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(inputEventData, OnSourceUpEventHandler);
@@ -422,10 +374,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnInputDown(casted);
             };
 
-        private void InputSource_SourceDown(object sender, InputSourceEventArgs e)
+        public void RaiseSourceDown(IInputSource source, uint sourceId)
         {
             // Create input event
-            inputEventData.Initialize(e.InputSource, e.SourceId);
+            inputEventData.Initialize(source, sourceId);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(inputEventData, OnSourceDownEventHandler);
@@ -453,10 +405,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnSourceDetected(casted);
             };
 
-        private void InputSource_SourceDetected(object sender, InputSourceEventArgs e)
+        public void RaiseSourceDetected(IInputSource source, uint sourceId)
         {
             // Create input event
-            sourceStateEventData.Initialize(e.InputSource, e.SourceId);
+            sourceStateEventData.Initialize(source, sourceId);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(sourceStateEventData, OnSourceDetectedEventHandler);
@@ -469,10 +421,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnSourceLost(casted);
             };
 
-        private void InputSource_SourceLost(object sender, InputSourceEventArgs e)
+        public void RaiseSourceLost(IInputSource source, uint sourceId)
         {
             // Create input event
-            sourceStateEventData.Initialize(e.InputSource, e.SourceId);
+            sourceStateEventData.Initialize(source, sourceId);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(sourceStateEventData, OnSourceLostEventHandler);
@@ -485,10 +437,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnManipulationStarted(casted);
             };
 
-        private void InputSource_ManipulationStarted(object sender, ManipulationEventArgs e)
+        public void RaiseManipulationStarted(IInputSource source, uint sourceId, Vector3 cumulativeDelta)
         {
             // Create input event
-            manipulationEventData.Initialize(e.InputSource, e.SourceId, e.CumulativeDelta);
+            manipulationEventData.Initialize(source, sourceId, cumulativeDelta);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(manipulationEventData, OnManipulationStartedEventHandler);
@@ -501,10 +453,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnManipulationUpdated(casted);
             };
 
-        private void InputSource_ManipulationUpdated(object sender, ManipulationEventArgs e)
+        public void RaiseManipulationUpdated(IInputSource source, uint sourceId, Vector3 cumulativeDelta)
         {
             // Create input event
-            manipulationEventData.Initialize(e.InputSource, e.SourceId, e.CumulativeDelta);
+            manipulationEventData.Initialize(source, sourceId, cumulativeDelta);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(manipulationEventData, OnManipulationUpdatedEventHandler);
@@ -517,10 +469,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnManipulationCompleted(casted);
             };
 
-        private void InputSource_ManipulationCompleted(object sender, ManipulationEventArgs e)
+        public void RaiseManipulationCompleted(IInputSource source, uint sourceId, Vector3 cumulativeDelta)
         {
             // Create input event
-            manipulationEventData.Initialize(e.InputSource, e.SourceId, e.CumulativeDelta);
+            manipulationEventData.Initialize(source, sourceId, cumulativeDelta);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(manipulationEventData, OnManipulationCompletedEventHandler);
@@ -533,10 +485,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnManipulationCanceled(casted);
             };
 
-        private void InputSource_ManipulationCanceled(object sender, ManipulationEventArgs e)
+        public void RaiseManipulationCanceled(IInputSource source, uint sourceId, Vector3 cumulativeDelta)
         {
             // Create input event
-            manipulationEventData.Initialize(e.InputSource, e.SourceId, e.CumulativeDelta);
+            manipulationEventData.Initialize(source, sourceId, cumulativeDelta);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(manipulationEventData, OnManipulationCanceledEventHandler);
@@ -549,10 +501,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnHoldStarted(casted);
             };
 
-        private void InputSource_HoldStarted(object sender, HoldEventArgs e)
+        public void RaiseHoldStarted(IInputSource source, uint sourceId)
         {
             // Create input event
-            holdEventData.Initialize(e.InputSource, e.SourceId);
+            holdEventData.Initialize(source, sourceId);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(holdEventData, OnHoldStartedEventHandler);
@@ -565,10 +517,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnHoldCompleted(casted);
             };
 
-        private void InputSource_HoldCompleted(object sender, HoldEventArgs e)
+        public void RaiseHoldCompleted(IInputSource source, uint sourceId)
         {
             // Create input event
-            holdEventData.Initialize(e.InputSource, e.SourceId);
+            holdEventData.Initialize(source, sourceId);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(holdEventData, OnHoldCompletedEventHandler);
@@ -581,10 +533,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnHoldCanceled(casted);
             };
 
-        private void InputSource_HoldCanceled(object sender, HoldEventArgs e)
+        public void RaiseHoldCanceled(IInputSource source, uint sourceId)
         {
             // Create input event
-            holdEventData.Initialize(e.InputSource, e.SourceId);
+            holdEventData.Initialize(source, sourceId);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(holdEventData, OnHoldCanceledEventHandler);
@@ -597,10 +549,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnNavigationStarted(casted);
             };
 
-        private void InputSource_NavigationStarted(object sender, NavigationEventArgs e)
+        public void RaiseNavigationStarted(IInputSource source, uint sourceId, Vector3 normalizedOffset)
         {
             // Create input event
-            navigationEventData.Initialize(e.InputSource, e.SourceId, e.NormalizedOffset);
+            navigationEventData.Initialize(source, sourceId, normalizedOffset);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(navigationEventData, OnNavigationStartedEventHandler);
@@ -613,10 +565,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnNavigationUpdated(casted);
             };
 
-        private void InputSource_NavigationUpdated(object sender, NavigationEventArgs e)
+        public void RaiseNavigationUpdated(IInputSource source, uint sourceId, Vector3 normalizedOffset)
         {
             // Create input event
-            navigationEventData.Initialize(e.InputSource, e.SourceId, e.NormalizedOffset);
+            navigationEventData.Initialize(source, sourceId, normalizedOffset);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(navigationEventData, OnNavigationUpdatedEventHandler);
@@ -629,10 +581,10 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnNavigationCompleted(casted);
             };
 
-        private void InputSource_NavigationCompleted(object sender, NavigationEventArgs e)
+        public void RaiseNavigationCompleted(IInputSource source, uint sourceId, Vector3 normalizedOffset)
         {
             // Create input event
-            navigationEventData.Initialize(e.InputSource, e.SourceId, e.NormalizedOffset);
+            navigationEventData.Initialize(source, sourceId, normalizedOffset);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(navigationEventData, OnNavigationCompletedEventHandler);
@@ -645,13 +597,14 @@ namespace HoloToolkit.Unity.InputModule
                 handler.OnNavigationCanceled(casted);
             };
 
-        private void InputSource_NavigationCanceled(object sender, NavigationEventArgs e)
+        public void RaiseNavigationCanceled(IInputSource source, uint sourceId, Vector3 normalizedOffset)
         {
             // Create input event
-            navigationEventData.Initialize(e.InputSource, e.SourceId, e.NormalizedOffset);
+            navigationEventData.Initialize(source, sourceId, normalizedOffset);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(navigationEventData, OnNavigationCanceledEventHandler);
         }
+
     }
 }
