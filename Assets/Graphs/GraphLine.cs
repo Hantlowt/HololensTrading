@@ -13,6 +13,11 @@ public class GraphLine : MonoBehaviour
 	public string graph_name;
     private LineRenderer linerender;
 	private Vector2[] vertices2d;
+	private bool data_selected = false;
+	private Transform CylinderX;
+	private Transform CylinderY;
+	private Transform Name;
+	private Transform Selected_Data;
 
 	void Restart()
 	{
@@ -22,7 +27,10 @@ public class GraphLine : MonoBehaviour
 
     void Start() //Initialisation..
     {
-
+		Selected_Data = transform.FindChild("Selected_Data");
+		CylinderX = transform.FindChild("CylinderX");
+		CylinderY = transform.FindChild("CylinderY");
+		Name = transform.FindChild("Name");
 		nbr_points_save = nbr_points;
         linerender = GetComponent<LineRenderer>();
 		linerender.numPositions = nbr_points;
@@ -101,23 +109,42 @@ public class GraphLine : MonoBehaviour
 
 	void Update_cylinder() //Deformation et positionnement des supports cylindrique
 	{
-		transform.FindChild("CylinderX").transform.localScale = new Vector3(0.005f, width / 2.0f, 0.005f);
-		transform.FindChild("CylinderX").transform.localPosition = new Vector3(width / 2.0f, 0.0f, 0.0f);
-		transform.FindChild("CylinderY").transform.localScale = new Vector3(0.005f, height / 2.0f, 0.005f);
-		transform.FindChild("CylinderY").transform.localPosition = new Vector3(0.0f, height / 2.0f, 0.0f);
+		CylinderX.transform.localScale = new Vector3(0.005f, width / 2.0f, 0.005f);
+		CylinderX.transform.localPosition = new Vector3(width / 2.0f, 0.0f, 0.0f);
+		CylinderY.transform.localScale = new Vector3(0.005f, height / 2.0f, 0.005f);
+		CylinderY.transform.localPosition = new Vector3(0.0f, height / 2.0f, 0.0f);
 	}
 
-	void Update_Name()
+	void Update_Name() //On change le nom du graph et on le scale correctement
 	{
 		float def = (width < height ? width / 10.0f : height / 10.0f);
-		transform.FindChild("Name").transform.localScale = new Vector3(def, def);
-		transform.FindChild("Name").GetComponent<TextMesh>().text = graph_name;
+		Name.transform.localScale = new Vector3(def, def);
+		Name.GetComponent<TextMesh>().text = graph_name;
 	}
 
-	void Update_Collider()
+	void Update_Collider() //On scale le box collider, important pour le raycast en dessous..
 	{
 		GetComponent<BoxCollider>().center = new Vector3(width / 2.0f, height / 2.0f);
 		GetComponent<BoxCollider>().size = new Vector3(width, height);
+	}
+
+	int Nearest_Points (Vector3 pos)
+	{
+		float dist = Mathf.Infinity;
+		int result_id = 0;
+		pos.y = 0.0f;
+		for (int i = 0; i < nbr_points; i++)
+		{
+			Vector3 pos_point = transform.position + linerender.GetPosition(i);
+			pos_point.y = 0.0f;
+			float temp = Vector3.Distance(pos, pos_point);
+			if (temp < dist)
+			{
+				dist = temp;
+				result_id = i;
+			}
+		}
+		return result_id;
 	}
 
 	// Update is called once per frame
@@ -128,6 +155,29 @@ public class GraphLine : MonoBehaviour
 		RaycastHit hit;
 		if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 10)
 			&& hit.transform.gameObject == this.gameObject)
-			print("Oh yeah");
+			data_selected = true;
+		else
+			data_selected = false;
+		if (data_selected)
+		{
+			Selected_Data.gameObject.SetActive(true);
+			Update_Selected_Data(hit.point);
+		}
+		else
+			Selected_Data.gameObject.SetActive(false);
+	}
+
+	void Update_Selected_Data(Vector3 pos)
+	{
+		int id = Nearest_Points(pos);
+		float def = (width < height ? width / 10.0f : height / 10.0f);
+		Selected_Data.GetComponent<TextMesh>().text = data[id].ToString();
+		Selected_Data.position = transform.position + linerender.GetPosition(id);
+		Selected_Data.localScale = new Vector3(def, def);
+		Vector3 pos_point_line = transform.position + linerender.GetPosition(id);
+		pos.z -= 0.2f;
+		Selected_Data.GetComponent<LineRenderer>().SetPosition(0, pos_point_line);
+		pos_point_line.y -= linerender.GetPosition(id).y;
+		Selected_Data.GetComponent<LineRenderer>().SetPosition(1, pos_point_line);
 	}
 }
