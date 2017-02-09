@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: double_sided
-  m_Shader: {fileID: 4800000, guid: 102ae67d75d24bf49b90cba8fedb7360, type: 3}
+  m_Shader: {fileID: 4800000, guid: d0188c64b3ff75947a4e285da6cedcd4, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -35,6 +35,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     - first:
         name: _DetailNormalMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DiffuseMap
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -113,6 +119,9 @@ Material:
         name: _DstBlend
       second: 10
     - first:
+        name: _EmissiveIntensity
+      second: 0.47
+    - first:
         name: _Gloss
       second: 0.498
     - first:
@@ -153,7 +162,7 @@ Material:
       second: 0
     - first:
         name: _SpecIntensity
-      second: 2
+      second: 0.6
     - first:
         name: _SpecularHighlights
       second: 1

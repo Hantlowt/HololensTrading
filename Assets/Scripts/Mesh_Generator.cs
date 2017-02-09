@@ -4,12 +4,14 @@ using System.Collections;
 /* Classe pour generer des mesh a partir des vertices, elle s'occupe de trianguler, generer les normals map et creer le mesh :) */
 public class Mesh_Generator {
 
-	public Mesh_Generator(Vector2[] vertices2d, GameObject gameobject)
+	Mesh mesh;
+
+	public Mesh_Generator(Vector2[] vertices2d)
 	{
-		Apply_Mesh(Generate_Mesh_from_2dvertices(vertices2d), gameobject);
+		Generate_Mesh_from_2dvertices(vertices2d);
 	}
 
-	public void Apply_Mesh(Mesh mesh, GameObject gameobject)
+	public void Apply_Mesh(GameObject gameobject)
 	{
 		gameobject.GetComponent<MeshFilter>().mesh.Clear();
 		gameobject.GetComponent<MeshFilter>().mesh = mesh;
@@ -17,7 +19,7 @@ public class Mesh_Generator {
 
 	public Mesh Generate_Mesh_from_2dvertices(Vector2[] vertices2d)
 	{
-		Mesh mesh = new Mesh();
+		mesh = new Mesh();
 		Triangulator tr = new Triangulator(vertices2d);
 		int[] indices = tr.Triangulate();
 		Vector3[] vertices = new Vector3[vertices2d.Length];
