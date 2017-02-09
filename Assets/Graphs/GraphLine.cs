@@ -1,19 +1,26 @@
 ﻿using UnityEngine;
+using HoloToolkit.Unity.InputModule;
 using System.Collections;
 
-public class GraphLine : MonoBehaviour
+/* 
+ * La classe GraphLine pour pouvoir gerer les Graphiques en Lignes.
+ * Le but etant de les rendre jolie mais aussi dynamique :)
+ */
+public class GraphLine : MonoBehaviour, IInputClickHandler
 {
 
-    public int nbr_points = 50;
+    public int nbr_points = 50; //Nombre de points dans le graph
 	private int nbr_points_save;
-	public float height = 1.0f;
-    public float width = 1.0f;
-	public float time_to_update = 0.5f;
-    public double[] data;
-	public string graph_name;
+	public float height = 1.0f; //hauteur de celui-ci
+    public float width = 1.0f; //largeur de celui-ci
+	public float time_to_update = 0.5f; //Pour les besoins de la demo, temps qui s'ecoulent avant l'add de data
+    public double[] data; //Les fameuses data
+	public string graph_name; //Nom du graphique, peut-etre modifie a n'importe quel moment
+	public bool selected = false; //Defini si le graph est selectionne (et donc se deplace avec vous)
+	public float distance_selected = 1.0f;
     private LineRenderer linerender;
 	private Vector2[] vertices2d;
-	private bool data_selected = false;
+	private bool data_selected = false; //Lorsque l'on regarde le graph, les donnees s'affichent.. ou non
 	private Transform CylinderX;
 	private Transform CylinderY;
 	private Transform Name;
@@ -36,7 +43,7 @@ public class GraphLine : MonoBehaviour
 		linerender.numPositions = nbr_points;
         data = new double[nbr_points];
 		data[0] = 5.0f;
-        for (int i = 1; i < nbr_points; i++) //On remplit les donnees de zero..
+        for (int i = 1; i < nbr_points; i++) //On remplit les donnes avec n'importe quoi
             data[i] = data[i - 1] + Random.Range(-0.5f, 0.5f);
 		vertices2d = new Vector2[nbr_points + 2];
         StartCoroutine("FakeValues");
@@ -53,9 +60,9 @@ public class GraphLine : MonoBehaviour
     void InsertData(double d)
     {
 		if (d > data[nbr_points - 1])
-			linerender.endColor = Color.green;
+			linerender.endColor = Color.green; //Des variations de couleurs si les chiffres sont en hausse..
 		else
-			linerender.endColor = Color.red;
+			linerender.endColor = Color.red; //.. ou en baisse :)
 		for (int i = 0; i < nbr_points - 1; i++)
             data[i] = data[i + 1];
         data[nbr_points - 1] = d;
@@ -76,7 +83,7 @@ public class GraphLine : MonoBehaviour
 			double d = data[nbr_points - 1] + (double)Random.Range(-0.5f, 0.5f);
 			d = (d > 10.0 ? 10.0 : d);
             InsertData((d < 0.0 ? 0.0 : d));
-			Update_All();
+			Update_All(); //Et remettre a jour le graph
 			yield return new WaitForSeconds(time_to_update);
         }
     }
@@ -127,7 +134,8 @@ public class GraphLine : MonoBehaviour
 		GetComponent<BoxCollider>().center = new Vector3(width / 2.0f, height / 2.0f);
 		GetComponent<BoxCollider>().size = new Vector3(width, height);
 	}
-
+	/* Recupere l'id d'un point du graph le plus proche d'une position dans l'espace
+	 * Utile pour l'affichage des donnes du graph en fonction de la ou l'on regarde, un peu plus bas */
 	int Nearest_Points (Vector3 pos)
 	{
 		float dist = Mathf.Infinity;
@@ -158,26 +166,48 @@ public class GraphLine : MonoBehaviour
 			data_selected = true;
 		else
 			data_selected = false;
+		Update_Selected_Data(hit.point);
+		if (selected)
+		{
+			transform.LookAt(2 * transform.position - Camera.main.transform.position);
+			transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;
+		}
+	}
+	
+	/* Alors... Cette fonction de barbar permet de faire un truc super classe :
+	 * Afficher les donnees du graph !
+	 * Bon en gros, si le curseur est passe sur le graph, data_selected est vrai
+	 * Ainsi, on affiche le gameobject child de la data selected qui est compose de la valeur que
+	 * l'on observe (il faut donc modifie le texte), ainsi que d'un trait indicateur, realise par
+	 * un line_renderer. Il faut donc changer le position de ce traitm la position du texte, et
+	 * scale le tout a l'echelle du graph.
+	 * Aussi, l'utilisation de la fonction Nearest_Point permet de recuperer un id d'un point du graph dont
+	 * une position (celle du curseur en l'occurrence) est la plus proche. C'est ce qui permet de savoir
+	 * quelle donnees afficher..
+	 */ 
+	void Update_Selected_Data(Vector3 pos)
+	{
 		if (data_selected)
 		{
 			Selected_Data.gameObject.SetActive(true);
-			Update_Selected_Data(hit.point);
+			int id = Nearest_Points(pos);
+			float def = (width < height ? width / 10.0f : height / 10.0f);
+			Selected_Data.GetComponent<TextMesh>().text = data[id].ToString();
+			Selected_Data.position = transform.position + linerender.GetPosition(id);
+			Selected_Data.localScale = new Vector3(def, def);
+			Vector3 pos_point_line = transform.position + linerender.GetPosition(id);
+			pos.z -= 0.2f;
+			Selected_Data.GetComponent<LineRenderer>().SetPosition(0, pos_point_line);
+			pos_point_line.y -= linerender.GetPosition(id).y;
+			Selected_Data.GetComponent<LineRenderer>().SetPosition(1, pos_point_line);
 		}
 		else
 			Selected_Data.gameObject.SetActive(false);
 	}
 
-	void Update_Selected_Data(Vector3 pos)
+	public void OnInputClicked (InputClickedEventData eventData)
 	{
-		int id = Nearest_Points(pos);
-		float def = (width < height ? width / 10.0f : height / 10.0f);
-		Selected_Data.GetComponent<TextMesh>().text = data[id].ToString();
-		Selected_Data.position = transform.position + linerender.GetPosition(id);
-		Selected_Data.localScale = new Vector3(def, def);
-		Vector3 pos_point_line = transform.position + linerender.GetPosition(id);
-		pos.z -= 0.2f;
-		Selected_Data.GetComponent<LineRenderer>().SetPosition(0, pos_point_line);
-		pos_point_line.y -= linerender.GetPosition(id).y;
-		Selected_Data.GetComponent<LineRenderer>().SetPosition(1, pos_point_line);
+		selected = !selected;
+		distance_selected = Vector3.Distance(transform.position, Camera.main.transform.position);
 	}
 }
