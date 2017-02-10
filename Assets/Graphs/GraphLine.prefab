@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 23000014124808970}
   - component: {fileID: 33000010833344822}
   - component: {fileID: 65000013943025146}
-  - component: {fileID: 114000013633337938}
+  - component: {fileID: 114933933087702146}
   m_Layer: 0
   m_Name: GraphLine
   m_TagString: Graph
@@ -155,7 +155,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014013835262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.78}
+  m_LocalPosition: {x: 0, y: 0, z: 6.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000013827186392}
@@ -199,7 +199,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1470728984030278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.586, z: 0}
+  m_LocalPosition: {x: 0.277, y: 0.508, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_Children: []
   m_Father: {fileID: 4000012272885948}
@@ -430,9 +430,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &65000010364498648
 BoxCollider:
@@ -500,19 +500,6 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
---- !u!114 &114000013633337938
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014013835262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d40781677294a0e4caffa3460012ae41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RecognizerStart: 0
-  UseRailsNavigation: 0
 --- !u!114 &114000013640123386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -530,6 +517,25 @@ MonoBehaviour:
   time_to_update: 0.5
   data: []
   graph_name: Name Test
+  selected: 0
+  distance_selected: 1
+--- !u!114 &114933933087702146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014013835262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1a2a33ffcac354298137001635a001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxGazeCollisionDistance: 10
+  RaycastLayerMasks:
+  - serializedVersion: 2
+    m_Bits: 4294967291
+  Stabilizer: {fileID: 0}
+  GazeTransform: {fileID: 0}
 --- !u!120 &120000013874768444
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -566,7 +572,7 @@ LineRenderer:
   - {x: 0.5, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 1
+    widthMultiplier: 2
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -667,11 +673,11 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: -1.5, z: 0}
-  - {x: 0, y: -10, z: 0}
+  - {x: 0, y: -1.5, z: -0.02}
+  - {x: 0, y: -10, z: -0.02}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.05
+    widthMultiplier: 0.19
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -732,7 +738,7 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
 --- !u!136 &136000011023224854
 CapsuleCollider:
   m_ObjectHideFlags: 1

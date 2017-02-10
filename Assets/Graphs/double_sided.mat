@@ -7,11 +7,12 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: double_sided
-  m_Shader: {fileID: 4800000, guid: d0188c64b3ff75947a4e285da6cedcd4, type: 3}
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION
   m_LightmapFlags: 1
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -120,7 +121,7 @@ Material:
       second: 10
     - first:
         name: _EmissiveIntensity
-      second: 0.47
+      second: 0.71
     - first:
         name: _Gloss
       second: 0.498
@@ -129,7 +130,7 @@ Material:
       second: 1
     - first:
         name: _Glossiness
-      second: 0.651
+      second: 0.159
     - first:
         name: _GlossyReflections
       second: 1
@@ -138,7 +139,7 @@ Material:
       second: 0
     - first:
         name: _Metallic
-      second: 0
+      second: 1
     - first:
         name: _Mode
       second: 3

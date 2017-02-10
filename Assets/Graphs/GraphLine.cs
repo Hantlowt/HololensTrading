@@ -17,7 +17,7 @@ public class GraphLine : MonoBehaviour, IInputClickHandler
     public double[] data; //Les fameuses data
 	public string graph_name; //Nom du graphique, peut-etre modifie a n'importe quel moment
 	public bool selected = false; //Defini si le graph est selectionne (et donc se deplace avec vous)
-	public float distance_selected = 1.0f;
+	public float distance_selected = 5.0f;
     private LineRenderer linerender;
 	private Vector2[] vertices2d;
 	private bool data_selected = false; //Lorsque l'on regarde le graph, les donnees s'affichent.. ou non
@@ -134,6 +134,7 @@ public class GraphLine : MonoBehaviour, IInputClickHandler
 		GetComponent<BoxCollider>().center = new Vector3(width / 2.0f, height / 2.0f);
 		GetComponent<BoxCollider>().size = new Vector3(width, height);
 	}
+
 	/* Recupere l'id d'un point du graph le plus proche d'une position dans l'espace
 	 * Utile pour l'affichage des donnes du graph en fonction de la ou l'on regarde, un peu plus bas */
 	int Nearest_Points (Vector3 pos)
@@ -144,7 +145,7 @@ public class GraphLine : MonoBehaviour, IInputClickHandler
 		for (int i = 0; i < nbr_points; i++)
 		{
 			Vector3 pos_point = transform.position + linerender.GetPosition(i);
-			pos_point.y = 0.0f;
+			pos_point.y = pos.y;
 			float temp = Vector3.Distance(pos, pos_point);
 			if (temp < dist)
 			{
@@ -169,8 +170,12 @@ public class GraphLine : MonoBehaviour, IInputClickHandler
 		Update_Selected_Data(hit.point);
 		if (selected)
 		{
+			Vector3 new_pos;
 			transform.LookAt(2 * transform.position - Camera.main.transform.position);
-			transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;
+			new_pos = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;
+			new_pos.x -= width / 2.0f;
+			new_pos.y -= height / 2.0f;
+			transform.position = new_pos;
 		}
 	}
 	
@@ -193,12 +198,13 @@ public class GraphLine : MonoBehaviour, IInputClickHandler
 			int id = Nearest_Points(pos);
 			float def = (width < height ? width / 10.0f : height / 10.0f);
 			Selected_Data.GetComponent<TextMesh>().text = data[id].ToString();
-			Selected_Data.position = transform.position + linerender.GetPosition(id);
+			Vector3 pos_point_line = linerender.GetPosition(id);
+			pos_point_line.y += 0.1f;
+			Selected_Data.localPosition = pos_point_line;
 			Selected_Data.localScale = new Vector3(def, def);
-			Vector3 pos_point_line = transform.position + linerender.GetPosition(id);
-			pos.z -= 0.2f;
+			pos_point_line = new Vector3(0.0f, -1.5f, -0.3f);
 			Selected_Data.GetComponent<LineRenderer>().SetPosition(0, pos_point_line);
-			pos_point_line.y -= linerender.GetPosition(id).y;
+			pos_point_line.y -= linerender.GetPosition(id).y / Selected_Data.localScale.y + 1.5f;
 			Selected_Data.GetComponent<LineRenderer>().SetPosition(1, pos_point_line);
 		}
 		else
