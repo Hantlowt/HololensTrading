@@ -518,7 +518,7 @@ MonoBehaviour:
   data: []
   graph_name: Name Test
   selected: 0
-  distance_selected: 1
+  distance_selected: 5
 --- !u!114 &114933933087702146
 MonoBehaviour:
   m_ObjectHideFlags: 1
