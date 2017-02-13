@@ -182,7 +182,7 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0, g: 0.5448277, b: 1, a: 0.516}
+      second: {r: 0.19463669, g: 0.3289584, b: 0.44117647, a: 0.516}
     - first:
         name: _Diffusecolor
       second: {r: 0, g: 0.2965517, b: 1, a: 1}

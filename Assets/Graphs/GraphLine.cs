@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using HoloToolkit.Unity.InputModule;
 using System.Collections;
 
 /* 
  * La classe GraphLine pour pouvoir gerer les Graphiques en Lignes.
  * Le but etant de les rendre jolie mais aussi dynamique :)
  */
-public class GraphLine : MonoBehaviour, IInputClickHandler
+public class GraphLine : MonoBehaviour
 {
 
     public int nbr_points = 50; //Nombre de points dans le graph
@@ -16,8 +15,6 @@ public class GraphLine : MonoBehaviour, IInputClickHandler
 	public float time_to_update = 0.5f; //Pour les besoins de la demo, temps qui s'ecoulent avant l'add de data
     public double[] data; //Les fameuses data
 	public string graph_name; //Nom du graphique, peut-etre modifie a n'importe quel moment
-	public bool selected = false; //Defini si le graph est selectionne (et donc se deplace avec vous)
-	public float distance_selected = 5.0f;
     private LineRenderer linerender;
 	private Vector2[] vertices2d;
 	private bool data_selected = false; //Lorsque l'on regarde le graph, les donnees s'affichent.. ou non
@@ -168,15 +165,6 @@ public class GraphLine : MonoBehaviour, IInputClickHandler
 		else
 			data_selected = false;
 		Update_Selected_Data(hit.point);
-		if (selected)
-		{
-			Vector3 new_pos;
-			transform.LookAt(2 * transform.position - Camera.main.transform.position);
-			new_pos = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;
-			new_pos.x -= width / 2.0f;
-			new_pos.y -= height / 2.0f;
-			transform.position = new_pos;
-		}
 	}
 	
 	/* Alors... Cette fonction de barbar permet de faire un truc super classe :
@@ -211,9 +199,5 @@ public class GraphLine : MonoBehaviour, IInputClickHandler
 			Selected_Data.gameObject.SetActive(false);
 	}
 
-	public void OnInputClicked (InputClickedEventData eventData)
-	{
-		selected = !selected;
-		distance_selected = Vector3.Distance(transform.position, Camera.main.transform.position);
-	}
+
 }
