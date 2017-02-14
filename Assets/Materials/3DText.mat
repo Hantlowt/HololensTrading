@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: double_sided
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: 3DText
+  m_Shader: {fileID: 4800000, guid: ed875ad522f007041bfae56323b7e665, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -40,24 +40,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
-        name: _DiffuseMap
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
-        name: _DiffuseMapSpecA
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
-        name: _DiffuseMapTransA
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
         name: _EmissionMap
       second:
         m_Texture: {fileID: 0}
@@ -70,19 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
-        name: _MatCap
-      second:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
         name: _MetallicGlossMap
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
-        name: _NormalMap
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -95,12 +65,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     - first:
         name: _ParallaxMap
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
-        name: _SpecularMap
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -119,59 +83,35 @@ Material:
         name: _DstBlend
       second: 0
     - first:
-        name: _EmissiveIntensity
-      second: 0.71
-    - first:
-        name: _Gloss
-      second: 0.498
-    - first:
         name: _GlossMapScale
       second: 1
     - first:
         name: _Glossiness
-      second: 0.48
+      second: 0.5
     - first:
         name: _GlossyReflections
       second: 1
     - first:
-        name: _MatCapAccurate
-      second: 0
-    - first:
         name: _Metallic
-      second: 1
+      second: 0
     - first:
         name: _Mode
       second: 0
     - first:
-        name: _NormalIntensity
-      second: 1.1
-    - first:
         name: _OcclusionStrength
       second: 1
-    - first:
-        name: _Outline
-      second: 0.0069
     - first:
         name: _Parallax
       second: 0.02
     - first:
-        name: _Shininess
-      second: 0.412
-    - first:
         name: _SmoothnessTextureChannel
       second: 0
-    - first:
-        name: _SpecIntensity
-      second: 0.6
     - first:
         name: _SpecularHighlights
       second: 1
     - first:
         name: _SrcBlend
       second: 1
-    - first:
-        name: _Transparency
-      second: 0.452
     - first:
         name: _UVSec
       second: 0
@@ -181,16 +121,10 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0.64705884, g: 0.5966591, b: 0.19031142, a: 0.516}
+      second: {r: 1, g: 1, b: 1, a: 1}
     - first:
-        name: _Diffusecolor
-      second: {r: 0, g: 0.2965517, b: 1, a: 1}
+        name: _Colorize
+      second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
-    - first:
-        name: _RimColor
-      second: {r: 0.011764706, g: 0, b: 0.37254903, a: 1}
-    - first:
-        name: _Speccolor
-      second: {r: 0, g: 0.5448277, b: 1, a: 1}
