@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 65506010854826700}
   m_Layer: 0
   m_Name: GraphBar
-  m_TagString: Untagged
+  m_TagString: Graph
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2717e57484311f74782ce70399fa5c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nbr_points: 13
+  nbr_points: 28
   height: 0.5
   width: 0.8
   time_to_update: 0.5
