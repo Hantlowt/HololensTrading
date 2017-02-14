@@ -19,26 +19,14 @@ public class Selector : MonoBehaviour, IInputClickHandler
         if (selected_object != null)
         {
             //Vector3 new_pos;
+            selected_object.transform.LookAt(2 * transform.position - Camera.main.transform.position);
+            selected_object.transform.localRotation = Quaternion.identity;
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 10)
                 && hit.transform.gameObject.tag != "Graph")
-            {
                 selected_object.transform.position = hit.transform.position;
-                selected_object.transform.rotation = Quaternion.FromToRotation(selected_object.transform.forward, hit.normal);
-                
-            }
             else
-            {
-                selected_object.transform.localRotation = Quaternion.identity;
-                selected_object.transform.LookAt(2 * transform.position - Camera.main.transform.position);
                 selected_object.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;
-            }
-            selected_object.transform.rotation = Quaternion.Euler(lockrot.eulerAngles.x,
-                selected_object.transform.rotation.eulerAngles.y, lockrot.eulerAngles.z);
-                //new_pos = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;
-            // selected_object.transform.position = new_pos;
-           // selected_object.transform.parent = this.transform;
-            //selected_object.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
         }
     }
 
@@ -53,10 +41,13 @@ public class Selector : MonoBehaviour, IInputClickHandler
                 selected_object.transform.parent = Camera.main.transform;
                 distance_selected = Vector3.Distance(transform.position, Camera.main.transform.position);
                 lockrot = selected_object.transform.rotation;
+                selected_object.GetComponent<BoxCollider>().enabled = false;
+
             }
-            else
+            else if(selected_object != null)
             {
                 selected_object.transform.parent = null;
+                selected_object.GetComponent<BoxCollider>().enabled = true;
                 selected_object = null;
             }
             //selected_object.transform.localPosition = GetComponent<BoxCollider>().center;

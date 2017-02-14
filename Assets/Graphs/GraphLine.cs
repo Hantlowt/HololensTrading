@@ -141,7 +141,7 @@ public class GraphLine : MonoBehaviour
 		pos.y = 0.0f;
 		for (int i = 0; i < nbr_points; i++)
 		{
-			Vector3 pos_point = transform.position + linerender.GetPosition(i);
+			Vector3 pos_point = transform.TransformPoint(linerender.GetPosition(i));
 			pos_point.y = pos.y;
 			float temp = Vector3.Distance(pos, pos_point);
 			if (temp < dist)
