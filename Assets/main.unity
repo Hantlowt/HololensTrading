@@ -1563,14 +1563,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 114803622779191682, guid: f61631fd582318b4f8ab47045f48778b,
+    - target: {fileID: 102057591938052544, guid: f61631fd582318b4f8ab47045f48778b,
         type: 2}
-      propertyPath: nbr_points
-      value: 28
+      propertyPath: m_FontSize
+      value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 1764986235632808, guid: f61631fd582318b4f8ab47045f48778b, type: 2}
-      propertyPath: m_TagString
-      value: Graph
+    - target: {fileID: 4812848627554710, guid: f61631fd582318b4f8ab47045f48778b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.009
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f61631fd582318b4f8ab47045f48778b, type: 2}
