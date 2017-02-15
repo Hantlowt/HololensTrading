@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ public class Bar : MonoBehaviour {
             data_text.SetActive(false);
         }
             
-        data_text.GetComponent<TextMesh>().text = data.ToString();
+        data_text.GetComponent<TextMesh>().text = Math.Round(data, 3).ToString();
         
         float height = Graph.GetComponent<GraphBar>().height;
         float width = Graph.GetComponent<GraphBar>().width;

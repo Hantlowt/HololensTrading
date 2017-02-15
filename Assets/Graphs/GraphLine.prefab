@@ -78,7 +78,6 @@ GameObject:
   - component: {fileID: 23000014124808970}
   - component: {fileID: 33000010833344822}
   - component: {fileID: 65000013943025146}
-  - component: {fileID: 114933933087702146}
   m_Layer: 0
   m_Name: GraphLine
   m_TagString: Graph
@@ -517,23 +516,6 @@ MonoBehaviour:
   time_to_update: 0.5
   data: []
   graph_name: Name Test
---- !u!114 &114933933087702146
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014013835262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d1a2a33ffcac354298137001635a001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxGazeCollisionDistance: 10
-  RaycastLayerMasks:
-  - serializedVersion: 2
-    m_Bits: 4294967291
-  Stabilizer: {fileID: 0}
-  GazeTransform: {fileID: 0}
 --- !u!120 &120000013874768444
 LineRenderer:
   m_ObjectHideFlags: 1

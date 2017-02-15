@@ -40,7 +40,7 @@ public class GraphLine : MonoBehaviour
 		linerender.numPositions = nbr_points;
         data = new double[nbr_points];
 		data[0] = 5.0f;
-        for (int i = 1; i < nbr_points; i++) //On remplit les donnes avec n'importe quoi
+        for (int i = 1; i < nbr_points; i++) //On remplit les donnees avec n'importe quoi
             data[i] = data[i - 1] + Random.Range(-0.5f, 0.5f);
 		vertices2d = new Vector2[nbr_points + 2];
         StartCoroutine("FakeValues");
@@ -86,8 +86,8 @@ public class GraphLine : MonoBehaviour
     }
 
 	/* 
-	 * Fonction permettant d'update dans le world la position des points
-	 * ainsi que de generer un mesh a la volee afin de "dessiner" le support en dessous les bars
+	 * Permets de mettre à jour la position des points dans le monde
+	 * et genere un mesh a la volee afin de "dessiner" le support d'en dessous des points de la ligne
 	 */
     void Update_points_position()
     {
@@ -111,7 +111,7 @@ public class GraphLine : MonoBehaviour
 		m.Apply_Mesh(this.gameObject);
 	}
 
-	void Update_cylinder() //Deformation et positionnement des supports cylindrique
+	void Update_cylinder() //Deformation et positionnement des supports cylindriques
 	{
 		CylinderX.transform.localScale = new Vector3(0.005f, width / 2.0f, 0.005f);
 		CylinderX.transform.localPosition = new Vector3(width / 2.0f, 0.0f, 0.0f);
@@ -167,16 +167,16 @@ public class GraphLine : MonoBehaviour
 		Update_Selected_Data(hit.point);
 	}
 	
-	/* Alors... Cette fonction de barbar permet de faire un truc super classe :
+	/* Alors... Cette fonction de barbare permet de faire un truc super classe :
 	 * Afficher les donnees du graph !
 	 * Bon en gros, si le curseur est passe sur le graph, data_selected est vrai
-	 * Ainsi, on affiche le gameobject child de la data selected qui est compose de la valeur que
-	 * l'on observe (il faut donc modifie le texte), ainsi que d'un trait indicateur, realise par
-	 * un line_renderer. Il faut donc changer le position de ce traitm la position du texte, et
-	 * scale le tout a l'echelle du graph.
-	 * Aussi, l'utilisation de la fonction Nearest_Point permet de recuperer un id d'un point du graph dont
-	 * une position (celle du curseur en l'occurrence) est la plus proche. C'est ce qui permet de savoir
-	 * quelle donnees afficher..
+	 * Ainsi, on affiche le gameobject child de la data selected qui est composee de :
+	 * - la valeur que l'on observe (il faut donc modifier le texte);
+	 * - ainsi que d'un trait indicateur, realise par un line_renderer. Il faut donc changer le position de ce trait avec la position du texte,
+	 * et mettre à jour la taille du tout selon l'echelle du graph.
+	 * La fonction Nearest_Point permet de recuperer l'id d'un point du graph dont une position
+	 * (celle du curseur en l'occurrence) est la plus proche. C'est ce qui permet de savoir
+	 * quelle donnees afficher.
 	 */ 
 	void Update_Selected_Data(Vector3 pos)
 	{
@@ -184,8 +184,8 @@ public class GraphLine : MonoBehaviour
 		{
 			Selected_Data.gameObject.SetActive(true);
 			int id = Nearest_Points(pos);
-			float def = (width < height ? width / 10.0f : height / 10.0f);
-			Selected_Data.GetComponent<TextMesh>().text = data[id].ToString();
+			float def = width < height ? width / 10.0f : height / 10.0f;
+			Selected_Data.GetComponent<TextMesh>().text = System.Math.Round(data[id], 3).ToString();
 			Vector3 pos_point_line = linerender.GetPosition(id);
 			pos_point_line.y += 0.1f;
 			Selected_Data.localPosition = pos_point_line;
