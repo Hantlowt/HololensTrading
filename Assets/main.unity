@@ -144,25 +144,6 @@ MonoBehaviour:
   - CAC40
   - EUR/USD
   - Oil Brent
---- !u!1 &51700474 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000012943254746, guid: b2db04283121ca74495c2ee000fb4243,
-    type: 2}
-  m_PrefabInternal: {fileID: 1695240873}
---- !u!114 &51700478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 51700474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b942647d4ac3df948823f086c5a56c15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selected_object: {fileID: 0}
-  distance_selected: 0
-  lockrot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &154472816
 GameObject:
   m_ObjectHideFlags: 0
@@ -2537,22 +2518,6 @@ Prefab:
     - target: {fileID: 4000013535415816, guid: b2db04283121ca74495c2ee000fb4243, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013851064060, guid: b2db04283121ca74495c2ee000fb4243,
-        type: 2}
-      propertyPath: PrimaryCursorVisual
-      value: 
-      objectReference: {fileID: 4000011283192616, guid: b2db04283121ca74495c2ee000fb4243,
-        type: 2}
-    - target: {fileID: 114000013851064060, guid: b2db04283121ca74495c2ee000fb4243,
-        type: 2}
-      propertyPath: DefaultCursorDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013851064060, guid: b2db04283121ca74495c2ee000fb4243,
-        type: 2}
-      propertyPath: SurfaceCursorDistance
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b2db04283121ca74495c2ee000fb4243, type: 2}

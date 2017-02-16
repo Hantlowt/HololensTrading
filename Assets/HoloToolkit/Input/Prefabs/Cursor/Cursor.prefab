@@ -37,6 +37,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4000013535415816}
   - component: {fileID: 114000013851064060}
+  - component: {fileID: 114689253998401214}
+  - component: {fileID: 114045743718463358}
   m_Layer: 2
   m_Name: Cursor
   m_TagString: Untagged
@@ -122,7 +124,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012943254746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6.4688234, y: -1.4095377, z: 6.229497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000011283192616}
@@ -214,14 +216,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinCursorDistance: 1
-  DefaultCursorDistance: 2
-  SurfaceCursorDistance: 0.02
+  DefaultCursorDistance: 10
+  SurfaceCursorDistance: 0
   UseUnscaledTime: 1
   PositionLerpTime: 0.01
   ScaleLerpTime: 0.01
   RotationLerpTime: 0.01
   LookRotationBlend: 0.5
-  PrimaryCursorVisual: {fileID: 0}
+  PrimaryCursorVisual: {fileID: 4000011283192616}
   CursorStateData:
   - Name: On Hologram
     CursorState: 1
@@ -236,3 +238,34 @@ MonoBehaviour:
     CursorState: 2
     CursorObject: {fileID: 1000013615056792}
   ParentTransform: {fileID: 0}
+--- !u!114 &114045743718463358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012943254746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b942647d4ac3df948823f086c5a56c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected_object: {fileID: 0}
+  distance_selected: 0
+  lockrot: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114689253998401214
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012943254746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1a2a33ffcac354298137001635a001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxGazeCollisionDistance: 10
+  RaycastLayerMasks:
+  - serializedVersion: 2
+    m_Bits: 4294967291
+  Stabilizer: {fileID: 0}
+  GazeTransform: {fileID: 0}
