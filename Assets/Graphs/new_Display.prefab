@@ -299,4 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   led_images_prefab:
   - {fileID: 1914473921726698, guid: 9185d148d0c55a94bae8e6e4ea52c7cb, type: 2}
+  - {fileID: 1914473921726698, guid: 9185d148d0c55a94bae8e6e4ea52c7cb, type: 2}
+  - {fileID: 1914473921726698, guid: 9185d148d0c55a94bae8e6e4ea52c7cb, type: 2}
+  - {fileID: 1914473921726698, guid: 9185d148d0c55a94bae8e6e4ea52c7cb, type: 2}
   speed: 0.1
