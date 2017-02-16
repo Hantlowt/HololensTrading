@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GraphBar : MonoBehaviour {
 
-    public int nbr_bar = 50; //Nombre de points dans le graph
+    public int nbr_bar = 50; //Nombre de bar dans le graph
     private int nbr_bar_save;
     public float height = 1.0f; //hauteur de celui-ci
     public float width = 1.0f; //largeur de celui-ci
@@ -12,7 +12,7 @@ public class GraphBar : MonoBehaviour {
     public double[] data; //Les fameuses data
     private GameObject[] bars;
     public GameObject bar_prefab;
-    public string graph_name; //Nom du graphique, peut etre modifie a n'importe quel moment
+    public string graph_name; //Nom du graphique (peut etre modifie a n'importe quel moment dans Unity)
     private Transform CylinderX;
     private Transform CylinderY;
     private Transform Name;
@@ -37,7 +37,7 @@ public class GraphBar : MonoBehaviour {
                 Destroy(bars[i]);
         bars = new GameObject[nbr_bar];
         data[0] = 5.0f;
-        for (int i = 1; i < nbr_bar; i++) //On remplit les donnes avec n'importe quoi
+        for (int i = 1; i < nbr_bar; i++) //On remplit les donnees avec des nombres fictifs mais cohérents.
             data[i] = data[i - 1] + Random.Range(-0.5f, 0.5f);
         for (int i = 0; i < nbr_bar; i++)
         {
