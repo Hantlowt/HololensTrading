@@ -22,6 +22,8 @@ public class GraphLine : MonoBehaviour
 	private Transform CylinderY;
 	private Transform Name;
 	private Transform Selected_Data;
+    private bool raycast;
+    private RaycastHit hit;
 
 	void Restart()
 	{
@@ -43,6 +45,7 @@ public class GraphLine : MonoBehaviour
         for (int i = 1; i < nbr_points; i++) //On remplit les donnees avec n'importe quoi
             data[i] = data[i - 1] + Random.Range(-0.5f, 0.5f);
 		vertices2d = new Vector2[nbr_points + 2];
+        raycast = false;
         StartCoroutine("FakeValues");
     }
 
@@ -158,13 +161,12 @@ public class GraphLine : MonoBehaviour
     {
 		if (nbr_points_save != nbr_points)
 			Restart();
-		RaycastHit hit;
-		if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 10)
-			&& hit.transform.gameObject == this.gameObject)
+		if (raycast && hit.transform.gameObject == this.gameObject)
 			data_selected = true;
 		else
 			data_selected = false;
 		Update_Selected_Data(hit.point);
+        raycast = false;
 	}
 	
 	/* Alors... Cette fonction de barbare permet de faire un truc super classe :
@@ -199,5 +201,9 @@ public class GraphLine : MonoBehaviour
 			Selected_Data.gameObject.SetActive(false);
 	}
 
-
+    void Raycast_Receiver(RaycastHit h)
+    {
+        raycast = true;
+        hit = h;
+    }
 }

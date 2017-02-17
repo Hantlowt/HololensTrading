@@ -128,10 +128,5 @@ public class GraphBar : MonoBehaviour {
     {
         if (nbr_bar_save != nbr_bar)
             Restart();
-       /* RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 10)
-            && hit.transform.gameObject.name == "Bar")
-            Debug.Log("hit touch bar");
-			*/
     }
 }
