@@ -40,7 +40,7 @@ public class Bar : MonoBehaviour {
         float def = (width < height ? width / 10.0f : height / 10.0f);
         //data_text.GetComponent<TextMesh>().fontSize = (int)def;
         data_text.transform.localScale = new Vector3(1.0f / transform.localScale.x * def, 1.0f / transform.localScale.y * def);
-        data_text.transform.localPosition = new Vector3(0.0f, 0.5f / transform.localScale.y);
+        //data_text.transform.localPosition = new Vector3(0.0f, 0.5f / transform.localScale.y);
         raycast = false;
     }
 
