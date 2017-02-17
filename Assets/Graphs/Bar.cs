@@ -9,19 +9,20 @@ public class Bar : MonoBehaviour {
     private GameObject Graph;
     public Color normal_color;
     public Color select_color;
+    public bool raycast;
+    public RaycastHit hit;
 	// Use this for initialization
 	void Start () {
         data_text = transform.FindChild("data").gameObject;
         data_text.SetActive(false);
         data = 0.0;
         Graph = transform.parent.gameObject;
+        raycast = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 10)
-            && hit.transform.gameObject == this.gameObject)
+        if (raycast)
         {
             data_text.SetActive(true);
             GetComponent<MeshRenderer>().material.color = select_color;
@@ -40,5 +41,12 @@ public class Bar : MonoBehaviour {
         //data_text.GetComponent<TextMesh>().fontSize = (int)def;
         data_text.transform.localScale = new Vector3(1.0f / transform.localScale.x * def, 1.0f / transform.localScale.y * def);
         data_text.transform.localPosition = new Vector3(0.0f, 0.5f / transform.localScale.y);
+        raycast = false;
+    }
+
+    void Raycast_Receiver(RaycastHit h)
+    {
+        raycast = true;
+        hit = h;
     }
 }
