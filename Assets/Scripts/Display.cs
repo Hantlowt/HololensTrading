@@ -5,12 +5,14 @@ using UnityEngine;
 public class Display : MonoBehaviour {
     public GameObject[] led_images_prefab;
     private GameObject[] led_images;
+    private int pos;
     private int nbr_instance;
     public float speed;
 	// Use this for initialization
 	void Start () {
         nbr_instance = 4;
         led_images = new GameObject[nbr_instance];
+        pos = 0;
         for (int i = 0; i < nbr_instance; i++)
         {
             led_images[i] = Instantiate(led_images_prefab[i % led_images_prefab.Length]);
@@ -57,3 +59,19 @@ public class Display : MonoBehaviour {
         return (System.Math.Abs(a * b) + a) % b;
     }
 }
+
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Display : MonoBehaviour {
+    public GameObject[] led_images_prefab;
+    private GameObject[] led_images;
+    private int nbr_instance;
+    public float speed;
+	// Use this for initialization
+        led_images = new GameObject[nbr_instance];
+        for (int i = 0; i < nbr_instance; i++)
+        {
+            led_images[i] = Instantiate(led_images_prefab[i % led_images_prefab.Length]);
+            led_images[i].transform.parent = this.transform;
