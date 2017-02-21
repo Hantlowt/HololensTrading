@@ -20,7 +20,7 @@ public class GraphLine : MonoBehaviour
 	private bool data_selected = false; //Lorsque l'on regarde le graph, les donnees s'affichent.. ou non
 	private Transform CylinderX;
 	private Transform CylinderY;
-	private Transform Name;
+	//private Transform Name;
 	private Transform Selected_Data;
     private bool raycast;
     private RaycastHit hit;
@@ -36,17 +36,25 @@ public class GraphLine : MonoBehaviour
 		Selected_Data = transform.FindChild("Selected_Data");
 		CylinderX = transform.FindChild("CylinderX");
 		CylinderY = transform.FindChild("CylinderY");
-		Name = transform.FindChild("Name");
+		//Name = transform.FindChild("Name");
 		nbr_points_save = nbr_points;
         linerender = GetComponent<LineRenderer>();
 		linerender.numPositions = nbr_points;
         data = new double[nbr_points];
 		data[0] = 5.0f;
-        for (int i = 1; i < nbr_points; i++) //On remplit les donnees avec n'importe quoi
+
+		//////////////////////////////////////////////////////////////////////////
+		// !! MEMO DD TO DO => A REMPLIR AVEC DES DONNEES COHERENTE REQUEST API //
+		//////////////////////////////////////////////////////////////////////////
+
+		/* version d'Antoine - sauvegarde en attendant fonctionnement API :
+		 *  */
+		for (int i = 1; i < nbr_points; i++) //On remplit les donnees avec n'importe quoi
             data[i] = data[i - 1] + Random.Range(-0.5f, 0.5f);
+		
 		vertices2d = new Vector2[nbr_points + 2];
         raycast = false;
-        StartCoroutine("FakeValues");
+       // StartCoroutine("FakeValues");
     }
 
     double MoreDistantData()
@@ -72,11 +80,26 @@ public class GraphLine : MonoBehaviour
 	{
 		Update_points_position();
 		Update_cylinder();
-		Update_Name();
+		//Update_Name();
 		Update_Collider();
 	}
 
-    IEnumerator FakeValues() //Coroutine pour ajouter regulierement des fausses valeurs au graph
+
+	IEnumerator FakeValues () //Coroutine pour ajouter regulierement des valeurs au graph par requete API
+	{
+		while (true)
+		{
+			double d = data[nbr_points - 1] + (double)Random.Range(-0.5f, 0.5f);
+			d = (d > 10.0 ? 10.0 : d);
+			InsertData((d < 0.0 ? 0.0 : d));
+			Update_All(); //Et remettre a jour le graph
+			yield return new WaitForSeconds(time_to_update);
+		}
+	}
+
+	/* version d'Antoine - sauvegarde en attendant fonctionnement API :
+	 * 
+	IEnumerator FakeValues() //Coroutine pour ajouter regulierement des fausses valeurs au graph
     {
         while (true)
         {
@@ -87,12 +110,13 @@ public class GraphLine : MonoBehaviour
 			yield return new WaitForSeconds(time_to_update);
         }
     }
+	*/
 
-	/* 
-	 * Permets de mettre à jour la position des points dans le monde
-	 * et genere un mesh a la volee afin de "dessiner" le support d'en dessous des points de la ligne
-	 */
-    void Update_points_position()
+		/* 
+		 * Permets de mettre à jour la position des points dans le monde
+		 * et genere un mesh a la volee afin de "dessiner" le support d'en dessous des points de la ligne
+		 */
+		void Update_points_position()
     {
 		vertices2d[0] = new Vector2(0.0f, -0.001f);
 		for (int i = 0; i < nbr_points; i++) //Pour chaque points...
@@ -121,13 +145,13 @@ public class GraphLine : MonoBehaviour
 		CylinderY.transform.localScale = new Vector3(0.005f, height / 2.0f, 0.005f);
 		CylinderY.transform.localPosition = new Vector3(0.0f, height / 2.0f, 0.0f);
 	}
-
+	/*
 	void Update_Name() //On change le nom du graph et on le scale correctement
 	{
 		float def = (width < height ? width / 10.0f : height / 10.0f);
 		Name.transform.localScale = new Vector3(def, def);
 		Name.GetComponent<TextMesh>().text = graph_name;
-	}
+	}*/
 
 	void Update_Collider() //On scale le box collider, important pour le raycast en dessous..
 	{
