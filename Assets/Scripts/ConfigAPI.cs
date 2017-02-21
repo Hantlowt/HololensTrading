@@ -27,8 +27,9 @@ using UnityEngine;
 
 public class ConfigAPI : MonoBehaviour {
 
-	public static string apiGoogleBasePath = "finance.google.com/finance/";
+	public static string apiGoogleBasePath = "http://finance.google.com/finance/";
 	public static string getPrice = "getprices?";
+	public static string getLastPrice = "info?";
 	public static string paramCompany = "q=";
 	public static string[] TickersList = { "AAPL", "GLE", "MSFT", "GOOG", "AMZN", "YHOO", "INDEXEURO:PX1" };
 	public static string[] CompanyNameList = { "Apple Inc", "Société Générale", "Microsoft Corp", "Google", "Amazone", "Yahoo", "CAC 40" };
