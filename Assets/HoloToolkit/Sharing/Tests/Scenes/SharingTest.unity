@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 685058488}
   - component: {fileID: 685058487}
   - component: {fileID: 685058486}
+  - component: {fileID: 685058489}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -277,6 +278,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 685058484}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &685058489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 685058484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e623389d0f1a40d418cefd9fa059dd07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &942915099
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,6 +410,15 @@ Prefab:
     - target: {fileID: 114000012667812730, guid: 8aaf37823b26ee449bb3b3d7775965c3,
         type: 2}
       propertyPath: ShowDetailedLogs
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012667812730, guid: 8aaf37823b26ee449bb3b3d7775965c3,
+        type: 2}
+      propertyPath: ServerAddress
+      value: 192.168.137.101
+      objectReference: {fileID: 0}
+    - target: {fileID: 163528, guid: 8aaf37823b26ee449bb3b3d7775965c3, type: 2}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
