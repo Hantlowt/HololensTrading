@@ -7,7 +7,6 @@ using System.Collections;
  */
 public class GraphLine : MonoBehaviour
 {
-
     public int nbr_points = 50; //Nombre de points dans le graph
 	private int nbr_points_save;
 	public float height = 1.0f; //hauteur de celui-ci

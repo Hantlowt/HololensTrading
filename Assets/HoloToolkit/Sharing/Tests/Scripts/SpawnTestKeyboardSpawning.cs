@@ -36,10 +36,10 @@ namespace HoloToolkit.Sharing.Tests
                 Vector3 position = Random.onUnitSphere * 2;
                 Quaternion rotation = Random.rotation;
 
-                SyncSpawnTestSphere spawnedObject = new SyncSpawnTestSphere();
-                spawnedObject.TestFloat.Value = Random.Range(0f, 100f);
+                //SyncSpawnTestSphere spawnedObject = new SyncSpawnTestSphere();
+                //spawnedObject.TestFloat.Value = Random.Range(0f, 100f);
 
-                SpawnManager.Spawn(spawnedObject, position, rotation, SpawnParent, "SpawnTestSphere", false);
+                //SpawnManager.Spawn(spawnedObject, position, rotation, SpawnParent, "SpawnTestSphere", false);
             }
         }
     }
