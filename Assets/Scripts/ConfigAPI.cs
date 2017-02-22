@@ -31,8 +31,23 @@ public class ConfigAPI : MonoBehaviour {
 	public static string getPrice = "getprices?";
 	public static string getLastPrice = "info?";
 	public static string paramCompany = "q=";
-	public static string[] TickersList = { "AAPL", "GLE", "MSFT", "GOOG", "AMZN", "YHOO", "INDEXEURO:PX1" };
-	public static string[] CompanyNameList = { "Apple Inc", "Société Générale", "Microsoft Corp", "Google", "Amazone", "Yahoo", "CAC 40" };
+	public static Dictionary<string, string> CompanyList = new Dictionary<string, string>()
+	{
+		{"AAPL", "Apple Inc" },
+		{"GLE", "Société Générale" },
+		{"MSFT", "Microsoft Corp" },
+		{"GOOG", "Google" },
+		{"AMZN", "Amazone" },
+		{"YHOO", "Yahoo" },
+		{"INDEXEURO:PX1", "CAC 40" },
+		{"EPA", "Ephraim Ressources" },
+		{"SSNNF", "Samsung Electronic" },
+		{"AIR", "Airbus Group" },
+		{"HO", "Thales SA" },
+		{"SAF", "Safran" },
+	};
+	//public static string[] TickersList = { "AAPL", "GLE", "MSFT", "GOOG", "AMZN", "YHOO", "INDEXEURO:PX1" };
+	//public static string[] CompanyNameList = { "Apple Inc", "Société Générale", "Microsoft Corp", "Google", "Amazone", "Yahoo", "CAC 40" };
 	//public static string paramDateStart = "&startdate=";
 	//public static string paramDateEnd = "&enddate=";
 	//public static string paramFormatJson = "&format=json";

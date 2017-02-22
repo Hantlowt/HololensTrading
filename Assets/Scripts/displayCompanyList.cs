@@ -16,10 +16,14 @@ public class displayCompanyList : MonoBehaviour
 		dropDown.ClearOptions();
 
 		options = new List<string>();
-		foreach (string companyName in ConfigAPI.CompanyNameList)
+		foreach (KeyValuePair<string, string> entry in ConfigAPI.CompanyList)
+		{
+			options.Add(entry.Value);
+		}
+		/*foreach (string companyName in ConfigAPI.CompanyNameList)
 		{
 			options.Add(companyName);
-		}
+		}*/
 		dropDown.AddOptions(options);
 	}
 }

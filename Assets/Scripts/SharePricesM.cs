@@ -1,7 +1,7 @@
 ﻿using System;
 
 [Serializable]
-public class CompanySharePriceM
+public class SharePricesM
 {
 	public int id;
 	public string t;
@@ -19,10 +19,4 @@ public class CompanySharePriceM
 	public float cp_fix;
 	public string ccol;
 	public float pcls_fix;
-}
-
-[Serializable]
-public class SharePricesM
-{
-	public CompanySharePriceM[] sharePrices;
 }

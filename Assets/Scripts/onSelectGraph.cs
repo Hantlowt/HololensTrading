@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 public class onSelectGraph : MonoBehaviour {
 
 	public GameObject   Graph_Prefab;
+	public static Color colorGraph = Color.blue;
 
 	/* Au click pour ajouter un graph on récupère le nom de la société et le
 	 * ticker correspondant pour lancer l'instanciation du nouveau graph
@@ -14,8 +16,19 @@ public class onSelectGraph : MonoBehaviour {
 	public void onClickOnTypeOfGraph (Text CompanyName)
 	{
 		print(CompanyName.text);
-		int pos = 0;
+		bool dataForRequestCheck = false;
 
+		foreach (KeyValuePair<string, string> entry in ConfigAPI.CompanyList)
+		{
+			if (CompanyName.text.Equals(entry.Value))
+			{
+				drawNewGraphLine(entry.Value, entry.Key);
+				dataForRequestCheck = true;
+			}
+		}
+		if (!dataForRequestCheck)
+			print("choisir une société dans la liste et rééssayer");
+		/*
 		while (pos < ConfigAPI.CompanyNameList.Length)
 		{
 			if (String.Equals(ConfigAPI.CompanyNameList[pos], CompanyName.text))
@@ -25,8 +38,10 @@ public class onSelectGraph : MonoBehaviour {
 			}
 			pos++;
 		}
+		
 		if (pos == ConfigAPI.CompanyNameList.Length)
 			print("choisir une société dans la liste et rééssayer"); //valeurs d'erreurs, gestion du cas à prévoir/ajouter pour la gestion requete API = TO DO
+		*/
 	}
 
 	/* on instancie avec des valeurs par défaut le nouveau Graph dont le prefab est en paramètre,
@@ -40,8 +55,7 @@ public class onSelectGraph : MonoBehaviour {
 		temp.GetComponent<GraphLine>().graph_name = title;
 		temp.GetComponent<GraphLine>().ticker = ticker;
 		temp.GetComponent<GraphLine>().time_to_update = 1.0f;
-		temp.GetComponent<MeshRenderer>().material.color = Color.green;
+		temp.GetComponent<MeshRenderer>().material.color = colorGraph;
 	}
-
 
 }
