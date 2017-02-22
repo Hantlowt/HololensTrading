@@ -28,20 +28,6 @@ public class onSelectGraph : MonoBehaviour {
 		}
 		if (!dataForRequestCheck)
 			print("choisir une société dans la liste et rééssayer");
-		/*
-		while (pos < ConfigAPI.CompanyNameList.Length)
-		{
-			if (String.Equals(ConfigAPI.CompanyNameList[pos], CompanyName.text))
-			{
-				drawNewGraphLine(ConfigAPI.CompanyNameList[pos], ConfigAPI.TickersList[pos]);
-				break;
-			}
-			pos++;
-		}
-		
-		if (pos == ConfigAPI.CompanyNameList.Length)
-			print("choisir une société dans la liste et rééssayer"); //valeurs d'erreurs, gestion du cas à prévoir/ajouter pour la gestion requete API = TO DO
-		*/
 	}
 
 	/* on instancie avec des valeurs par défaut le nouveau Graph dont le prefab est en paramètre,

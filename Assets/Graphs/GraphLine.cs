@@ -86,7 +86,7 @@ public class GraphLine : MonoBehaviour
 		}
 	}
 
-	private double parseRequestLastPrices (string data)
+	public double parseRequestLastPrices (string data)
 	{
 		string pattern = @"{[^}]+}";
 		Match m = Regex.Match(data, pattern);
@@ -127,7 +127,7 @@ public class GraphLine : MonoBehaviour
 		 * Permets de mettre à jour la position des points dans le monde
 		 * et genere un mesh a la volee afin de "dessiner" le support d'en dessous des points de la ligne
 		 */
-		void Update_points_position()
+	void Update_points_position()
     {
 		vertices2d[0] = new Vector2(0.0f, -0.001f);
 		for (int i = 0; i < nbr_points; i++) //Pour chaque points...
