@@ -44,17 +44,9 @@ public class GraphLine : MonoBehaviour
         linerender = GetComponent<LineRenderer>();
 		linerender.numPositions = nbr_points;
         data = new double[nbr_points];
-		data[0] = 0.0;
+		data[0] = 50.0;
 		for (int i = 1; i < nbr_points; i++)
 			data[i] = data[i - 1] + Random.Range(-2.5f, 2.5f);
-
-		/*
-		UnityWebRequest www = UnityWebRequest.Get(ConfigAPI.apiGoogleBasePath + ConfigAPI.getLastPrice + ConfigAPI.paramCompany + ticker);
-		yield return www.Send();
-		print("URL" + www.url);
-		print("resultat brut du lastPrice : " + www.downloadHandler.text);
-		data[0] = parseRequestLastPrices(www.downloadHandler.text);
-		*/
 		
 		vertices2d = new Vector2[nbr_points + 2];
         raycast = false;
@@ -86,15 +78,15 @@ public class GraphLine : MonoBehaviour
 		}
 	}
 
-	public double parseRequestLastPrices (string data)
+	private double parseRequestLastPrices (string data)
 	{
 		string pattern = @"{[^}]+}";
-		Match m = Regex.Match(data, pattern);
+		Match m = Regex.Match(data, pattern); // Regex pour corriger le format du json reçu
 		print(m.Value);
 		SharePricesM sharePrice;
-		sharePrice = JsonUtility.FromJson<SharePricesM>(m.Value);
+		sharePrice = JsonUtility.FromJson<SharePricesM>(m.Value); //enregistrement des données du json dans un objet SharePriceM
 		print(sharePrice.l);
-		return (System.Convert.ToDouble(sharePrice.l));
+		return (System.Convert.ToDouble(sharePrice.l)); //retour de la valeur intéressante en tant que double
 	}
 
 	void InsertData (double d)

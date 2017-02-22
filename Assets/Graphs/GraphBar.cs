@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GraphBar : MonoBehaviour {
 
@@ -16,10 +18,9 @@ public class GraphBar : MonoBehaviour {
     private Transform CylinderX;
     private Transform CylinderY;
     private Transform Name;
-    public Color normal_color;
-    public Color select_color;
+	public string ticker;
 
-    void Restart()
+	void Restart()
     {
         StopAllCoroutines();
         Start();
@@ -46,8 +47,6 @@ public class GraphBar : MonoBehaviour {
             bars[i].transform.localScale = new Vector3(width / nbr_bar, 1.0f, width / nbr_bar);
             bars[i].transform.localPosition = new Vector3(i * bars[i].transform.localScale.x, 0.0f, 0.0f);
             bars[i].GetComponent<Bar>().data = data[i];
-            bars[i].GetComponent<Bar>().normal_color = normal_color;
-            bars[i].GetComponent<Bar>().select_color = select_color;
         }
 		Update_Name();
 		Update_Collider();
@@ -80,7 +79,9 @@ public class GraphBar : MonoBehaviour {
     {
         while (true)
         {
-            double d = data[nbr_bar - 1] + (double)Random.Range(-0.5f, 0.5f);
+			UnityWebRequest www = UnityWebRequest.Get(ConfigAPI.apiGoogleBasePath + ConfigAPI.getLastPrice + ConfigAPI.paramCompany + ticker);
+			yield return www.Send();
+			double d = parseRequestLastPrices(www.downloadHandler.text);
             d = d > 10.0 ? 10.0 : d;
             InsertData(d < 0.0 ? 0.0 : d);
             Update_All(); //Et remettre a jour le graph
@@ -88,7 +89,18 @@ public class GraphBar : MonoBehaviour {
         }
     }
 
-    void Update_bar() // Met à jour la taille et la position des bars selon leurs nouvelles valeurs
+	private double parseRequestLastPrices (string data)
+	{
+		string pattern = @"{[^}]+}";
+		Match m = Regex.Match(data, pattern); // Regex pour corriger le format du json reçu
+		print(m.Value);
+		SharePricesM sharePrice;
+		sharePrice = JsonUtility.FromJson<SharePricesM>(m.Value); //enregistrement des données du json dans un objet SharePriceM
+		print(sharePrice.l);
+		return (System.Convert.ToDouble(sharePrice.l)); //retour de la valeur intéressante en tant que double
+	}
+
+	void Update_bar() // Met à jour la taille et la position des bars selon leurs nouvelles valeurs
 	{
         
         for (int i = 0; i < nbr_bar; i++)

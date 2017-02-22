@@ -7,8 +7,6 @@ public class Bar : MonoBehaviour {
     public double data;
     private GameObject data_text;
     private GameObject Graph;
-    public Color normal_color;
-    public Color select_color;
     public bool raycast;
     public RaycastHit hit;
 	// Use this for initialization
@@ -25,11 +23,11 @@ public class Bar : MonoBehaviour {
         if (raycast)
         {
             data_text.SetActive(true);
-            GetComponent<MeshRenderer>().material.color = select_color;
+            GetComponent<MeshRenderer>().material.color = Color.red;
         }
         else
         {
-            GetComponent<MeshRenderer>().material.color = normal_color;
+            GetComponent<MeshRenderer>().material.color = onSelectGraph.colorGraph; ;
             data_text.SetActive(false);
         }
             

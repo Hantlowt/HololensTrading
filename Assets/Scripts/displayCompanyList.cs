@@ -20,10 +20,6 @@ public class displayCompanyList : MonoBehaviour
 		{
 			options.Add(entry.Value);
 		}
-		/*foreach (string companyName in ConfigAPI.CompanyNameList)
-		{
-			options.Add(companyName);
-		}*/
 		dropDown.AddOptions(options);
 	}
 }
