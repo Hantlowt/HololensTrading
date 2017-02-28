@@ -39,20 +39,22 @@ public class onSelectGraph : MonoBehaviour {
 	public void drawNewGraphLine ()
 	{
 		GameObject temp = Instantiate(Graph_Prefab, new Vector3(0.8f, 0.25f, 2.9f), transform.rotation) as GameObject;
-		temp.GetComponent<GraphLine>().height = 0.35f;
-		temp.GetComponent<GraphLine>().width = 0.8f;
-		temp.GetComponent<GraphLine>().graph_name = graphTitle;
-		temp.GetComponent<GraphLine>().ticker = graphTicker;
-		temp.GetComponent<GraphLine>().time_to_update = 1.0f;
-		temp.GetComponent<MeshRenderer>().material.color = colorGraph;
+		GameObject graphChild = temp.transform.GetChild(0).gameObject;
+		graphChild.GetComponent<GraphLine>().height = 0.35f;
+		graphChild.GetComponent<GraphLine>().width = 0.8f;
+		graphChild.GetComponent<GraphLine>().graph_name = graphTitle;
+		graphChild.GetComponent<GraphLine>().ticker = graphTicker;
+		graphChild.GetComponent<GraphLine>().time_to_update = 1.0f;
+		graphChild.GetComponent<MeshRenderer>().material.color = colorGraph;
 	}
 
 	public void drawNewGraphBar ()
 	{
 		GameObject temp = Instantiate(Graph_Prefab, new Vector3(0.8f, 0.25f, 2.9f), transform.rotation) as GameObject;
-		temp.GetComponent<GraphBar>().graph_name = graphTitle;
-		temp.GetComponent<GraphBar>().ticker = graphTicker;
-		temp.GetComponent<MeshRenderer>().material.color = colorGraph;
+		GameObject graphChild = temp.transform.GetChild(0).gameObject;
+		graphChild.GetComponent<GraphBar>().graph_name = graphTitle;
+		graphChild.GetComponent<GraphBar>().ticker = graphTicker;
+		graphChild.GetComponent<MeshRenderer>().material.color = colorGraph;
 	}
 
 }
