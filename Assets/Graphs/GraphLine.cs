@@ -50,35 +50,30 @@ public class GraphLine : MonoBehaviour
 		
 		vertices2d = new Vector2[nbr_points + 2];
         raycast = false;
-		Put_Name();
+		Update_Name();
 		//getPrices.Singleton.StartCoroutine("getPricesDays", ticker);
-		StartCoroutine("RealValues");
+		StartCoroutine("FakeValues");
 	}
 
-	private void Put_Name () //On change le nom du graph et on le scale correctement
+	void Update_Name () //On change le nom du graph et on le scale correctement
 	{
 		float def = (width < height ? width / 10.0f : height / 10.0f);
 		Name.transform.localScale = new Vector3(def, def);
 		Name.GetComponent<TextMesh>().text = graph_name;
 	}
 
-	private void UpdateAllGraph ()
-	{
-			Update_points_position();
-			Update_cylinder();
-			Update_Collider();
-	}
-
-	IEnumerator RealValues () //Coroutine pour ajouter regulierement des fausses valeurs au graph
+	IEnumerator FakeValues () //Coroutine pour ajouter regulierement des valeurs au graph par requete API
 	{
 		while (true)
 		{
 			UnityWebRequest www = UnityWebRequest.Get(ConfigAPI.apiGoogleBasePath + ConfigAPI.getLastPrice + ConfigAPI.paramCompany + ticker);
 			yield return www.Send();
+			print("URL" + www.url);
+			print("resultat brut du lastPrice : " + www.downloadHandler.text);
 			double d = parseRequestLastPrices(www.downloadHandler.text);
-			d = d > 10.0 ? 10.0 : d;
-			InsertData(d < 0.0 ? 0.0 : d);
-			UpdateAllGraph();
+			print("new price = " + d);
+			InsertData((d < 0.0 ? 0.0 : d));
+			Update_All(); //Et remettre a jour le graph
 			yield return new WaitForSeconds(time_to_update);
 		}
 	}
@@ -87,14 +82,14 @@ public class GraphLine : MonoBehaviour
 	{
 		string pattern = @"{[^}]+}";
 		Match m = Regex.Match(data, pattern); // Regex pour corriger le format du json reçu
-		//print(m.Value);
+		print(m.Value);
 		SharePricesM sharePrice;
 		sharePrice = JsonUtility.FromJson<SharePricesM>(m.Value); //enregistrement des données du json dans un objet SharePriceM
-		//print(sharePrice.l);
+		print(sharePrice.l);
 		return (System.Convert.ToDouble(sharePrice.l)); //retour de la valeur intéressante en tant que double
 	}
 
-	private void InsertData (double d)
+	void InsertData (double d)
 	{
 		if (d > data[nbr_points - 1])
 			linerender.endColor = Color.green; //Des variations de couleurs si les chiffres sont en hausse..
@@ -103,6 +98,13 @@ public class GraphLine : MonoBehaviour
 		for (int i = 0; i < nbr_points - 1; i++)
 			data[i] = data[i + 1];
 		data[nbr_points - 1] = d;
+	}
+
+	void Update_All ()
+	{
+		Update_points_position();
+		Update_cylinder();
+		Update_Collider();
 	}
 
 	double MoreDistantData()

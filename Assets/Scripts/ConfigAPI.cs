@@ -40,6 +40,8 @@ public class ConfigAPI : MonoBehaviour {
 		{"AMZN", "Amazone" },
 		{"YHOO", "Yahoo" },
 		{"INDEXEURO:PX1", "CAC 40" },
+		{"EPA", "Ephraim Ressources" },
+		{"SSNNF", "Samsung Electronic" },
 		{"AIR", "Airbus Group" },
 		{"HO", "Thales SA" },
 		{"SAF", "Safran" },
