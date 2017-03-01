@@ -9,8 +9,6 @@ public class displayCompanyList : MonoBehaviour
 	private Dropdown dropDown;
 	private List<string> options;
 
-	//public GameObject prefabDebug = null;
-
 	private void Start ()
 	{
 		//Requête API pour récupérer la liste des entreprises :
@@ -18,9 +16,9 @@ public class displayCompanyList : MonoBehaviour
 		dropDown.ClearOptions();
 
 		options = new List<string>();
-		foreach (string company in ConfigAPI.paramTickers)
+		foreach (KeyValuePair<string, string> entry in ConfigAPI.CompanyList)
 		{
-			options.Add(company);
+			options.Add(entry.Value);
 		}
 		dropDown.AddOptions(options);
 	}

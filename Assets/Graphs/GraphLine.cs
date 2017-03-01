@@ -3,6 +3,8 @@ using System.Collections;
 using HoloToolkit.Sharing.SyncModel;
 using HoloToolkit.Sharing;
 using HoloToolkit.Sharing.Spawning;
+using UnityEngine.Networking;
+using System.Text.RegularExpressions;
 
 
 namespace HoloToolkit.Sharing.Spawning
@@ -24,13 +26,15 @@ namespace HoloToolkit.Sharing.Spawning
  */
 public class GraphLine : MonoBehaviour
 {
-    public int nbr_points = 50; //Nombre de points dans le graph
+
+    public int nbr_points = 60; //Nombre de points dans le graph
 	private int nbr_points_save;
 	public float height = 1.0f; //hauteur de celui-ci
     public float width = 1.0f; //largeur de celui-ci
-	public float time_to_update = 0.5f; //Pour les besoins de la demo, temps qui s'ecoulent avant l'add de data
+	public float time_to_update = 2.0f; //Pour les besoins de la demo, temps qui s'ecoulent avant l'add de data
     public double[] data; //Les fameuses data
 	public string graph_name; //Nom du graphique, peut-etre modifie a n'importe quel moment
+	public string ticker; // abrégé du nom de société pour la requete API
     private LineRenderer linerender;
 	private Vector2[] vertices2d;
 	private bool data_selected = false; //Lorsque l'on regarde le graph, les donnees s'affichent.. ou non
@@ -49,7 +53,7 @@ public class GraphLine : MonoBehaviour
 		Start();
 	}
 
-    void Start() //Initialisation..
+	void Start() //Initialisation..
     {
         sync = GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphLine;
         Selected_Data = transform.FindChild("Selected_Data");
@@ -60,15 +64,68 @@ public class GraphLine : MonoBehaviour
         linerender = GetComponent<LineRenderer>();
 		linerender.numPositions = nbr_points;
         data = new double[nbr_points];
-		data[0] = 5.0f;
-        for (int i = 1; i < nbr_points; i++) //On remplit les donnees avec n'importe quoi
-            data[i] = data[i - 1] + Random.Range(-0.5f, 0.5f);
+		data[0] = 50.0;
+		for (int i = 1; i < nbr_points; i++)
+			data[i] = data[i - 1] + Random.Range(-2.5f, 2.5f);
+		
 		vertices2d = new Vector2[nbr_points + 2];
         raycast = false;
-        StartCoroutine("FakeValues");
-    }
+		Put_Name();
+		//getPrices.Singleton.StartCoroutine("getPricesDays", ticker);
+		StartCoroutine("RealValues");
+	}
 
-    double MoreDistantData()
+	private void Put_Name () //On change le nom du graph et on le scale correctement
+	{
+		float def = (width < height ? width / 10.0f : height / 10.0f);
+		Name.transform.localScale = new Vector3(def, def);
+		Name.GetComponent<TextMesh>().text = graph_name;
+	}
+
+	private void UpdateAllGraph ()
+	{
+			Update_points_position();
+			Update_cylinder();
+			Update_Collider();
+	}
+
+	IEnumerator RealValues () //Coroutine pour ajouter regulierement des fausses valeurs au graph
+	{
+		while (true)
+		{
+			UnityWebRequest www = UnityWebRequest.Get(ConfigAPI.apiGoogleBasePath + ConfigAPI.getLastPrice + ConfigAPI.paramCompany + ticker);
+			yield return www.Send();
+			double d = parseRequestLastPrices(www.downloadHandler.text);
+			d = d > 10.0 ? 10.0 : d;
+			InsertData(d < 0.0 ? 0.0 : d);
+			UpdateAllGraph();
+			yield return new WaitForSeconds(time_to_update);
+		}
+	}
+
+	private double parseRequestLastPrices (string data)
+	{
+		string pattern = @"{[^}]+}";
+		Match m = Regex.Match(data, pattern); // Regex pour corriger le format du json reçu
+		//print(m.Value);
+		SharePricesM sharePrice;
+		sharePrice = JsonUtility.FromJson<SharePricesM>(m.Value); //enregistrement des données du json dans un objet SharePriceM
+		//print(sharePrice.l);
+		return (System.Convert.ToDouble(sharePrice.l)); //retour de la valeur intéressante en tant que double
+	}
+
+	private void InsertData (double d)
+	{
+		if (d > data[nbr_points - 1])
+			linerender.endColor = Color.green; //Des variations de couleurs si les chiffres sont en hausse..
+		else
+			linerender.endColor = Color.red; //.. ou en baisse :)
+		for (int i = 0; i < nbr_points - 1; i++)
+			data[i] = data[i + 1];
+		data[nbr_points - 1] = d;
+	}
+
+	double MoreDistantData()
     {
         double result = 0.0f;
         for (int i = 0; i < nbr_points; i++)
@@ -76,42 +133,11 @@ public class GraphLine : MonoBehaviour
         return (result);
     }
 
-    void InsertData(double d)
-    {
-		if (d > data[nbr_points - 1])
-			linerender.endColor = Color.green; //Des variations de couleurs si les chiffres sont en hausse..
-		else
-			linerender.endColor = Color.red; //.. ou en baisse :)
-		for (int i = 0; i < nbr_points - 1; i++)
-            data[i] = data[i + 1];
-        data[nbr_points - 1] = d;
-    }
-
-	void Update_All()
-	{
-		Update_points_position();
-		Update_cylinder();
-		Update_Name();
-		Update_Collider();
-	}
-
-    IEnumerator FakeValues() //Coroutine pour ajouter regulierement des fausses valeurs au graph
-    {
-        while (true)
-        {
-			double d = data[nbr_points - 1] + (double)Random.Range(-0.5f, 0.5f);
-			d = (d > 10.0 ? 10.0 : d);
-            InsertData((d < 0.0 ? 0.0 : d));
-			Update_All(); //Et remettre a jour le graph
-			yield return new WaitForSeconds(time_to_update);
-        }
-    }
-
-	/* 
-	 * Permets de mettre à jour la position des points dans le monde
-	 * et genere un mesh a la volee afin de "dessiner" le support d'en dessous des points de la ligne
-	 */
-    void Update_points_position()
+		/* 
+		 * Permets de mettre à jour la position des points dans le monde
+		 * et genere un mesh a la volee afin de "dessiner" le support d'en dessous des points de la ligne
+		 */
+	void Update_points_position()
     {
 		vertices2d[0] = new Vector2(0.0f, -0.001f);
 		for (int i = 0; i < nbr_points; i++) //Pour chaque points...
@@ -139,13 +165,6 @@ public class GraphLine : MonoBehaviour
 		CylinderX.transform.localPosition = new Vector3(width / 2.0f, 0.0f, 0.0f);
 		CylinderY.transform.localScale = new Vector3(0.005f, height / 2.0f, 0.005f);
 		CylinderY.transform.localPosition = new Vector3(0.0f, height / 2.0f, 0.0f);
-	}
-
-	void Update_Name() //On change le nom du graph et on le scale correctement
-	{
-		float def = (width < height ? width / 10.0f : height / 10.0f);
-		Name.transform.localScale = new Vector3(def, def);
-		Name.GetComponent<TextMesh>().text = graph_name;
 	}
 
 	void Update_Collider() //On scale le box collider, important pour le raycast en dessous..
