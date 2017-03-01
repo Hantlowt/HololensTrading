@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 222244101906017688}
   - component: {fileID: 114053906835310698}
   - component: {fileID: 114557216778509900}
+  - component: {fileID: 114306776022861054}
   m_Layer: 5
   m_Name: MoveButton
   m_TagString: Untagged
@@ -1093,6 +1094,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114306776022861054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027424572590620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbad991a9894486418e4988222483ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SavedAnchorFriendlyName: MyNewAnchor
+  PlaceParentOnTap: 0
+  ParentGameObjectToPlace: {fileID: 1526719817148046}
+  IsBeingPlaced: 0
 --- !u!114 &114343304526391476
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 222831829176657344}
   - component: {fileID: 114097037278180362}
   - component: {fileID: 114052334932163530}
+  - component: {fileID: 114762116800798226}
   m_Layer: 5
   m_Name: MoveButton
   m_TagString: Untagged
@@ -1477,6 +1478,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040dbe95cb0cc6541bd39eac8a710d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114762116800798226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1346163429413846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbad991a9894486418e4988222483ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SavedAnchorFriendlyName: SavedAnchorFriendlyName
+  PlaceParentOnTap: 1
+  ParentGameObjectToPlace: {fileID: 1130231892817502}
+  IsBeingPlaced: 0
 --- !u!114 &114806407001119952
 MonoBehaviour:
   m_ObjectHideFlags: 1

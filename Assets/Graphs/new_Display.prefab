@@ -132,7 +132,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1581130573050278}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: -0.056}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 1, z: 0.07582734}
   m_Children: []
   m_Father: {fileID: 4532299375477512}
@@ -325,4 +325,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text_image_prefab: {fileID: 1344593955424718, guid: 5511361a161b66143880c93cd27e098d,
     type: 2}
+  cubeInvisibleLeft: {fileID: 1382783083294266}
+  cubeInvisibleRight: {fileID: 1030607808285618}
   speed: 0.5

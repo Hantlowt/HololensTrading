@@ -5,12 +5,16 @@ using UnityEngine;
 public class Display : MonoBehaviour
 {
 	public GameObject text_image_prefab;
+	public GameObject cubeInvisibleLeft;
+	public GameObject cubeInvisibleRight;
 	private GameObject[] led_image = new GameObject[ConfigAPI.CompanyList.Count];
+	Vector3 posStart;
 	private int nbr_instance;
 	public float speed;
 
-    IEnumerator Start()
+	IEnumerator Start()
     {
+		posStart = new Vector3(cubeInvisibleRight.transform.localPosition.x - 0.1f, cubeInvisibleRight.transform.localPosition.y, -0.1f);
 		nbr_instance = ConfigAPI.CompanyList.Count;
 		InitLedImage();
 		yield return new WaitForSeconds(1.0f);
@@ -21,8 +25,9 @@ public class Display : MonoBehaviour
 		int i = 0;
 		foreach (KeyValuePair<string, string> entry in ConfigAPI.CompanyList)
 		{
-			led_image[i] = Instantiate(text_image_prefab, new Vector3(-4.5f, 0.0f, -0.01f), Quaternion.identity);
+			led_image[i] = Instantiate(text_image_prefab, posStart, Quaternion.identity);
 			(led_image[i]).transform.parent = transform;
+			led_image[i].transform.localPosition = posStart;
 			(led_image[i]).transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
 			led_image[i].GetComponent<UpdateInfosBanner>().title = entry.Value;
 			led_image[i].GetComponent<UpdateInfosBanner>().ticker = entry.Key;
@@ -34,23 +39,33 @@ public class Display : MonoBehaviour
 	{
 		MoveImages();
 	}
-
-	void MoveImages()
+	/*
+	private double FindSizeOfGameObject (GameObject myObject)
+	{
+		MeshFilter mf = myObject.GetComponent(typeof(MeshFilter)) as MeshFilter;
+		if (mf == null)
+		{ return 0; }
+		Mesh mesh = mf.sharedMesh;
+		if (mesh == null)
+		{ return 0; }
+		Vector3 size = mesh.bounds.size;
+		Vector3 scale = myObject.transform.localScale;
+		return (size.x * scale.x + size.y * scale.y + size.z * scale.z);
+	}
+	*/
+	private void MoveImages ()
 	{
 		for (int i = 0; i < nbr_instance; i++)
 		{
-			if (led_image[i].transform.localPosition.x > -2.2f)
+			if (led_image[i].transform.localPosition.x - 0.1 > cubeInvisibleLeft.transform.localPosition.x)
 			{
-				if (i > 0)
-				{
-					if (led_image[i - 1].transform.localPosition.x <= 1.85f || led_image[i].transform.localPosition.x <= 1.85f)
+				if (i > 0 && led_image[i - 1].transform.localPosition.x <= 1.85f)
 						led_image[i].transform.localPosition = new Vector3(led_image[i].transform.localPosition.x - Time.deltaTime * speed, led_image[i].transform.localPosition.y, led_image[i].transform.localPosition.z);
-				}
-				else
+				else if (i == 0)
 					led_image[i].transform.localPosition = new Vector3(led_image[i].transform.localPosition.x - Time.deltaTime * speed, led_image[i].transform.localPosition.y, led_image[i].transform.localPosition.z);
 			}
-			else if (led_image[nbr_instance - 1].transform.localPosition.x <= 1.85f)
-				led_image[i].transform.localPosition = new Vector3(5f, 0.0f, -0.1f);
+			else if (led_image[nbr_instance - 1].transform.localPosition.x - 0.1 <= cubeInvisibleLeft.transform.localPosition.x)
+				led_image[i].transform.localPosition = posStart;
 		}
 	}
 
