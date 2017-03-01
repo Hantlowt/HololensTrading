@@ -8,10 +8,13 @@ using HoloToolkit.Sharing.Spawning;
 namespace HoloToolkit.Sharing.Spawning
 {
     [SyncDataClass]
-    public class SyncGraphLine : SyncSpawnedObject
+    public class SyncGraphLine : SyncSpawnedObject //Pour le partage des donnees sur le network
     {
         [SyncData]
         public SyncString GraphName;
+
+        [SyncData]
+        public SyncInteger Color;
     }
 }
 
