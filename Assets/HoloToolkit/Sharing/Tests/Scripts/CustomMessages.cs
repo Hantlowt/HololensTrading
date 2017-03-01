@@ -21,6 +21,7 @@ namespace HoloToolkit.Sharing.Tests
         public enum TestMessageID : byte
         {
             HeadTransform = MessageID.UserMessageIDStart,
+            StageTransform,
             Max
         }
 

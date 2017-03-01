@@ -74,10 +74,10 @@ GameObject:
   - component: {fileID: 4000012272885948}
   - component: {fileID: 120000013874768444}
   - component: {fileID: 114000013640123386}
-  - component: {fileID: 54000011021735150}
   - component: {fileID: 23000014124808970}
   - component: {fileID: 33000010833344822}
   - component: {fileID: 65000013943025146}
+  - component: {fileID: 114971673324985868}
   m_Layer: 0
   m_Name: GraphLine
   m_TagString: Graph
@@ -418,21 +418,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014045093650}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54000011021735150
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014013835262}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!65 &65000010364498648
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -511,11 +496,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nbr_points: 50
-  height: 0.1
-  width: 0.3
+  height: 0.3
+  width: 1
   time_to_update: 0.5
   data: []
   graph_name: Name Test
+--- !u!114 &114971673324985868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014013835262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef662ab2ff31aba40a19a5b6d7e2bad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &120000013874768444
 LineRenderer:
   m_ObjectHideFlags: 1

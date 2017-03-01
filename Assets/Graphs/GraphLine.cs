@@ -1,5 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using HoloToolkit.Sharing.SyncModel;
+using HoloToolkit.Sharing;
+using HoloToolkit.Sharing.Spawning;
+
+
+namespace HoloToolkit.Sharing.Spawning
+{
+    [SyncDataClass]
+    public class SyncGraphLine : SyncSpawnedObject
+    {
+        [SyncData]
+        public SyncString GraphName;
+    }
+}
 
 /* 
  * La classe GraphLine pour pouvoir gerer les Graphiques en Lignes.
@@ -23,8 +37,10 @@ public class GraphLine : MonoBehaviour
 	private Transform Selected_Data;
     private bool raycast;
     private RaycastHit hit;
+    private SyncGraphLine sync;
 
-	void Restart()
+
+    void Restart()
 	{
 		StopAllCoroutines();
 		Start();
@@ -32,7 +48,8 @@ public class GraphLine : MonoBehaviour
 
     void Start() //Initialisation..
     {
-		Selected_Data = transform.FindChild("Selected_Data");
+        sync = GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphLine;
+        Selected_Data = transform.FindChild("Selected_Data");
 		CylinderX = transform.FindChild("CylinderX");
 		CylinderY = transform.FindChild("CylinderY");
 		Name = transform.FindChild("Name");

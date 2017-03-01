@@ -42,7 +42,6 @@ namespace HoloToolkit.Sharing.Spawning
         {
             Name.Value = name;
             ParentPath.Value = parentPath;
-
             ObjectPath.Value = string.Empty;
             if (!string.IsNullOrEmpty(ParentPath.Value))
             {

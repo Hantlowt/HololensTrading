@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
+using HoloToolkit.Sharing;
+using UnityEngine.VR.WSA;
 
 public class Selector : MonoBehaviour, IInputClickHandler
 {
@@ -49,6 +51,7 @@ public class Selector : MonoBehaviour, IInputClickHandler
             }
             else if(selected_object != null)
             {
+                DestroyImmediate(selected_object.GetComponent<WorldAnchor>());
                 selected_object.transform.parent = null;
                 selected_object.GetComponent<BoxCollider>().enabled = true;
                 selected_object = null;

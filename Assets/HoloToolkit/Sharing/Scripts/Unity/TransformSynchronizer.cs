@@ -106,7 +106,6 @@ namespace HoloToolkit.Sharing
                 transformDataModel.Position.Value = transform.localPosition;
                 transformDataModel.Rotation.Value = transform.localRotation;
                 transformDataModel.Scale.Value = transform.localScale;
-
                 // The object was moved locally, so reset the target positions to the current position
                 Position.Reset(transform.localPosition);
                 Rotation.Reset(transform.localRotation);
