@@ -23,6 +23,15 @@ namespace HoloToolkit.Sharing.Spawning
 
         [SyncData]
         public SyncFloat Width;
+
+        [SyncData]
+        public SyncFloat Color_R;
+
+        [SyncData]
+        public SyncFloat Color_G;
+
+        [SyncData]
+        public SyncFloat Color_B;
     }
 }
 
@@ -214,6 +223,9 @@ public class GraphLine : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
+        if (online)
+            GetComponent<MeshRenderer>().material.color = new Color(sync.Color_R.Value,
+                sync.Color_G.Value, sync.Color_B.Value);
 		if (nbr_points_save != nbr_points)
 			Restart();
 		if (raycast)
