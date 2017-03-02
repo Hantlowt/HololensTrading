@@ -62,9 +62,10 @@ public class onSelectGraph : MonoBehaviour {
             sync.Width.Value = 0.8f;
             sync.GraphName.Value = graphTitle;
             sync.Ticker.Value = graphTicker;
+            sync.Color_R.Value = 1.0f;
+            sync.Color_G.Value = 0.0f;
+            sync.Color_B.Value = 0.0f;
             SpawnManager.Spawn(sync, new Vector3(0.8f, 0.25f, 2.0f), transform.rotation, transform.parent.transform.parent.transform.parent.gameObject, "SyncGraphLine", false);
-            graphChild = sync.GameObject.transform.GetChild(0).gameObject;
-            graphChild.GetComponent<GraphLine>().online = true;
         }
     }
 
