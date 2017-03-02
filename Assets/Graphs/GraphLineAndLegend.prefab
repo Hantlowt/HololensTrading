@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 54987879037551032}
   - component: {fileID: 23045121280245254}
   - component: {fileID: 33078875726440800}
-  - component: {fileID: 65535667838824204}
   m_Layer: 0
   m_Name: GraphLine
   m_TagString: Graph
@@ -220,9 +219,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4708824443530942}
+  - component: {fileID: 114898321010165972}
+  - component: {fileID: 65518829694426490}
   m_Layer: 0
   m_Name: GraphLineAndLegend
-  m_TagString: Untagged
+  m_TagString: Graph
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -453,7 +454,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1526719817148046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8, y: 0.3, z: 3}
+  m_LocalPosition: {x: 12.614143, y: -2.2460904, z: 10.163383}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4352729148593242}
@@ -774,18 +775,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65535667838824204
+--- !u!65 &65518829694426490
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1112396066175020}
+  m_GameObject: {fileID: 1526719817148046}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.09, y: 0.6, z: 0}
-  m_Center: {x: 0.5, y: 0.28, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!102 &102091181561378124
 TextMesh:
   serializedVersion: 3
@@ -1442,6 +1443,7 @@ MonoBehaviour:
   data: []
   graph_name: Name Test
   ticker: 
+  online: 0
 --- !u!114 &114621004862494398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1781,6 +1783,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5dae873cf5988594aa8222e44cbd3b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114898321010165972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526719817148046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef662ab2ff31aba40a19a5b6d7e2bad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114931582779841232

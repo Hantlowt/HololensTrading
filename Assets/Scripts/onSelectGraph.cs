@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using HoloToolkit.Sharing.Spawning;
+using HoloToolkit.Sharing.SyncModel;
+using HoloToolkit.Sharing;
 
 public class onSelectGraph : MonoBehaviour {
 
@@ -11,11 +14,12 @@ public class onSelectGraph : MonoBehaviour {
 	public static Color colorGraph = Color.blue;
 	private static string graphTicker = "GOOG"; //tmp test graph si pas de société choisit
 	private string graphTitle = ConfigAPI.CompanyList[graphTicker]; //tmp test graph si pas de société choisit
-
-	/* Au click pour ajouter un graph on récupère le nom de la société et le
+    public bool online;
+    public PrefabSpawnManager SpawnManager;
+    /* Au click pour ajouter un graph on récupère le nom de la société et le
 	 * ticker correspondant pour lancer l'instanciation du nouveau graph
 	 */
-	public void onClickOnTypeOfGraph (Text CompanyName)
+    public void onClickOnTypeOfGraph (Text CompanyName)
 	{
 		print(CompanyName.text);
 		bool dataForRequestCheck = false;
@@ -38,23 +42,47 @@ public class onSelectGraph : MonoBehaviour {
 	 */
 	public void drawNewGraphLine ()
 	{
-		GameObject temp = Instantiate(Graph_Prefab, new Vector3(0.8f, 0.25f, 2.9f), transform.rotation) as GameObject;
-		GameObject graphChild = temp.transform.GetChild(0).gameObject;
-		graphChild.GetComponent<GraphLine>().height = 0.35f;
-		graphChild.GetComponent<GraphLine>().width = 0.8f;
-		graphChild.GetComponent<GraphLine>().graph_name = graphTitle;
-		graphChild.GetComponent<GraphLine>().ticker = graphTicker;
-		graphChild.GetComponent<GraphLine>().time_to_update = 1.0f;
-		graphChild.GetComponent<MeshRenderer>().material.color = colorGraph;
-	}
+        GameObject graphChild;
+        if (!online)
+        {
+            GameObject temp = Instantiate(Graph_Prefab, new Vector3(0.8f, 0.25f, 2.9f), transform.rotation, transform.parent.transform.parent.transform.parent) as GameObject;
+            graphChild = temp.transform.GetChild(0).gameObject;
+            graphChild.GetComponent<GraphLine>().online = false;
+            graphChild.GetComponent<GraphLine>().height = 0.35f;
+            graphChild.GetComponent<GraphLine>().width = 0.8f;
+            graphChild.GetComponent<GraphLine>().graph_name = graphTitle;
+            graphChild.GetComponent<GraphLine>().ticker = graphTicker;
+            graphChild.GetComponent<GraphLine>().time_to_update = 1.0f;
+            graphChild.GetComponent<MeshRenderer>().material.color = colorGraph;
+
+        }
+        else
+        {
+            SyncGraphLine sync = new SyncGraphLine();
+            sync.Height.Value = 0.35f;
+            sync.Width.Value = 0.8f;
+            sync.GraphName.Value = graphTitle;
+            sync.Ticker.Value = graphTicker;
+            SpawnManager.Spawn(sync, new Vector3(0.8f, 0.25f, 2.0f), transform.rotation, transform.parent.transform.parent.transform.parent.gameObject, "SyncGraphLine", false);
+            graphChild = sync.GameObject.transform.GetChild(0).gameObject;
+            graphChild.GetComponent<GraphLine>().online = true;
+        }
+    }
 
 	public void drawNewGraphBar ()
 	{
-		GameObject temp = Instantiate(Graph_Prefab, new Vector3(0.8f, 0.25f, 2.9f), transform.rotation) as GameObject;
-		GameObject graphChild = temp.transform.GetChild(0).gameObject;
-		graphChild.GetComponent<GraphBar>().graph_name = graphTitle;
-		graphChild.GetComponent<GraphBar>().ticker = graphTicker;
-		graphChild.GetComponent<MeshRenderer>().material.color = colorGraph;
+        if (!online)
+        {
+            GameObject temp = Instantiate(Graph_Prefab, new Vector3(0.8f, 0.25f, 2.9f), transform.rotation, transform.parent.transform.parent.transform.parent) as GameObject;
+            GameObject graphChild = temp.transform.GetChild(0).gameObject;
+            graphChild.GetComponent<GraphBar>().graph_name = graphTitle;
+            graphChild.GetComponent<GraphBar>().ticker = graphTicker;
+            graphChild.GetComponent<MeshRenderer>().material.color = colorGraph;
+        }
+        else
+        {
+
+        }
 	}
 
 }

@@ -16,7 +16,13 @@ namespace HoloToolkit.Sharing.Spawning
         public SyncString GraphName;
 
         [SyncData]
-        public SyncInteger Color;
+        public SyncString Ticker;
+
+        [SyncData]
+        public SyncFloat Height;
+
+        [SyncData]
+        public SyncFloat Width;
     }
 }
 
@@ -45,6 +51,7 @@ public class GraphLine : MonoBehaviour
     private bool raycast;
     private RaycastHit hit;
     private SyncGraphLine sync;
+    public bool online;
 
 
     void Restart()
@@ -55,7 +62,8 @@ public class GraphLine : MonoBehaviour
 
 	void Start() //Initialisation..
     {
-        sync = GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphLine;
+        online = true;
+        sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphLine;
         Selected_Data = transform.FindChild("Selected_Data");
 		CylinderX = transform.FindChild("CylinderX");
 		CylinderY = transform.FindChild("CylinderY");
@@ -79,7 +87,7 @@ public class GraphLine : MonoBehaviour
 	{
 		float def = (width < height ? width / 10.0f : height / 10.0f);
 		Name.transform.localScale = new Vector3(def, def);
-		Name.GetComponent<TextMesh>().text = graph_name;
+		Name.GetComponent<TextMesh>().text = (online ? sync.GraphName.Value : graph_name);
 	}
 
 	private void UpdateAllGraph ()
@@ -93,10 +101,15 @@ public class GraphLine : MonoBehaviour
 	{
 		while (true)
 		{
+            ticker = (online ? sync.Ticker.Value : ticker);
 			UnityWebRequest www = UnityWebRequest.Get(ConfigAPI.apiGoogleBasePath + ConfigAPI.getLastPrice + ConfigAPI.paramCompany + ticker);
 			yield return www.Send();
-			double d = parseRequestLastPrices(www.downloadHandler.text);
-			d = d > 10.0 ? 10.0 : d;
+            double d = 0.0;
+            if (www.downloadHandler.text != "")
+                d = parseRequestLastPrices(www.downloadHandler.text);
+            else
+                d = data[data.Length - 1] + Random.Range(-0.5f, 0.5f);
+			//d = d > 10.0 ? 10.0 : d;
 			InsertData(d < 0.0 ? 0.0 : d);
 			UpdateAllGraph();
 			yield return new WaitForSeconds(time_to_update);
@@ -139,7 +152,9 @@ public class GraphLine : MonoBehaviour
 		 */
 	void Update_points_position()
     {
-		vertices2d[0] = new Vector2(0.0f, -0.001f);
+        height = (online ? sync.Height.Value : height);
+        width = (online ? sync.Width.Value : width);
+        vertices2d[0] = new Vector2(0.0f, -0.001f);
 		for (int i = 0; i < nbr_points; i++) //Pour chaque points...
         {
             Vector3 newPos = new Vector3();
@@ -169,8 +184,8 @@ public class GraphLine : MonoBehaviour
 
 	void Update_Collider() //On scale le box collider, important pour le raycast en dessous..
 	{
-		GetComponent<BoxCollider>().center = new Vector3(width / 2.0f, height / 2.0f);
-		GetComponent<BoxCollider>().size = new Vector3(width, height);
+		transform.parent.GetComponent<BoxCollider>().center = new Vector3(width / 2.0f, height / 2.0f);
+		transform.parent.GetComponent<BoxCollider>().size = new Vector3(width, height);
 	}
 
 	/* Recupere l'id d'un point du graph le plus proche d'une position dans l'espace
