@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 4708824443530942}
   - component: {fileID: 114898321010165972}
   - component: {fileID: 65518829694426490}
+  - component: {fileID: 114898637754267512}
   m_Layer: 0
   m_Name: GraphLineAndLegend
   m_TagString: Graph
@@ -1816,6 +1817,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef662ab2ff31aba40a19a5b6d7e2bad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114898637754267512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526719817148046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff591f43ecba96d4ca3984aa7cbbc770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114931582779841232

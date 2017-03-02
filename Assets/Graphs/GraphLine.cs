@@ -216,7 +216,7 @@ public class GraphLine : MonoBehaviour
     {
 		if (nbr_points_save != nbr_points)
 			Restart();
-		if (raycast && hit.transform.gameObject == this.gameObject)
+		if (raycast)
 			data_selected = true;
 		else
 			data_selected = false;
