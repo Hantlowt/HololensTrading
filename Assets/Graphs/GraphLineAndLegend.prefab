@@ -1442,8 +1442,8 @@ MonoBehaviour:
   width: 0.3
   time_to_update: 0.5
   data: []
-  graph_name: Name Test
-  ticker: 
+  graph_name: SG (default data)
+  ticker: GLE
   online: 0
 --- !u!114 &114621004862494398
 MonoBehaviour:

@@ -19,6 +19,7 @@ public class GraphBar : MonoBehaviour {
     private Transform CylinderY;
     private Transform Name;
 	public string ticker;
+	public Color ColorBar = Color.white;
 
 	void Restart()
     {
@@ -43,11 +44,13 @@ public class GraphBar : MonoBehaviour {
         for (int i = 0; i < nbr_bar; i++)
         {
             bars[i] = Instantiate(bar_prefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
-            bars[i].transform.parent = this.transform;
+            bars[i].transform.parent = transform;
             bars[i].transform.localScale = new Vector3(width / nbr_bar, 1.0f, width / nbr_bar);
             bars[i].transform.localPosition = new Vector3(i * bars[i].transform.localScale.x, 0.0f, 0.0f);
             bars[i].GetComponent<Bar>().data = data[i];
-        }
+			bars[i].GetComponent<Bar>().ColorBar = ColorBar;
+			//bars[i].GetComponent<Bar>().GetComponent<MeshRenderer>().material.color = ColorBar;
+		}
 		Put_Name();
 		yield return StartCoroutine("RealValues");
     }
@@ -112,7 +115,9 @@ public class GraphBar : MonoBehaviour {
             bars[i].transform.localPosition = new Vector3(bars[i].transform.localPosition.x,
                 bars[i].transform.localScale.y, bars[i].transform.localPosition.z);
             bars[i].GetComponent<Bar>().data = data[i];
-        }
+			bars[i].GetComponent<Bar>().ColorBar = ColorBar;
+			//bars[i].GetComponent<Bar>().GetComponent<MeshRenderer>().material.color = ColorBar;
+		}
     }
 
     void Update_cylinder() //Deformation et positionnement des supports cylindriques
