@@ -70,7 +70,8 @@ public class GraphLine : MonoBehaviour
 		Name = transform.FindChild("Name");
 		nbr_points_save = nbr_points;
         linerender = GetComponent<LineRenderer>();
-		linerender.numPositions = nbr_points;
+        linerender.enabled = false;
+        linerender.numPositions = nbr_points;
         data = new double[nbr_points];
 		data[0] = 50.0;
 		for (int i = 1; i < nbr_points; i++)
@@ -155,12 +156,15 @@ public class GraphLine : MonoBehaviour
         height = (online ? sync.Height.Value : height);
         width = (online ? sync.Width.Value : width);
         vertices2d[0] = new Vector2(0.0f, -0.001f);
-		for (int i = 0; i < nbr_points; i++) //Pour chaque points...
+        linerender.enabled = false;
+        for (int i = 0; i < nbr_points; i++) //Pour chaque points...
         {
             Vector3 newPos = new Vector3();
             newPos.x = (width / nbr_points) * i;
             if (MoreDistantData() != 0.0)
                 newPos.y = (((float)data[i] / (float)MoreDistantData()) * height); //on calcule la position...
+            else
+                newPos.y = 0.0f;
             newPos.z = 0.0f;
 			vertices2d[i + 1] = newPos; //et on genere les vertices
 			if (i == nbr_points - 1)
@@ -170,7 +174,8 @@ public class GraphLine : MonoBehaviour
 			}
             linerender.SetPosition(i, newPos);
         }
-		Mesh_Generator m = new Mesh_Generator(vertices2d); //On genere le mesh !
+        linerender.enabled = true;
+        Mesh_Generator m = new Mesh_Generator(vertices2d); //On genere le mesh !
 		m.Apply_Mesh(this.gameObject);
 	}
 
