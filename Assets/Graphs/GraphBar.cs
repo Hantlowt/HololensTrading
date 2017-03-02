@@ -10,7 +10,7 @@ public class GraphBar : MonoBehaviour {
     private int nbr_bar_save;
     public float height = 1.0f; //hauteur de celui-ci
     public float width = 1.0f; //largeur de celui-ci
-    public float time_to_update = 0.5f; //Pour les besoins de la demo, temps qui s'ecoulent avant l'add de data
+    public float time_to_update = 15.0f; //Pour les besoins de la demo = 15 secondes !!! entre 2 RealValues
     public double[] data; //Les fameuses data
     private GameObject[] bars;
     public GameObject bar_prefab;
@@ -49,7 +49,6 @@ public class GraphBar : MonoBehaviour {
             bars[i].transform.localPosition = new Vector3(i * bars[i].transform.localScale.x, 0.0f, 0.0f);
             bars[i].GetComponent<Bar>().data = data[i];
 			bars[i].GetComponent<Bar>().ColorBar = ColorBar;
-			//bars[i].GetComponent<Bar>().GetComponent<MeshRenderer>().material.color = ColorBar;
 		}
 		Put_Name();
 		yield return StartCoroutine("RealValues");
@@ -116,7 +115,6 @@ public class GraphBar : MonoBehaviour {
                 bars[i].transform.localScale.y, bars[i].transform.localPosition.z);
             bars[i].GetComponent<Bar>().data = data[i];
 			bars[i].GetComponent<Bar>().ColorBar = ColorBar;
-			//bars[i].GetComponent<Bar>().GetComponent<MeshRenderer>().material.color = ColorBar;
 		}
     }
 

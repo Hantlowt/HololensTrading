@@ -250,8 +250,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected_object: {fileID: 0}
+  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
   distance_selected: 0
   lockrot: {x: 0, y: 0, z: 0, w: 0}
+  max_dist: 10
 --- !u!114 &114689253998401214
 MonoBehaviour:
   m_ObjectHideFlags: 1

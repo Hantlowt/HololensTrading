@@ -25,8 +25,8 @@ public class Display : MonoBehaviour
 		int i = 0;
 		foreach (KeyValuePair<string, string> entry in ConfigAPI.CompanyList)
 		{
-			led_image[i] = Instantiate(text_image_prefab, posStart, Quaternion.identity);
-			(led_image[i]).transform.parent = transform;
+			led_image[i] = Instantiate(text_image_prefab, posStart, Quaternion.identity, transform);
+			//(led_image[i]).transform.parent = transform;
 			led_image[i].transform.localPosition = posStart;
 			(led_image[i]).transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
 			led_image[i].GetComponent<UpdateInfosBanner>().title = entry.Value;
