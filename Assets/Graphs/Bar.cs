@@ -9,6 +9,8 @@ public class Bar : MonoBehaviour {
     private GameObject Graph;
     public bool raycast;
     public RaycastHit hit;
+	public Color ColorBar = Color.white;
+
 	// Use this for initialization
 	void Start () {
         data_text = transform.FindChild("data").gameObject;
@@ -27,8 +29,8 @@ public class Bar : MonoBehaviour {
         }
         else
         {
-            GetComponent<MeshRenderer>().material.color = onSelectGraph.colorGraph; ;
-            data_text.SetActive(false);
+            GetComponent<MeshRenderer>().material.color = ColorBar;
+			data_text.SetActive(false);
         }
             
         data_text.GetComponent<TextMesh>().text = Math.Round(data, 3).ToString();

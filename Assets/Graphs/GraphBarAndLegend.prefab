@@ -1023,8 +1023,8 @@ MonoBehaviour:
   - 4.7997714430093765
   - 4.628542497754097
   bar_prefab: {fileID: 1794256890875864, guid: e4994fc9e0661ef408d28ea3d2e42541, type: 2}
-  graph_name: Ficticious name
-  ticker: 
+  graph_name: SG (Default data)
+  ticker: GLE
 --- !u!114 &114267041783498826
 MonoBehaviour:
   m_ObjectHideFlags: 1

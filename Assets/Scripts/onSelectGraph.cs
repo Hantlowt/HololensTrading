@@ -12,8 +12,8 @@ public class onSelectGraph : MonoBehaviour {
 
 	public GameObject   Graph_Prefab;
 	public static Color colorGraph = Color.blue;
-	private static string graphTicker = "GOOG"; //tmp test graph si pas de société choisit
-	private string graphTitle = ConfigAPI.CompanyList[graphTicker]; //tmp test graph si pas de société choisit
+	private static string graphTicker = "GLE"; //tmp test graph si pas de société choisit
+	private string graphTitle = "SG (Default data)"; //tmp test graph si pas de société choisit
     public bool online;
     public PrefabSpawnManager SpawnManager;
     /* Au click pour ajouter un graph on récupère le nom de la société et le
@@ -21,7 +21,6 @@ public class onSelectGraph : MonoBehaviour {
 	 */
     public void onClickOnTypeOfGraph (Text CompanyName)
 	{
-		print(CompanyName.text);
 		bool dataForRequestCheck = false;
 
 		foreach (KeyValuePair<string, string> entry in ConfigAPI.CompanyList)
@@ -77,8 +76,8 @@ public class onSelectGraph : MonoBehaviour {
             GameObject graphChild = temp.transform.GetChild(0).gameObject;
             graphChild.GetComponent<GraphBar>().graph_name = graphTitle;
             graphChild.GetComponent<GraphBar>().ticker = graphTicker;
-            //graphChild.GetComponent<MeshRenderer>().material.color = colorGraph;
-        }
+			graphChild.GetComponent<GraphBar>().ColorBar = colorGraph;
+		}
         else
         {
 

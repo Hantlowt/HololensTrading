@@ -39,20 +39,7 @@ public class Display : MonoBehaviour
 	{
 		MoveImages();
 	}
-	/*
-	private double FindSizeOfGameObject (GameObject myObject)
-	{
-		MeshFilter mf = myObject.GetComponent(typeof(MeshFilter)) as MeshFilter;
-		if (mf == null)
-		{ return 0; }
-		Mesh mesh = mf.sharedMesh;
-		if (mesh == null)
-		{ return 0; }
-		Vector3 size = mesh.bounds.size;
-		Vector3 scale = myObject.transform.localScale;
-		return (size.x * scale.x + size.y * scale.y + size.z * scale.z);
-	}
-	*/
+	
 	private void MoveImages ()
 	{
 		for (int i = 0; i < nbr_instance; i++)
