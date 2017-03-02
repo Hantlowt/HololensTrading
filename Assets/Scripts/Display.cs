@@ -14,7 +14,7 @@ public class Display : MonoBehaviour
 
 	IEnumerator Start()
     {
-		posStart = new Vector3(cubeInvisibleRight.transform.localPosition.x - 0.1f, cubeInvisibleRight.transform.localPosition.y, -0.1f);
+		posStart = new Vector3(cubeInvisibleRight.transform.localPosition.x - 0.1f, cubeInvisibleRight.transform.localPosition.y -0.03f, -0.1f);
 		nbr_instance = ConfigAPI.CompanyList.Count;
 		InitLedImage();
 		yield return new WaitForSeconds(1.0f);

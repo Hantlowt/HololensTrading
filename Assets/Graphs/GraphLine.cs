@@ -37,7 +37,7 @@ public class GraphLine : MonoBehaviour
 	private int nbr_points_save;
 	public float height = 1.0f; //hauteur de celui-ci
     public float width = 1.0f; //largeur de celui-ci
-	public float time_to_update = 2.0f; //Pour les besoins de la demo, temps qui s'ecoulent avant l'add de data
+	public float time_to_update = 15.0f; //Une update de la google API a lieue toutes les 15 secondes environs
     public double[] data; //Les fameuses data
 	public string graph_name; //Nom du graphique, peut-etre modifie a n'importe quel moment
 	public string ticker; // abrégé du nom de société pour la requete API
@@ -60,7 +60,7 @@ public class GraphLine : MonoBehaviour
 		Start();
 	}
 
-	void Start() //Initialisation..
+	IEnumerator Start() //Initialisation..
     {
         online = true;
         sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphLine;
@@ -80,7 +80,7 @@ public class GraphLine : MonoBehaviour
         raycast = false;
 		Put_Name();
 		//getPrices.Singleton.StartCoroutine("getPricesDays", ticker);
-		StartCoroutine("RealValues");
+		yield return StartCoroutine("RealValues");
 	}
 
 	private void Put_Name () //On change le nom du graph et on le scale correctement
@@ -108,8 +108,7 @@ public class GraphLine : MonoBehaviour
             if (www.downloadHandler.text != "")
                 d = parseRequestLastPrices(www.downloadHandler.text);
             else
-                d = data[data.Length - 1] + Random.Range(-0.5f, 0.5f);
-			//d = d > 10.0 ? 10.0 : d;
+                d = data[data.Length - 1] + Random.Range(-0.50f, 0.50f);
 			InsertData(d < 0.0 ? 0.0 : d);
 			UpdateAllGraph();
 			yield return new WaitForSeconds(time_to_update);
@@ -120,10 +119,8 @@ public class GraphLine : MonoBehaviour
 	{
 		string pattern = @"{[^}]+}";
 		Match m = Regex.Match(data, pattern); // Regex pour corriger le format du json reçu
-		//print(m.Value);
 		SharePricesM sharePrice;
 		sharePrice = JsonUtility.FromJson<SharePricesM>(m.Value); //enregistrement des données du json dans un objet SharePriceM
-		//print(sharePrice.l);
 		return (System.Convert.ToDouble(sharePrice.l)); //retour de la valeur intéressante en tant que double
 	}
 

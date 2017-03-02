@@ -26,7 +26,7 @@ public class GraphBar : MonoBehaviour {
         Start();
     }
 
-    void Start() //Initialisation..
+    IEnumerator Start() //Initialisation..
     {
         CylinderX = transform.FindChild("CylinderX");
         CylinderY = transform.FindChild("CylinderY");
@@ -49,7 +49,7 @@ public class GraphBar : MonoBehaviour {
             bars[i].GetComponent<Bar>().data = data[i];
         }
 		Put_Name();
-		StartCoroutine("RealValues");
+		yield return StartCoroutine("RealValues");
     }
 
     double MoreDistantData()
@@ -81,8 +81,11 @@ public class GraphBar : MonoBehaviour {
 		{
 			UnityWebRequest www = UnityWebRequest.Get(ConfigAPI.apiGoogleBasePath + ConfigAPI.getLastPrice + ConfigAPI.paramCompany + ticker);
 			yield return www.Send();
-			double d = parseRequestLastPrices(www.downloadHandler.text);
-			d = d > 10.0 ? 10.0 : d;
+			double d = 0.0;
+			if (www.downloadHandler.text != "")
+				d = parseRequestLastPrices(www.downloadHandler.text);
+			else
+				d = data[data.Length - 1] + Random.Range(-0.5f, 0.5f);
 			InsertData(d < 0.0 ? 0.0 : d);
 			UpdateAllGraph();
 			yield return new WaitForSeconds(time_to_update);

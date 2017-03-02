@@ -27,9 +27,14 @@ public class UpdateInfosBanner : MonoBehaviour {
 
 	IEnumerator DataToImageLed (string ticker)
 	{
-		UnityWebRequest www = UnityWebRequest.Get(ConfigAPI.apiGoogleBasePath + ConfigAPI.getLastPrice + ConfigAPI.paramCompany + ticker);
-		yield return www.Send();
-		yield return StartCoroutine("ParseRequestLastPrices", www.downloadHandler.text);
+		while (true)
+		{
+			UnityWebRequest www = UnityWebRequest.Get(ConfigAPI.apiGoogleBasePath + ConfigAPI.getLastPrice + ConfigAPI.paramCompany + ticker);
+			yield return www.Send();
+			if (www.downloadHandler.text != "")
+				yield return StartCoroutine("ParseRequestLastPrices", www.downloadHandler.text);
+			yield return new WaitForSeconds(15.0f); // on met à jour les textes des bannieres toutes les 15 secondes
+		}
 	}
 
 	IEnumerator ParseRequestLastPrices (string data)
@@ -49,7 +54,7 @@ public class UpdateInfosBanner : MonoBehaviour {
 		//récupérer ici les textes enfants pour enregistrer les données de la requête...
 		titleText.GetComponent<Text>().text = title;
 		priceText.GetComponent<Text>().text = newPrice.ToString();
-		if (newPercent > 0)
+		if (newPercent > 0) //le cours de l'action monte mettre en vert
 		{
 			percentText.GetComponent<Text>().text = "+" + newPercent.ToString();
 			arrowGreen.SetActive(true);
@@ -57,7 +62,7 @@ public class UpdateInfosBanner : MonoBehaviour {
 			arrowWhite.SetActive(false);
 			percentText.GetComponent<Text>().color = Color.green;
 		}
-		else if (newPercent == 0)
+		else if (newPercent == 0)//le cours de l'action est identique mettre en blanc
 		{
 			percentText.GetComponent<Text>().text = newPercent.ToString();
 			arrowGreen.SetActive(false);
@@ -65,7 +70,7 @@ public class UpdateInfosBanner : MonoBehaviour {
 			arrowWhite.SetActive(true);
 			percentText.GetComponent<Text>().color = Color.white;
 		}
-		else
+		else //le cours de l'action chûte mettre en rouge
 		{
 			percentText.GetComponent<Text>().text = newPercent.ToString();
 			arrowGreen.SetActive(false);

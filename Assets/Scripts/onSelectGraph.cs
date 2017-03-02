@@ -77,7 +77,7 @@ public class onSelectGraph : MonoBehaviour {
             GameObject graphChild = temp.transform.GetChild(0).gameObject;
             graphChild.GetComponent<GraphBar>().graph_name = graphTitle;
             graphChild.GetComponent<GraphBar>().ticker = graphTicker;
-            graphChild.GetComponent<MeshRenderer>().material.color = colorGraph;
+            //graphChild.GetComponent<MeshRenderer>().material.color = colorGraph;
         }
         else
         {
