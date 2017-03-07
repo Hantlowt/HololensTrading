@@ -157,15 +157,15 @@ namespace HoloToolkit.Sharing.Spawning
 
             // Add the data model object to the networked array, for networking and history purposes
             dataModel.Initialize(instanceName, parent.transform.GetFullPath("/"));
-            dataModel.Transform.Position.Value = localPosition;
-            dataModel.Transform.Rotation.Value = localRotation;
+            dataModel.Position.Value = localPosition;
+            dataModel.Rotation.Value = localRotation;
             if (localScale.HasValue)
             {
-                dataModel.Transform.Scale.Value = localScale.Value;
+                dataModel.Scale.Value = localScale.Value;
             }
             else
             {
-                dataModel.Transform.Scale.Value = prefabToSpawn.transform.localScale;
+                dataModel.Scale.Value = prefabToSpawn.transform.localScale;
             }
 
             User owner = null;
@@ -216,8 +216,8 @@ namespace HoloToolkit.Sharing.Spawning
         /// <returns></returns>
         protected virtual GameObject CreatePrefabInstance(SyncSpawnedObject dataModel, GameObject prefabToInstantiate, GameObject parentObject, string objectName)
         {
-            GameObject instance = Instantiate(prefabToInstantiate, dataModel.Transform.Position.Value, dataModel.Transform.Rotation.Value);
-            instance.transform.localScale = dataModel.Transform.Scale.Value;
+            GameObject instance = Instantiate(prefabToInstantiate, dataModel.Position.Value, dataModel.Rotation.Value);
+            instance.transform.localScale = dataModel.Scale.Value;
             instance.transform.SetParent(parentObject.transform, false);
             instance.gameObject.name = objectName;
 
@@ -238,8 +238,8 @@ namespace HoloToolkit.Sharing.Spawning
             }
 
             // Setup the transform synchronization
-            TransformSynchronizer transformSynchronizer = instance.EnsureComponent<TransformSynchronizer>();
-            transformSynchronizer.TransformDataModel = dataModel.Transform;
+            //TransformSynchronizer transformSynchronizer = instance.EnsureComponent<TransformSynchronizer>();
+            //transformSynchronizer.TransformDataModel = dataModel.Transform;
 
             return instance;
         }

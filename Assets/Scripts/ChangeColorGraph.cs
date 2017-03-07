@@ -32,7 +32,16 @@ public class ChangeColorGraph : MonoBehaviour
 		}
 		else
 		{
-			graph.GetComponent<GraphBar>().ColorBar = GetComponent<Image>().color;
+            GraphBar g = graph.GetComponent<GraphBar>();
+            if (g.online)
+            {
+                SyncGraphBar sync = graph.transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphBar;
+                sync.Color_R.Value = GetComponent<Image>().color.r;
+                sync.Color_G.Value = GetComponent<Image>().color.g;
+                sync.Color_B.Value = GetComponent<Image>().color.b;
+            }
+            else
+                graph.GetComponent<GraphBar>().ColorBar = GetComponent<Image>().color;
 		}
 	}
 }

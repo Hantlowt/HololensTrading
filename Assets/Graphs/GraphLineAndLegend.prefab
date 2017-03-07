@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 114898321010165972}
   - component: {fileID: 65518829694426490}
   - component: {fileID: 114898637754267512}
+  - component: {fileID: 114340315877692608}
   m_Layer: 0
   m_Name: GraphLineAndLegend
   m_TagString: Graph
@@ -1197,6 +1198,18 @@ MonoBehaviour:
   PlaceParentOnTap: 0
   ParentGameObjectToPlace: {fileID: 1526719817148046}
   IsBeingPlaced: 0
+--- !u!114 &114340315877692608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526719817148046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a60b4385a87e3748a39cac79f7a72ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  receive_data: 1
 --- !u!114 &114343304526391476
 MonoBehaviour:
   m_ObjectHideFlags: 1
