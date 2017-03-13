@@ -8,12 +8,6 @@ using HoloToolkit.Sharing.Spawning;
 
 public class ChangeColorGraph : MonoBehaviour
 {
-
-	public void ChooseColorGraph ()
-	{
-		onSelectGraph.colorGraph = GetComponent<Image>().color;
-	}
-
 	public void changeColorGraph (GameObject graph)
 	{
         
