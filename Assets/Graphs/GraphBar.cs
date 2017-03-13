@@ -1,8 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using HoloToolkit.Sharing.SyncModel;
+using HoloToolkit.Sharing;
+using HoloToolkit.Sharing.Spawning;
 using UnityEngine;
 using UnityEngine.Networking;
+
+
+namespace HoloToolkit.Sharing.Spawning
+{
+    [SyncDataClass]
+    public class SyncGraphBar : SyncSpawnedObject //Pour le partage des donnees sur le network
+    {
+        [SyncData]
+        public SyncString GraphName;
+
+        [SyncData]
+        public SyncString Ticker;
+
+        [SyncData]
+        public SyncFloat Height;
+
+        [SyncData]
+        public SyncFloat Width;
+
+        [SyncData]
+        public SyncFloat Color_R;
+
+        [SyncData]
+        public SyncFloat Color_G;
+
+        [SyncData]
+        public SyncFloat Color_B;
+    }
+}
 
 public class GraphBar : MonoBehaviour {
 
@@ -20,8 +52,10 @@ public class GraphBar : MonoBehaviour {
     private Transform Name;
 	public string ticker;
 	public Color ColorBar = Color.white;
+    private SyncGraphBar sync;
+    public bool online;
 
-	void Restart()
+    void Restart()
     {
         StopAllCoroutines();
         Start();
@@ -29,6 +63,8 @@ public class GraphBar : MonoBehaviour {
 
     IEnumerator Start() //Initialisation..
     {
+        online = true;
+        sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphBar;
         CylinderX = transform.FindChild("CylinderX");
         CylinderY = transform.FindChild("CylinderY");
         Name = transform.FindChild("Name");
@@ -50,7 +86,6 @@ public class GraphBar : MonoBehaviour {
             bars[i].GetComponent<Bar>().data = data[i];
 			bars[i].GetComponent<Bar>().ColorBar = ColorBar;
 		}
-		Put_Name();
 		yield return StartCoroutine("RealValues");
     }
 
@@ -72,16 +107,18 @@ public class GraphBar : MonoBehaviour {
 
     void UpdateAllGraph()
     {
-			Update_bar();
-			Update_cylinder();
-			Update_Collider();
-	}
+		Update_bar();
+		Update_cylinder();
+		Update_Collider();
+        Put_Name();
+    }
 
     IEnumerator RealValues() //Coroutine pour ajouter regulierement des fausses valeurs au graph
     {
 		while (true)
 		{
-			UnityWebRequest www = UnityWebRequest.Get(ConfigAPI.apiGoogleBasePath + ConfigAPI.getLastPrice + ConfigAPI.paramCompany + ticker);
+            ticker = (online ? sync.Ticker.Value : ticker);
+            UnityWebRequest www = UnityWebRequest.Get(ConfigAPI.apiGoogleBasePath + ConfigAPI.getLastPrice + ConfigAPI.paramCompany + ticker);
 			yield return www.Send();
 			double d = 0.0;
 			if (www.downloadHandler.text != "")
@@ -130,18 +167,20 @@ public class GraphBar : MonoBehaviour {
     {
         float def = width < height ? width / 10.0f : height / 10.0f;
         Name.transform.localScale = new Vector3(def, def);
-        Name.GetComponent<TextMesh>().text = graph_name;
+        Name.GetComponent<TextMesh>().text = (online ? sync.GraphName.Value : graph_name);
     }
 
 	void Update_Collider () //On scale le box collider à la taille du graphique en cours
     {
-        GetComponent<BoxCollider>().center = new Vector3(width / 2.0f, height / 2.0f);
-        GetComponent<BoxCollider>().size = new Vector3(width, height);
+        transform.parent.GetComponent<BoxCollider>().center = new Vector3(width / 2.0f, height / 2.0f);
+        transform.parent.GetComponent<BoxCollider>().size = new Vector3(width, height);
     }
 	
     // Update is called once per frame
     void Update()
     {
+        if (online)
+            ColorBar = new Color(sync.Color_R.Value, sync.Color_G.Value, sync.Color_B.Value);
         if (nbr_bar_save != nbr_bar)
             Restart();
     }

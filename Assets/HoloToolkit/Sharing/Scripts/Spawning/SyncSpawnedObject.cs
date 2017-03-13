@@ -18,7 +18,15 @@ namespace HoloToolkit.Sharing.Spawning
         /// <summary>
         /// Transform (position, orientation and scale) for the object.
         /// </summary>
-        [SyncData] public SyncTransform Transform;
+        //[SyncData] public SyncTransform Transform;
+        [SyncData]
+        public SyncVector3 Position;
+
+        [SyncData]
+        public SyncQuaternion Rotation;
+
+        [SyncData]
+        public SyncVector3 Scale;
 
         /// <summary>
         /// Name of the object.

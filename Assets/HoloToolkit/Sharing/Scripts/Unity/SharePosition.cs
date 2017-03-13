@@ -1,42 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HoloToolkit.Sharing.SyncModel;
 using HoloToolkit.Sharing;
+using HoloToolkit.Sharing.Spawning;
 using HoloToolkit.Unity;
 
-namespace HoloToolkit.Sharing.Tests
+
+public class SharePosition : MonoBehaviour
 {
-    public class SharePosition : MonoBehaviour
+    SyncSpawnedObject sync;
+    public bool receive_data;
+    // Use this for initialization
+    void Start()
     {
-
-        // Use this for initialization
-        void Start()
-        {
-            CustomMessages.Instance.MessageHandlers[CustomMessages.TestMessageID.StageTransform] = this.OnStageTransfrom;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-        /// <summary>
-        /// When a remote system has a transform for us, we'll get it here.
-        /// </summary>
-        /// <param name="msg"></param>
-        void OnStageTransfrom(NetworkInMessage msg)
-        {
-            Debug.Log("tamere");
-            // We read the user ID but we don't use it here.
-            msg.ReadInt64();
-
-            transform.localPosition = CustomMessages.Instance.ReadVector3(msg);
-            transform.localRotation = CustomMessages.Instance.ReadQuaternion(msg);
-
-            //add any scripts you want.
-
-        }
-
+        sync = transform.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncSpawnedObject;
+        receive_data = true;
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (receive_data)
+        {
+            transform.position = sync.Position.Value;
+            transform.rotation = sync.Rotation.Value;
+            transform.localScale = sync.Scale.Value;
+        }
+    }
+
 }
+

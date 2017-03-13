@@ -85,10 +85,14 @@ namespace HoloToolkit.Sharing
             if (Position.HasUpdate())
             {
                 transform.localPosition = Position.GetUpdate(Time.deltaTime);
+                //transform.localPosition = transformDataModel.Position.Value;
+                //transform.localPosition = Position.Value;
             }
             if (Rotation.HasUpdate())
             {
                 transform.localRotation = Rotation.GetUpdate(Time.deltaTime);
+                //transform.localRotation = transformDataModel.Rotation.Value;
+                //transform.localRotation = Rotation.Value;
             }
             if (Scale.HasUpdate())
             {
