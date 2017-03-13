@@ -518,6 +518,24 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 232980249}
+--- !u!1 &273898925 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012943254746, guid: b2db04283121ca74495c2ee000fb4243,
+    type: 2}
+  m_PrefabInternal: {fileID: 1695240873}
+--- !u!114 &273898926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 273898925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4907ae5595dd640a9f185f2231e410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TrackingObject: {fileID: 1473060535694344, guid: 49bd370c2e00d0c4499f69f1323635b2,
+    type: 2}
 --- !u!1 &296791137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1714,7 +1732,7 @@ MonoBehaviour:
   AutoDiscoverServer: 0
   PingIntervalSec: 2
   IsAudioEndpoint: 1
-  ShowDetailedLogs: 0
+  ShowDetailedLogs: 1
 --- !u!4 &1053577282
 Transform:
   m_ObjectHideFlags: 0
@@ -2261,6 +2279,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 82907867490269890, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
+    - {fileID: 82672427115230984, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1438750106
@@ -2350,6 +2369,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!1 &1461877151 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011070707148, guid: 3eddd1c29199313478dd3f912bfab2ab,
+    type: 2}
+  m_PrefabInternal: {fileID: 1153858935}
+--- !u!114 &1461877152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1461877151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40781677294a0e4caffa3460012ae41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RecognizerStart: 0
+  UseRailsNavigation: 0
 --- !u!1 &1534694712
 GameObject:
   m_ObjectHideFlags: 0
@@ -3487,5 +3524,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Graph_Prefab: {fileID: 1130231892817502, guid: 39a78266705504a4a8ff7ffafa364139,
     type: 2}
-  online: 0
-  SpawnManager: {fileID: 0}
+  online: 1
+  SpawnManager: {fileID: 1053577280}

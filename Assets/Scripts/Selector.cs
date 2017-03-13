@@ -6,8 +6,9 @@ using HoloToolkit.Sharing.SyncModel;
 using HoloToolkit.Sharing;
 using HoloToolkit.Sharing.Spawning;
 using UnityEngine.VR.WSA;
+using UnityEngine.VR.WSA.Input;
 
-public class Selector : MonoBehaviour, IInputClickHandler
+public class Selector : MonoBehaviour, IInputClickHandler, INavigationHandler
 {
     public GameObject selected_object;
 	public float distance_selected;
@@ -23,23 +24,29 @@ public class Selector : MonoBehaviour, IInputClickHandler
         this.gameObject.AddComponent<AudioSource>();
         this.GetComponent<AudioSource>().clip = sound_click;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         raycast = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward,
             out hit, max_dist);
-		if (raycast)
-		{
-			hit.transform.gameObject.SendMessage("Raycast_Receiver", hit, SendMessageOptions.DontRequireReceiver);
+        if (raycast)
+        {
+            hit.transform.gameObject.SendMessage("Raycast_Receiver", hit, SendMessageOptions.DontRequireReceiver);
         }
         if (selected_object != null)
         {
             selected_object.transform.LookAt(2 * transform.position - Camera.main.transform.position);
             selected_object.transform.localRotation = Quaternion.identity;
-			if (raycast && hit.transform.gameObject.tag != "Graph")
+            /*if (raycast && hit.transform.gameObject.tag != "Graph")
                 selected_object.transform.position = hit.transform.position;
             else
-                selected_object.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;
+                selected_object.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;*/
+            selected_object.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            this.GetComponent<AudioSource>().Play();
         }
     }
 
@@ -71,5 +78,25 @@ public class Selector : MonoBehaviour, IInputClickHandler
                 selected_object = null;
             }
         }
+    }
+
+    public void OnNavigationStarted(NavigationEventData n)
+    {
+        this.GetComponent<AudioSource>().Play();
+    }
+
+    public void OnNavigationUpdated(NavigationEventData n)
+    {
+       
+    }
+
+    public void OnNavigationCompleted(NavigationEventData n)
+    {
+        
+    }
+
+    public void OnNavigationCanceled(NavigationEventData n)
+    {
+        
     }
 }

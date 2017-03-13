@@ -88,7 +88,6 @@ public class GraphLine : MonoBehaviour
 		
 		vertices2d = new Vector2[nbr_points + 2];
         raycast = false;
-		Put_Name();
 		//getPrices.Singleton.StartCoroutine("getPricesDays", ticker);
 		yield return StartCoroutine("RealValues");
 	}
@@ -102,10 +101,11 @@ public class GraphLine : MonoBehaviour
 
 	private void UpdateAllGraph ()
 	{
-			Update_points_position();
-			Update_cylinder();
-			Update_Collider();
-	}
+		Update_points_position();
+		Update_cylinder();
+		Update_Collider();
+        Put_Name();
+    }
 
 	IEnumerator RealValues () //Coroutine pour ajouter regulierement des fausses valeurs au graph
 	{

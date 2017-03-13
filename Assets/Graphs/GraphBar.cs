@@ -86,7 +86,6 @@ public class GraphBar : MonoBehaviour {
             bars[i].GetComponent<Bar>().data = data[i];
 			bars[i].GetComponent<Bar>().ColorBar = ColorBar;
 		}
-		Put_Name();
 		yield return StartCoroutine("RealValues");
     }
 
@@ -108,10 +107,11 @@ public class GraphBar : MonoBehaviour {
 
     void UpdateAllGraph()
     {
-			Update_bar();
-			Update_cylinder();
-			Update_Collider();
-	}
+		Update_bar();
+		Update_cylinder();
+		Update_Collider();
+        Put_Name();
+    }
 
     IEnumerator RealValues() //Coroutine pour ajouter regulierement des fausses valeurs au graph
     {
@@ -172,8 +172,8 @@ public class GraphBar : MonoBehaviour {
 
 	void Update_Collider () //On scale le box collider à la taille du graphique en cours
     {
-        GetComponent<BoxCollider>().center = new Vector3(width / 2.0f, height / 2.0f);
-        GetComponent<BoxCollider>().size = new Vector3(width, height);
+        transform.parent.GetComponent<BoxCollider>().center = new Vector3(width / 2.0f, height / 2.0f);
+        transform.parent.GetComponent<BoxCollider>().size = new Vector3(width, height);
     }
 	
     // Update is called once per frame

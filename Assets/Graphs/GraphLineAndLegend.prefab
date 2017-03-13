@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 114053906835310698}
   - component: {fileID: 114557216778509900}
   - component: {fileID: 114306776022861054}
-  - component: {fileID: 114840457925807746}
   m_Layer: 5
   m_Name: MoveButton
   m_TagString: Untagged
@@ -79,7 +78,6 @@ GameObject:
   - component: {fileID: 114735447617016440}
   - component: {fileID: 114634076499970818}
   - component: {fileID: 114691413742668120}
-  - component: {fileID: 114926310040610986}
   m_Layer: 5
   m_Name: yellow
   m_TagString: Untagged
@@ -99,7 +97,6 @@ GameObject:
   - component: {fileID: 114931582779841232}
   - component: {fileID: 114764410443523330}
   - component: {fileID: 114680060137680282}
-  - component: {fileID: 114384648792505480}
   m_Layer: 5
   m_Name: cyan
   m_TagString: Untagged
@@ -119,7 +116,6 @@ GameObject:
   - component: {fileID: 114397671186959676}
   - component: {fileID: 114974453781131532}
   - component: {fileID: 114644686246469178}
-  - component: {fileID: 114179530020564846}
   m_Layer: 5
   m_Name: HideButton
   m_TagString: Untagged
@@ -141,7 +137,6 @@ GameObject:
   - component: {fileID: 23045121280245254}
   - component: {fileID: 33078875726440800}
   - component: {fileID: 114684551607243830}
-  - component: {fileID: 114026424828826804}
   m_Layer: 0
   m_Name: GraphLine
   m_TagString: Graph
@@ -210,7 +205,6 @@ GameObject:
   - component: {fileID: 222359470744846924}
   - component: {fileID: 114343304526391476}
   - component: {fileID: 114002568438991318}
-  - component: {fileID: 114019203174739488}
   m_Layer: 5
   m_Name: ResizeButton
   m_TagString: Untagged
@@ -249,7 +243,6 @@ GameObject:
   - component: {fileID: 114237959229632910}
   - component: {fileID: 114986481957529380}
   - component: {fileID: 114140024730944302}
-  - component: {fileID: 114285056671561220}
   m_Layer: 5
   m_Name: ColorButton
   m_TagString: Untagged
@@ -269,7 +262,6 @@ GameObject:
   - component: {fileID: 114542130931899922}
   - component: {fileID: 114063717651946560}
   - component: {fileID: 114216950956049438}
-  - component: {fileID: 114699800333053738}
   m_Layer: 5
   m_Name: green
   m_TagString: Untagged
@@ -289,7 +281,6 @@ GameObject:
   - component: {fileID: 114370042541590766}
   - component: {fileID: 114789719642809768}
   - component: {fileID: 114892617168800868}
-  - component: {fileID: 114381749290364236}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -327,7 +318,6 @@ GameObject:
   - component: {fileID: 114621004862494398}
   - component: {fileID: 114837564614763046}
   - component: {fileID: 114446456876378244}
-  - component: {fileID: 114541487239132766}
   m_Layer: 5
   m_Name: blue
   m_TagString: Untagged
@@ -365,7 +355,6 @@ GameObject:
   - component: {fileID: 114140368372961992}
   - component: {fileID: 114201556980033046}
   - component: {fileID: 114726987949611784}
-  - component: {fileID: 114684739592603194}
   m_Layer: 5
   m_Name: red
   m_TagString: Untagged
@@ -385,7 +374,6 @@ GameObject:
   - component: {fileID: 114474418386723764}
   - component: {fileID: 114486846146773796}
   - component: {fileID: 114130130135180326}
-  - component: {fileID: 114548068226818970}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -405,7 +393,6 @@ GameObject:
   - component: {fileID: 114212545557177196}
   - component: {fileID: 114205000145565712}
   - component: {fileID: 114665213469074270}
-  - component: {fileID: 114462176964677798}
   m_Layer: 5
   m_Name: orange
   m_TagString: Untagged
@@ -425,7 +412,6 @@ GameObject:
   - component: {fileID: 114815882442800524}
   - component: {fileID: 114866950784970172}
   - component: {fileID: 114411979283173292}
-  - component: {fileID: 114122704210075786}
   m_Layer: 5
   m_Name: pink
   m_TagString: Untagged
@@ -471,7 +457,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1526719817148046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.614143, y: -2.2460904, z: 10.163383}
+  m_LocalPosition: {x: -3.772902, y: -5.2993035, z: 8.370968}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4352729148593242}
@@ -817,8 +803,8 @@ TextMesh:
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
-  m_TabSize: 20
-  m_FontSize: 0
+  m_TabSize: 4
+  m_FontSize: 12
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 0}
@@ -885,7 +871,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114019203174739488}
+      - m_Target: {fileID: 0}
         m_MethodName: OnMouseDown
         m_Mode: 1
         m_Arguments:
@@ -898,30 +884,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114019203174739488
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1476182709583096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
---- !u!114 &114026424828826804
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1112396066175020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
 --- !u!114 &114053906835310698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -960,18 +922,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040dbe95cb0cc6541bd39eac8a710d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114122704210075786
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1988047419659538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
 --- !u!114 &114130130135180326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1042,18 +992,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 10
---- !u!114 &114179530020564846
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1083521486391732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
 --- !u!114 &114201556980033046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1130,7 +1068,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 114699800333053738}
+        - m_Target: {fileID: 0}
           m_MethodName: OnMouseDown
           m_Mode: 1
           m_Arguments:
@@ -1171,18 +1109,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114285056671561220
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1568152570809768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
 --- !u!114 &114306776022861054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1264,30 +1190,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114381749290364236
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1762481189583654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
---- !u!114 &114384648792505480
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1078731557208056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
 --- !u!114 &114392848451271310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1358,7 +1260,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 114122704210075786}
+        - m_Target: {fileID: 0}
           m_MethodName: OnMouseDown
           m_Mode: 1
           m_Arguments:
@@ -1399,7 +1301,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 114541487239132766}
+        - m_Target: {fileID: 0}
           m_MethodName: OnMouseDown
           m_Mode: 1
           m_Arguments:
@@ -1413,18 +1315,6 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &114462176964677798
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1943910466042850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
 --- !u!114 &114474418386723764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1502,7 +1392,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114548068226818970}
+      - m_Target: {fileID: 0}
         m_MethodName: OnMouseDown
         m_Mode: 1
         m_Arguments:
@@ -1515,18 +1405,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114541487239132766
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1871201057350628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
 --- !u!114 &114542130931899922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1554,18 +1432,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114548068226818970
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1924432591960376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
 --- !u!114 &114557216778509900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1605,7 +1471,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114840457925807746}
+      - m_Target: {fileID: 0}
         m_MethodName: OnMouseDown
         m_Mode: 1
         m_Arguments:
@@ -1713,7 +1579,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 114462176964677798}
+        - m_Target: {fileID: 0}
           m_MethodName: OnMouseDown
           m_Mode: 1
           m_Arguments:
@@ -1754,7 +1620,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 114384648792505480}
+        - m_Target: {fileID: 0}
           m_MethodName: OnMouseDown
           m_Mode: 1
           m_Arguments:
@@ -1784,7 +1650,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 114026424828826804}
+        - m_Target: {fileID: 0}
           m_MethodName: OnMouseDown
           m_Mode: 1
           m_Arguments:
@@ -1798,18 +1664,6 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &114684739592603194
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1921000217533114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
 --- !u!114 &114691413742668120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1837,7 +1691,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 114926310040610986}
+        - m_Target: {fileID: 0}
           m_MethodName: OnMouseDown
           m_Mode: 1
           m_Arguments:
@@ -1851,18 +1705,6 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &114699800333053738
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1606508080116390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
 --- !u!114 &114726987949611784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1890,7 +1732,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 114684739592603194}
+        - m_Target: {fileID: 0}
           m_MethodName: OnMouseDown
           m_Mode: 1
           m_Arguments:
@@ -2036,7 +1878,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114381749290364236}
+      - m_Target: {fileID: 0}
         m_MethodName: OnMouseDown
         m_Mode: 1
         m_Arguments:
@@ -2087,18 +1929,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040dbe95cb0cc6541bd39eac8a710d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114840457925807746
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1027424572590620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
 --- !u!114 &114866950784970172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2143,18 +1973,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff591f43ecba96d4ca3984aa7cbbc770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114926310040610986
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1071712258986970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf898ea4d5a9ccf44894d65ad5a2324e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myclip: {fileID: 8300000, guid: 88afb554c0e7a3a4d82e9278ae9a8530, type: 3}
 --- !u!114 &114931582779841232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2232,7 +2050,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114179530020564846}
+      - m_Target: {fileID: 0}
         m_MethodName: OnMouseDown
         m_Mode: 1
         m_Arguments:
@@ -2295,7 +2113,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114285056671561220}
+      - m_Target: {fileID: 0}
         m_MethodName: OnMouseDown
         m_Mode: 1
         m_Arguments:
