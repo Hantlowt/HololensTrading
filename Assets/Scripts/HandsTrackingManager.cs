@@ -5,17 +5,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VR.WSA.Input;
 
-namespace HoloToolkit.Unity
-{
+
     /// <summary>
     /// HandsManager determines if the hand is currently detected or not.
     /// </summary>
-    public partial class HandsTrackingManager : Singleton<HandsTrackingManager>
+    public class HandsTrackingManager :HoloToolkit.Unity.Singleton<HandsTrackingManager>
     {
         /// <summary>
         /// HandDetected tracks the hand detected state.
         /// Returns true if the list of tracked hands is not empty.
         /// </summary>
+        /// 
+        
         public bool HandDetected
         {
             get { return trackedHands.Count > 0; }
@@ -25,7 +26,7 @@ namespace HoloToolkit.Unity
 
         private HashSet<uint> trackedHands = new HashSet<uint>();
         private Dictionary<uint, GameObject> trackingObject = new Dictionary<uint, GameObject>();
-       
+
         void Awake()
         {
             InteractionManager.SourceDetected += InteractionManager_SourceDetected;
@@ -98,4 +99,3 @@ namespace HoloToolkit.Unity
             InteractionManager.SourceUpdated -= InteractionManager_SourceUpdated;
         }
     }
-}

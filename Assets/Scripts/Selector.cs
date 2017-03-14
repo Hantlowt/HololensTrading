@@ -8,7 +8,7 @@ using HoloToolkit.Sharing.Spawning;
 using UnityEngine.VR.WSA;
 using UnityEngine.VR.WSA.Input;
 
-public class Selector : MonoBehaviour, IInputClickHandler, INavigationHandler
+public class Selector : MonoBehaviour, IInputClickHandler
 {
     public GameObject selected_object;
 	public float distance_selected;
@@ -42,7 +42,7 @@ public class Selector : MonoBehaviour, IInputClickHandler, INavigationHandler
                 selected_object.transform.position = hit.transform.position;
             else
                 selected_object.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;*/
-            selected_object.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;
+            //selected_object.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -50,9 +50,35 @@ public class Selector : MonoBehaviour, IInputClickHandler, INavigationHandler
         }
     }
 
+    public void enable_disable(GameObject o)
+    {
+        if (selected_object == null)
+        {
+            selected_object = o;
+            selected_object.transform.parent = Camera.main.transform;
+            distance_selected = Vector3.Distance(transform.position, Camera.main.transform.position);
+            lockrot = selected_object.transform.rotation;
+            selected_object.GetComponent<SharePosition>().receive_data = false;
+            selected_object.GetComponent<BoxCollider>().enabled = false;
+
+        }
+        else if (selected_object != null)
+        {
+            selected_object.transform.parent = null;
+            selected_object.GetComponent<BoxCollider>().enabled = true;
+            SyncSpawnedObject sync = selected_object.GetComponent<DefaultSyncModelAccessor>().SyncModel
+                as SyncSpawnedObject;
+            sync.Position.Value = selected_object.transform.position;
+            sync.Rotation.Value = selected_object.transform.rotation;
+            sync.Scale.Value = selected_object.transform.localScale;
+            selected_object.GetComponent<SharePosition>().receive_data = true;
+            selected_object = null;
+        }
+    }
+
     public void OnInputClicked(InputClickedEventData eventData)
     {
-		if (raycast)
+		/*if (raycast)
         {
             this.GetComponent<AudioSource>().Play();
             if (selected_object == null && hit.transform.gameObject.tag == "Graph")
@@ -77,26 +103,6 @@ public class Selector : MonoBehaviour, IInputClickHandler, INavigationHandler
                 selected_object.GetComponent<SharePosition>().receive_data = true;
                 selected_object = null;
             }
-        }
-    }
-
-    public void OnNavigationStarted(NavigationEventData n)
-    {
-        this.GetComponent<AudioSource>().Play();
-    }
-
-    public void OnNavigationUpdated(NavigationEventData n)
-    {
-       
-    }
-
-    public void OnNavigationCompleted(NavigationEventData n)
-    {
-        
-    }
-
-    public void OnNavigationCanceled(NavigationEventData n)
-    {
-        
+        }*/
     }
 }
