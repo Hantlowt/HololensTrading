@@ -1893,6 +1893,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000012009196210, guid: 3eddd1c29199313478dd3f912bfab2ab, type: 2}
+    - {fileID: 114000012864906760, guid: 3eddd1c29199313478dd3f912bfab2ab, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3eddd1c29199313478dd3f912bfab2ab, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1208256136
@@ -2380,6 +2381,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c4907ae5595dd640a9f185f2231e410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pressed: 0
+  velocity: {x: 0, y: 0, z: 0}
   TrackingObject: {fileID: 1473060535694344, guid: 49bd370c2e00d0c4499f69f1323635b2,
     type: 2}
 --- !u!1 &1534694712

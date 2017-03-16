@@ -11,12 +11,13 @@ using UnityEngine.VR.WSA.Input;
     /// </summary>
     public class HandsTrackingManager :HoloToolkit.Unity.Singleton<HandsTrackingManager>
     {
-        /// <summary>
-        /// HandDetected tracks the hand detected state.
-        /// Returns true if the list of tracked hands is not empty.
-        /// </summary>
-        /// 
-        
+    /// <summary>
+    /// HandDetected tracks the hand detected state.
+    /// Returns true if the list of tracked hands is not empty.
+    /// </summary>
+    /// 
+        public bool pressed;
+    public Vector3 velocity = new Vector3(0.0f, 0.0f, 0.0f);
         public bool HandDetected
         {
             get { return trackedHands.Count > 0; }
@@ -32,6 +33,7 @@ using UnityEngine.VR.WSA.Input;
             InteractionManager.SourceDetected += InteractionManager_SourceDetected;
             InteractionManager.SourceLost += InteractionManager_SourceLost;
             InteractionManager.SourceUpdated += InteractionManager_SourceUpdated;
+            pressed = false;
         }
 
         private void InteractionManager_SourceUpdated(InteractionSourceState state)
@@ -41,10 +43,13 @@ using UnityEngine.VR.WSA.Input;
 
             if (state.source.kind == InteractionSourceKind.Hand)
             {
+                pressed = state.pressed;
                 if (trackingObject.ContainsKey(state.source.id))
                 {
                     if (state.properties.location.TryGetPosition(out pos))
                     {
+                        state.properties.location.TryGetVelocity(out velocity);
+                    velocity /= 100.0f;
                         trackingObject[state.source.id].transform.position = pos;
                     }
                 }

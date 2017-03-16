@@ -8,7 +8,7 @@ using HoloToolkit.Sharing.Spawning;
 using UnityEngine.VR.WSA;
 using UnityEngine.VR.WSA.Input;
 
-public class Selector : MonoBehaviour, IInputClickHandler
+public class Selector : MonoBehaviour, IInputHandler
 {
     public GameObject selected_object;
 	public float distance_selected;
@@ -52,7 +52,7 @@ public class Selector : MonoBehaviour, IInputClickHandler
 
     public void enable_disable(GameObject o)
     {
-        if (selected_object == null)
+        if (selected_object == null && o != null)
         {
             selected_object = o;
             selected_object.transform.parent = Camera.main.transform;
@@ -76,9 +76,16 @@ public class Selector : MonoBehaviour, IInputClickHandler
         }
     }
 
-    public void OnInputClicked(InputClickedEventData eventData)
+    public void OnInputUp(InputEventData eventData)
     {
-		/*if (raycast)
+        enable_disable(null);
+        Debug.Log("Deselect");
+
+    }
+
+    public void OnInputDown(InputEventData eventData)
+    {
+        /*if (raycast)
         {
             this.GetComponent<AudioSource>().Play();
             if (selected_object == null && hit.transform.gameObject.tag == "Graph")
@@ -104,5 +111,8 @@ public class Selector : MonoBehaviour, IInputClickHandler
                 selected_object = null;
             }
         }*/
+        
     }
+
+        
 }

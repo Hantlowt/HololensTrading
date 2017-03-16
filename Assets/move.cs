@@ -13,13 +13,16 @@ public class move : EventTrigger
         s = GameObject.Find("Cursor").GetComponent<Selector>();
     }
 
+    public override void OnUpdateSelected(BaseEventData eventData)
+    {
+        transform.parent.parent.position += input.velocity;
+    }
+
     public override void OnPointerDown(PointerEventData data)
     {
-        Debug.Log(this.transform.parent.parent.name);
         s.enable_disable(this.transform.parent.parent.gameObject);
         Debug.Log("OnPointerDown called.");
     }
-
 
     public override void OnPointerUp(PointerEventData data)
     {
