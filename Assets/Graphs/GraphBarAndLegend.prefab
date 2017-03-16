@@ -42,6 +42,9 @@ GameObject:
   - component: {fileID: 114358315994146556}
   - component: {fileID: 114551471756198694}
   - component: {fileID: 65945377353561640}
+  - component: {fileID: 114805430866870146}
+  - component: {fileID: 114160295961004610}
+  - component: {fileID: 114669140546402596}
   m_Layer: 0
   m_Name: GraphBarAndLegend
   m_TagString: Graph
@@ -987,6 +990,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040dbe95cb0cc6541bd39eac8a710d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114160295961004610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130231892817502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d6513c2cdf97f409654a2a4114d9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keywords:
+  - Keyword: Red
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114805430866870146}
+          m_MethodName: ChangeColorGraphBar
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Red
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - Keyword: Green
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114805430866870146}
+          m_MethodName: ChangeColorGraphBar
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Green
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - Keyword: Blue
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114805430866870146}
+          m_MethodName: ChangeColorGraphBar
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Blue
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - Keyword: Close
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114805430866870146}
+          m_MethodName: DestroyGameObject
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Blue
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!114 &114220674970754946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1582,6 +1665,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040dbe95cb0cc6541bd39eac8a710d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114669140546402596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130231892817502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cae8f3c88e9704a4393cb8d904b62372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114680924648391360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1676,6 +1770,18 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &114805430866870146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130231892817502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bcb7ab09b53e5544895040af6536b1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myGraphChild: {fileID: 0}
 --- !u!114 &114806407001119952
 MonoBehaviour:
   m_ObjectHideFlags: 1
