@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class move : EventTrigger
+public class Move : EventTrigger
 {
     HandsTrackingManager input;
     Selector s;
