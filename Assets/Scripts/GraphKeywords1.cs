@@ -6,7 +6,6 @@ using HoloToolkit.Unity.InputModule;
 public class GraphKeywords1 : MonoBehaviour, ISpeechHandler
 {
 	private Color objectColor;
-	private bool online = true;
 	public GameObject myGraphChild;
 
 	public void ChangeColorGraphLine (string color)

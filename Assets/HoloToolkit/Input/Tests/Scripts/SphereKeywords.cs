@@ -15,11 +15,19 @@ namespace HoloToolkit.Unity.InputModule.Tests
             cachedMaterial = GetComponent<Renderer>().material;
         }
 
+		public void CloseObject()
+		{
+			Destroy(gameObject);
+		}
+
         public void ChangeColor(string color)
         {
             switch (color.ToLower())
             {
-                case "red":
+				case "close":
+					CloseObject();
+					break;
+				case "red":
                     cachedMaterial.SetColor("_Color", Color.red);
                     break;
                 case "blue":
