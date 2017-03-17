@@ -49,7 +49,6 @@ using UnityEngine.VR.WSA.Input;
                     if (state.properties.location.TryGetPosition(out pos))
                     {
                         state.properties.location.TryGetVelocity(out velocity);
-                    velocity /= 100.0f;
                         trackingObject[state.source.id].transform.position = pos;
                     }
                 }
