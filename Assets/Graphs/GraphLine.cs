@@ -59,11 +59,11 @@ public class GraphLine : MonoBehaviour
 	private Transform Selected_Data;
     private bool raycast;
     private RaycastHit hit;
-    private SyncGraphLine sync;
+    public SyncGraphLine sync;
     public bool online;
 
 
-    void Restart()
+    public void Restart()
 	{
 		StopAllCoroutines();
 		Start();
