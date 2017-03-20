@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 222359470744846924}
   - component: {fileID: 114343304526391476}
   - component: {fileID: 114002568438991318}
+  - component: {fileID: 114821257579180212}
   m_Layer: 5
   m_Name: ResizeButton
   m_TagString: Untagged
@@ -461,7 +462,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1526719817148046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.910739, y: -7.8498116, z: 16.933289}
+  m_LocalPosition: {x: 3.5957074, y: -3.108767, z: 6.53442}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4352729148593242}
@@ -2036,6 +2037,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114821257579180212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1476182709583096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a40435d293b99b4db3ba2db07cf2d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
 --- !u!114 &114837564614763046
 MonoBehaviour:
   m_ObjectHideFlags: 1

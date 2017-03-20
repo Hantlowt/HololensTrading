@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 222851619910878238}
   - component: {fileID: 114335790616889972}
   - component: {fileID: 114866069394934486}
+  - component: {fileID: 114476567409017132}
   m_Layer: 5
   m_Name: ResizeButton
   m_TagString: Untagged
@@ -465,7 +466,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1130231892817502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.019371, y: -8.369128, z: 17.543573}
+  m_LocalPosition: {x: 3.341174, y: -4.7673616, z: 5.6115694}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4015841238507806}
@@ -1380,6 +1381,19 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114476567409017132
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1846205144356860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a40435d293b99b4db3ba2db07cf2d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
 --- !u!114 &114495630934589636
 MonoBehaviour:
   m_ObjectHideFlags: 1
