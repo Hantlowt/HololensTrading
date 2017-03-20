@@ -6,8 +6,8 @@ public class SharePricesM
 	public int id;
 	public string t;
 	public string e;
-	public float l;
-	public float l_fix;
+	public double l;
+	public double l_fix;
 	public float l_cur;
 	public float s;
 	public string ltt;

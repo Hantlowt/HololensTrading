@@ -34,17 +34,17 @@ public class ConfigAPI : MonoBehaviour {
 	public static string paramCompany = "q=";
 	public static Dictionary<string, string> CompanyList = new Dictionary<string, string>()
 	{
-		{"TADAWUL:1120", "Al Rajhi Banking & Invstmnt" },
-		{"NASDAQ:AAPL", "Apple Inc" },
-		{"GLE:EPA", "Société Générale" },
-		{"NASDAQ:MSFT", "Microsoft Corp" },
-		{"NASDAQ:GOOG", "Google" },
-		{"NASDAQ:AMZN", "Amazone" },
-		{"EPA:AM", "Dassault Aviation SA" },
-		{"INDEXEURO:PX1", "CAC 40" },
-		{"EPA:AIR", "Airbus Group" },
-		{"EPA:HO", "Thales SA" },
-		{"TADAWUL:2010", "Saudi Basic Ind." },
+		{"TADAWUL:1120", "Al Rajhi Banking"},
+		{"NASDAQ:AAPL", "Apple Inc"},
+		{"GLE:EPA", "Société Générale"},
+		{"NASDAQ:MSFT", "Microsoft Corp"},
+		{"NASDAQ:GOOG", "Google"},
+		{"NASDAQ:AMZN", "Amazone"},
+		{"EPA:AM", "Dassault Aviation SA"},
+		{"INDEXEURO:PX1", "CAC 40"},
+		{"EPA:AIR", "Airbus Group"},
+		{"EPA:HO", "Thales SA"},
+		{"TADAWUL:2010", "Saudi Basic Ind."}
 	};
 	//public static string[] TickersList = { "AAPL", "GLE", "MSFT", "GOOG", "AMZN", "YHOO", "INDEXEURO:PX1" };
 	//public static string[] CompanyNameList = { "Apple Inc", "Société Générale", "Microsoft Corp", "Google", "Amazone", "Yahoo", "CAC 40" };

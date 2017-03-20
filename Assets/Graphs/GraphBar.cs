@@ -136,8 +136,8 @@ public class GraphBar : MonoBehaviour {
 		string pattern = @"{[^}]+}";
 		Match m = Regex.Match(data, pattern); // Regex pour corriger le format du json reçu
 		SharePricesM sharePrice;
-		sharePrice = JsonUtility.FromJson<SharePricesM>(m.Value); //enregistrement des données du json dans un objet SharePriceM
-		return (System.Convert.ToDouble(sharePrice.l)); //retour de la valeur intéressante en tant que double
+		sharePrice = JsonUtility.FromJson<SharePricesM>(m.Value);
+		return (System.Math.Round(sharePrice.l_fix)); //retour de la valeur intéressante
 	}
 
 	void Update_bar() // Met à jour la taille et la position des bars selon leurs nouvelles valeurs

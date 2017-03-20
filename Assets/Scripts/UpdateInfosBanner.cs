@@ -44,7 +44,7 @@ public class UpdateInfosBanner : MonoBehaviour {
 		SharePricesM sharePrice;
 		sharePrice = JsonUtility.FromJson<SharePricesM>(m.Value); //enregistrement des données du json dans un objet SharePriceM
 		yield return new WaitForSeconds(1.0f);
-		newPrice = Math.Round(sharePrice.l, 2);
+		newPrice = Math.Round(sharePrice.l_fix, 2);
 		newPercent = Math.Round(sharePrice.cp, 2);
 		yield return StartCoroutine("SaveNewDataInLedImage");
 	}

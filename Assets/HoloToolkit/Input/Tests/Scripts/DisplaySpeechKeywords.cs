@@ -19,11 +19,11 @@ namespace HoloToolkit.Unity.InputModule.Tests
                 return;
             }
 
-            textMesh.text = "On sphere try saying:\nBlue\nRed\nGreen\nClose\n\nOn graph try saying :\nClose\n\nOn button new graph try saying :\nOpen\n";
-            /*foreach (SpeechInputSource.KeywordAndKeyCode item in speechInputSource.Keywords)
+            textMesh.text = "Look object and try saying:\n";
+            foreach (SpeechInputSource.KeywordAndKeyCode item in speechInputSource.Keywords)
             {
                 textMesh.text += " " + item.Keyword + "\n";
-            }*/
+            }
         }
     }
 }
