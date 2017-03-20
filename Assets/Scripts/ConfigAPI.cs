@@ -30,19 +30,21 @@ public class ConfigAPI : MonoBehaviour {
 	public static string apiGoogleBasePath = "http://finance.google.com/finance/";
 	public static string getPrice = "getprices?";
 	public static string getLastPrice = "info?";
+	public static string getFinance = "finance?";
 	public static string paramCompany = "q=";
 	public static Dictionary<string, string> CompanyList = new Dictionary<string, string>()
 	{
-		{"AAPL", "Apple Inc" },
-		{"GLE", "Société Générale" },
-		{"MSFT", "Microsoft Corp" },
-		{"GOOG", "Google" },
-		{"AMZN", "Amazone" },
-		{"YHOO", "Yahoo" },
+		{"TADAWUL:1120", "Al Rajhi Banking & Invstmnt" },
+		{"NASDAQ:AAPL", "Apple Inc" },
+		{"GLE:EPA", "Société Générale" },
+		{"NASDAQ:MSFT", "Microsoft Corp" },
+		{"NASDAQ:GOOG", "Google" },
+		{"NASDAQ:AMZN", "Amazone" },
+		{"EPA:AM", "Dassault Aviation SA" },
 		{"INDEXEURO:PX1", "CAC 40" },
-		{"AIR", "Airbus Group" },
-		{"HO", "Thales SA" },
-		{"SAF", "Safran" },
+		{"EPA:AIR", "Airbus Group" },
+		{"EPA:HO", "Thales SA" },
+		{"TADAWUL:2010", "Saudi Basic Ind." },
 	};
 	//public static string[] TickersList = { "AAPL", "GLE", "MSFT", "GOOG", "AMZN", "YHOO", "INDEXEURO:PX1" };
 	//public static string[] CompanyNameList = { "Apple Inc", "Société Générale", "Microsoft Corp", "Google", "Amazone", "Yahoo", "CAC 40" };

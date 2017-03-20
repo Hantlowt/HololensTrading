@@ -88,7 +88,7 @@ public class GraphLine : MonoBehaviour
 		
 		vertices2d = new Vector2[nbr_points + 2];
         raycast = false;
-		//getPrices.Singleton.StartCoroutine("getPricesDays", ticker);
+		//yield return StartCoroutine("getPricesDays", ticker);
 		yield return StartCoroutine("RealValues");
 	}
 
