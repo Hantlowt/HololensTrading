@@ -486,7 +486,7 @@ PlayerSettings:
       InternetClient: True
       InternetClientServer: True
       Location: False
-      Microphone: False
+      Microphone: True
       MusicLibrary: False
       Objects3D: False
       PhoneCall: False
@@ -498,7 +498,7 @@ PlayerSettings:
       SpatialPerception: True
       UserAccountInformation: False
       VideosLibrary: False
-      VoipCall: False
+      VoipCall: True
       WebCam: False
   metroFTAName: 
   metroFTAFileTypes: []
