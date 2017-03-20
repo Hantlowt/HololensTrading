@@ -15,7 +15,7 @@ public class Move : EventTrigger
 
     public override void OnUpdateSelected(BaseEventData eventData)
     {
-        transform.parent.parent.position += input.velocity / 50.0f;
+        transform.parent.parent.position += input.velocity / 30.0f;
     }
 
     public override void OnPointerDown(PointerEventData data)

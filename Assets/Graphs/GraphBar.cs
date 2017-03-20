@@ -52,7 +52,7 @@ public class GraphBar : MonoBehaviour {
     private Transform Name;
 	public string ticker;
 	public Color ColorBar = Color.white;
-    private SyncGraphBar sync;
+    public SyncGraphBar sync;
     public bool online;
 
     void Restart()
