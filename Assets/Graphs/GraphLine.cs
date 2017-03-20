@@ -131,7 +131,7 @@ public class GraphLine : MonoBehaviour
 		Match m = Regex.Match(data, pattern); // Regex pour corriger le format du json reçu
 		SharePricesM sharePrice;
 		sharePrice = JsonUtility.FromJson<SharePricesM>(m.Value); //enregistrement des données du json dans un objet SharePriceM
-		return (sharePrice.l_fix); //retour de la valeur intéressante
+		return (System.Math.Round(sharePrice.l_fix)); //retour de la valeur intéressante
 	}
 
 	private void InsertData (double d)

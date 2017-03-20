@@ -44,8 +44,6 @@ GameObject:
   - component: {fileID: 65945377353561640}
   - component: {fileID: 114805430866870146}
   - component: {fileID: 114160295961004610}
-  - component: {fileID: 114669140546402596}
-  - component: {fileID: 114948080098510596}
   m_Layer: 0
   m_Name: GraphBarAndLegend
   m_TagString: Graph
@@ -246,7 +244,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4015841238507806}
   - component: {fileID: 114261134695770228}
-  - component: {fileID: 114804620657071050}
   m_Layer: 0
   m_Name: GraphBar
   m_TagString: Graph
@@ -1021,7 +1018,7 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-  - Keyword: Green
+  - Keyword: Blue
     Response:
       m_PersistentCalls:
         m_Calls:
@@ -1038,7 +1035,7 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-  - Keyword: Blue
+  - Keyword: Green
     Response:
       m_PersistentCalls:
         m_Calls:
@@ -1076,12 +1073,12 @@ MonoBehaviour:
     Response:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 114948080098510596}
-          m_MethodName: onClickHide
-          m_Mode: 2
+        - m_Target: {fileID: 114805430866870146}
+          m_MethodName: HideObject
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 1634979005639600}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: Blue
@@ -1160,7 +1157,7 @@ MonoBehaviour:
   nbr_bar: 50
   height: 0.5
   width: 0.8
-  time_to_update: 0.5
+  time_to_update: 5
   data:
   - 4.619696632027626
   - 4.500902608036995
@@ -1177,7 +1174,7 @@ MonoBehaviour:
   - 4.628542497754097
   bar_prefab: {fileID: 1794256890875864, guid: e4994fc9e0661ef408d28ea3d2e42541, type: 2}
   graph_name: SG (Default data)
-  ticker: GLE
+  ticker: GLE:EPA
   ColorBar: {r: 1, g: 1, b: 1, a: 1}
   online: 0
 --- !u!114 &114267041783498826
@@ -1697,17 +1694,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040dbe95cb0cc6541bd39eac8a710d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114669140546402596
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1130231892817502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cae8f3c88e9704a4393cb8d904b62372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114680924648391360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1772,36 +1758,6 @@ MonoBehaviour:
   PlaceParentOnTap: 1
   ParentGameObjectToPlace: {fileID: 1130231892817502}
   IsBeingPlaced: 0
---- !u!114 &114804620657071050
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1634979005639600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: OnMouseDown
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!114 &114805430866870146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2100,17 +2056,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114948080098510596
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1130231892817502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dae873cf5988594aa8222e44cbd3b0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114956242125553460
 MonoBehaviour:
   m_ObjectHideFlags: 1

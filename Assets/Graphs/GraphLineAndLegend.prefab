@@ -227,8 +227,6 @@ GameObject:
   - component: {fileID: 114340315877692608}
   - component: {fileID: 114477207855658584}
   - component: {fileID: 114416732679795490}
-  - component: {fileID: 114613646584230046}
-  - component: {fileID: 114935536981307060}
   m_Layer: 0
   m_Name: GraphLineAndLegend
   m_TagString: Graph
@@ -1456,12 +1454,12 @@ MonoBehaviour:
     Response:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 114935536981307060}
-          m_MethodName: onClickHide
-          m_Mode: 2
+        - m_Target: {fileID: 114416732679795490}
+          m_MethodName: HideObject
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 1112396066175020}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: Blue
@@ -1636,22 +1634,11 @@ MonoBehaviour:
   nbr_points: 50
   height: 0.1
   width: 0.3
-  time_to_update: 0.5
+  time_to_update: 5
   data: []
   graph_name: SG (default data)
   ticker: GLE
   online: 0
---- !u!114 &114613646584230046
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1526719817148046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cae8f3c88e9704a4393cb8d904b62372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114621004862494398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2132,17 +2119,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114935536981307060
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1526719817148046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dae873cf5988594aa8222e44cbd3b0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114974453781131532
 MonoBehaviour:
   m_ObjectHideFlags: 1

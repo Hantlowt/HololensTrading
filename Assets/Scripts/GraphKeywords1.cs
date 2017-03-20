@@ -33,7 +33,6 @@ public class GraphKeywords1 : MonoBehaviour, ISpeechHandler
 					sync.Color_B.Value = Color.green.b;
 					break;
 			}
-			Debug.Log("en ligne try change color line");
 		}
 		else //non connecté changement couleur pour le graph en ligne
 		{
@@ -49,7 +48,6 @@ public class GraphKeywords1 : MonoBehaviour, ISpeechHandler
 					objectColor = Color.green;
 					break;
 			}
-			Debug.Log("pas en ligne try change color line");
 		}
 	}
 
@@ -77,8 +75,6 @@ public class GraphKeywords1 : MonoBehaviour, ISpeechHandler
 					sync.Color_B.Value = Color.green.b;
 					break;
 			}
-
-			Debug.Log("en ligne try change color bar");
 		}
 		else // non connecté changement couleur pour le graph en bar
 		{
@@ -94,13 +90,20 @@ public class GraphKeywords1 : MonoBehaviour, ISpeechHandler
 					g.ColorBar = Color.green;
 					break;
 			}
-			Debug.Log("pas en ligne try change color bar");
 		}
 	}
 
 	public void DestroyGameObject ()
 	{
-		Destroy(gameObject);
+		Destroy(myGraphChild.transform.parent);
+	}
+
+	public void HideObject ()
+	{
+		if (myGraphChild.activeSelf)
+			myGraphChild.SetActive(false);
+		else
+			myGraphChild.SetActive(true);
 	}
 
 	public void OnSpeechKeywordRecognized (SpeechKeywordRecognizedEventData eventData)
@@ -109,6 +112,9 @@ public class GraphKeywords1 : MonoBehaviour, ISpeechHandler
 		{
 			case "close":
 				DestroyGameObject();
+				break;
+			case "hide":
+				HideObject();
 				break;
 			default:
 				if (myGraphChild.GetComponent<MeshRenderer>())

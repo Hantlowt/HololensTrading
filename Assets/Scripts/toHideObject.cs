@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class toHideObject : MonoBehaviour {
 
-	public void onClickHide (GameObject myObject)
+	public void Hide (GameObject myObject)
 	{
 		if (myObject.activeSelf)
 			myObject.SetActive(false);
