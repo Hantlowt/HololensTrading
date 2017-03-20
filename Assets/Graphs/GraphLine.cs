@@ -82,13 +82,13 @@ public class GraphLine : MonoBehaviour
         linerender.enabled = false;
         linerender.numPositions = nbr_points;
         data = new double[nbr_points];
-		data[0] = 50.0;
+		data[0] = 50.0f;
 		for (int i = 1; i < nbr_points; i++)
 			data[i] = data[i - 1] + Random.Range(-2.5f, 2.5f);
 		
 		vertices2d = new Vector2[nbr_points + 2];
         raycast = false;
-		//getPrices.Singleton.StartCoroutine("getPricesDays", ticker);
+		//yield return StartCoroutine("getPricesDays", ticker);
 		yield return StartCoroutine("RealValues");
 	}
 
@@ -131,7 +131,7 @@ public class GraphLine : MonoBehaviour
 		Match m = Regex.Match(data, pattern); // Regex pour corriger le format du json reçu
 		SharePricesM sharePrice;
 		sharePrice = JsonUtility.FromJson<SharePricesM>(m.Value); //enregistrement des données du json dans un objet SharePriceM
-		return (System.Convert.ToDouble(sharePrice.l)); //retour de la valeur intéressante en tant que double
+		return (sharePrice.l_fix); //retour de la valeur intéressante
 	}
 
 	private void InsertData (double d)
