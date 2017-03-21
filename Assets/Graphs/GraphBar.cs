@@ -53,6 +53,7 @@ public class GraphBar : MonoBehaviour {
 	public string ticker;
 	public Color ColorBar = Color.white;
     public SyncGraphBar sync;
+    public PrefabSpawnManager SpawnManager;
     public bool online;
 
     void Restart()
@@ -61,9 +62,16 @@ public class GraphBar : MonoBehaviour {
         Start();
     }
 
+    public void Destroy_on_Network()
+    {
+        SpawnManager.Delete(sync);
+        Destroy(this.transform.parent);
+    }
+
     IEnumerator Start() //Initialisation..
     {
         online = true;
+        SpawnManager = GameObject.Find("Sharing").GetComponent<PrefabSpawnManager>();
         sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphBar;
         CylinderX = transform.FindChild("CylinderX");
         CylinderY = transform.FindChild("CylinderY");

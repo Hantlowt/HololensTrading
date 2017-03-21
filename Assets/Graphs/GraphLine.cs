@@ -61,6 +61,7 @@ public class GraphLine : MonoBehaviour
     private RaycastHit hit;
     public SyncGraphLine sync;
     public bool online;
+    public PrefabSpawnManager SpawnManager;
 
 
     public void Restart()
@@ -69,9 +70,17 @@ public class GraphLine : MonoBehaviour
 		Start();
 	}
 
+    public void Destroy_on_Network()
+    {
+        SpawnManager.Delete(sync);
+        Destroy(this.transform.parent);
+    }
+
 	IEnumerator Start() //Initialisation..
     {
+        
         online = true;
+        SpawnManager = GameObject.Find("Sharing").GetComponent<PrefabSpawnManager>();
         sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphLine;
         Selected_Data = transform.FindChild("Selected_Data");
 		CylinderX = transform.FindChild("CylinderX");

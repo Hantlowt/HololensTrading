@@ -1223,7 +1223,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 15.335001, y: -106.339005, z: -48.030003}
 --- !u!1 &637410494
 GameObject:
@@ -1953,7 +1953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClientRole: 0
-  ServerAddress: 169.254.5.84
+  ServerAddress: 192.168.0.100
   ServerPort: 20602
   connectOnAwake: 1
   AutoDiscoverServer: 0
@@ -3408,7 +3408,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013535415816, guid: b2db04283121ca74495c2ee000fb4243, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114045743718463358, guid: b2db04283121ca74495c2ee000fb4243,
         type: 2}
