@@ -914,6 +914,7 @@ GameObject:
   - component: {fileID: 529453964}
   - component: {fileID: 529453963}
   - component: {fileID: 529453962}
+  - component: {fileID: 529453965}
   m_Layer: 0
   m_Name: HologramCollection
   m_TagString: Untagged
@@ -982,6 +983,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d681d9f273ecb84285cb0fd9548d5bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &529453965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 529453959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cae8f3c88e9704a4393cb8d904b62372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &573324706
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,6 +1035,8 @@ MonoBehaviour:
     KeyCode: 111
   - Keyword: Hide
     KeyCode: 104
+  - Keyword: Yellow
+    KeyCode: 121
 --- !u!4 &573324708
 Transform:
   m_ObjectHideFlags: 0
@@ -1370,7 +1384,6 @@ GameObject:
   - component: {fileID: 690865915}
   - component: {fileID: 690865914}
   - component: {fileID: 690865913}
-  - component: {fileID: 690865912}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -1392,22 +1405,6 @@ Transform:
   m_Father: {fileID: 1325951041}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &690865912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114877415049664904, guid: 08fd1074e0324a84b99bb65c91a775c5,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 690865910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38cef46c997b8fd42861b959f46fbf59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Graph_Prefab: {fileID: 1526719817148046, guid: 533977f4ac004804890a419ab0372f04,
-    type: 2}
-  online: 1
-  SpawnManager: {fileID: 0}
 --- !u!114 &690865913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1445,7 +1442,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Red
+            m_StringArgument: red
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -1462,7 +1459,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Green
+            m_StringArgument: green
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -1479,7 +1476,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Blue
+            m_StringArgument: blue
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -1490,10 +1487,10 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 690865913}
           m_MethodName: CloseObject
-          m_Mode: 1
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 690865910}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: Blue
@@ -1501,19 +1498,19 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-  - Keyword: Open
+  - Keyword: Yellow
     Response:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 690865912}
-          m_MethodName: drawNewGraphLine
-          m_Mode: 1
+        - m_Target: {fileID: 690865913}
+          m_MethodName: ChangeColor
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Blue
+            m_StringArgument: yellow
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -2351,7 +2348,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1325951041}
-  - component: {fileID: 1325951042}
   m_Layer: 0
   m_Name: Spheres
   m_TagString: Untagged
@@ -2376,18 +2372,6 @@ Transform:
   m_Father: {fileID: 148180258}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1325951042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114662774355094624, guid: 08fd1074e0324a84b99bb65c91a775c5,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1325951040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cae8f3c88e9704a4393cb8d904b62372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1383576200
 GameObject:
   m_ObjectHideFlags: 0
@@ -2402,7 +2386,6 @@ GameObject:
   - component: {fileID: 1383576205}
   - component: {fileID: 1383576204}
   - component: {fileID: 1383576203}
-  - component: {fileID: 1383576202}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -2424,22 +2407,6 @@ Transform:
   m_Father: {fileID: 1325951041}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1383576202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114815675919538472, guid: 08fd1074e0324a84b99bb65c91a775c5,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1383576200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38cef46c997b8fd42861b959f46fbf59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Graph_Prefab: {fileID: 1526719817148046, guid: 533977f4ac004804890a419ab0372f04,
-    type: 2}
-  online: 1
-  SpawnManager: {fileID: 0}
 --- !u!114 &1383576203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2477,7 +2444,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Red
+            m_StringArgument: red
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -2494,7 +2461,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Green
+            m_StringArgument: green
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -2511,7 +2478,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Blue
+            m_StringArgument: blue
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -2522,10 +2489,10 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1383576203}
           m_MethodName: CloseObject
-          m_Mode: 1
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 1383576200}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: Blue
@@ -2533,19 +2500,19 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-  - Keyword: Open
+  - Keyword: Yellow
     Response:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1383576202}
-          m_MethodName: drawNewGraphLine
-          m_Mode: 1
+        - m_Target: {fileID: 1383576203}
+          m_MethodName: ChangeColor
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Blue
+            m_StringArgument: yellow
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -3108,7 +3075,6 @@ GameObject:
   - component: {fileID: 1649284192}
   - component: {fileID: 1649284191}
   - component: {fileID: 1649284190}
-  - component: {fileID: 1649284189}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -3130,22 +3096,6 @@ Transform:
   m_Father: {fileID: 1325951041}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1649284189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114877415049664904, guid: 08fd1074e0324a84b99bb65c91a775c5,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1649284187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38cef46c997b8fd42861b959f46fbf59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Graph_Prefab: {fileID: 1526719817148046, guid: 533977f4ac004804890a419ab0372f04,
-    type: 2}
-  online: 1
-  SpawnManager: {fileID: 0}
 --- !u!114 &1649284190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3183,7 +3133,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Red
+            m_StringArgument: red
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -3200,7 +3150,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Green
+            m_StringArgument: green
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -3217,7 +3167,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Blue
+            m_StringArgument: blue
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -3228,10 +3178,10 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1649284190}
           m_MethodName: CloseObject
-          m_Mode: 1
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 1649284187}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: Blue
@@ -3239,19 +3189,19 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-  - Keyword: Open
+  - Keyword: Yellow
     Response:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1649284189}
-          m_MethodName: drawNewGraphLine
-          m_Mode: 1
+        - m_Target: {fileID: 1649284190}
+          m_MethodName: ChangeColor
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Blue
+            m_StringArgument: yellow
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
