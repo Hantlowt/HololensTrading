@@ -6,6 +6,14 @@ using HoloToolkit.Unity.InputModule;
 public class GraphKeywords1 : MonoBehaviour, ISpeechHandler
 {
 	public GameObject myGraphChild;
+	HandsTrackingManager input;
+	Selector s;
+
+	public void Start ()
+	{
+		input = GameObject.Find("InputManager").GetComponent<HandsTrackingManager>();
+		s = GameObject.Find("Cursor").GetComponent<Selector>();
+	}
 
 	public void ChangeColorGraphLine (string color)
 	{
@@ -131,22 +139,38 @@ public class GraphKeywords1 : MonoBehaviour, ISpeechHandler
 
 	public void HideObject (GameObject myObject)
 	{
-		if (myObject.activeSelf)
-			myObject.SetActive(false);
+		GameObject graphChild = myObject.transform.GetChild(0).gameObject;
+		if (graphChild.activeSelf)
+			graphChild.SetActive(false);
 		else
-			myObject.SetActive(true);
+			graphChild.SetActive(true);
+	}
+
+	public void SayMove (GameObject myObject)
+	{
+		s.enable_disable(myObject);
+	}
+
+	public void SayPlace (GameObject myObject)
+	{
+		s.enable_disable(null);
 	}
 
 	public void OnSpeechKeywordRecognized (SpeechKeywordRecognizedEventData eventData)
 	{
-		print("vous avez dis :" + eventData.RecognizedText);
 		switch (eventData.RecognizedText.ToLower())
 		{
 			case "close":
 				DestroyGameObject(gameObject);
 				break;
+			case "move":
+				SayMove(gameObject);
+				break;
+			case "place":
+				SayPlace(null);
+				break;
 			case "hide":
-				HideObject(myGraphChild);
+				HideObject(gameObject);
 				break;
 			default:
 				{

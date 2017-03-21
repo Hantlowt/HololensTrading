@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using HoloToolkit.Unity.InputModule;
 
-public class Move : EventTrigger, ISpeechHandler
+public class Move : EventTrigger
 {
     HandsTrackingManager input;
     Selector s;
@@ -30,27 +29,4 @@ public class Move : EventTrigger, ISpeechHandler
         s.enable_disable(null);
         Debug.Log("OnPointerUp called.");
     }
-
-	public void SayMove ()
-	{
-		s.enable_disable(this.transform.parent.parent.gameObject);
-	}
-
-	public void SayPlace ()
-	{
-		s.enable_disable(null);
-	}
-	public void OnSpeechKeywordRecognized (SpeechKeywordRecognizedEventData eventData)
-	{
-		switch(eventData.RecognizedText.ToLower())
-		{
-			case "move":
-				SayMove();
-				break;
-			case "place":
-				SayPlace();
-				break;
-		}
-	}
-
 }

@@ -119,7 +119,6 @@ GameObject:
   - component: {fileID: 114097037278180362}
   - component: {fileID: 114052334932163530}
   - component: {fileID: 114038746909788310}
-  - component: {fileID: 114843961923123380}
   m_Layer: 5
   m_Name: MoveButton
   m_TagString: Untagged
@@ -745,7 +744,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114680924648391360}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1634979005639600}
@@ -821,7 +820,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114010385704743690}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1955503182702684}
@@ -832,7 +831,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 114010385704743690}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1312136766327316}
@@ -843,7 +842,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 114010385704743690}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1624269581717156}
@@ -854,7 +853,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 114010385704743690}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1346163429413846}
@@ -865,7 +864,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 114010385704743690}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1846205144356860}
@@ -1056,6 +1055,17 @@ MonoBehaviour:
             m_StringArgument: Blue
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 114261134695770228}
+          m_MethodName: Destroy_on_Network
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
   - Keyword: Hide
@@ -1085,6 +1095,40 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: yellow
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - Keyword: Move
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114805430866870146}
+          m_MethodName: SayMove
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1130231892817502}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: yellow
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - Keyword: Place
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114805430866870146}
+          m_MethodName: SayPlace
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1130231892817502}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: yellow
@@ -1818,7 +1862,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114126240038097100}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1612615504481170}
@@ -1828,65 +1872,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: OnMouseDown
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114843961923123380
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1346163429413846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7d6513c2cdf97f409654a2a4114d9b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keywords:
-  - Keyword: Move
-    Response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 114038746909788310}
-          m_MethodName: SayMove
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: yellow
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-  - Keyword: Place
-    Response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 114038746909788310}
-          m_MethodName: SayPlace
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: yellow
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &114866069394934486
 MonoBehaviour:
   m_ObjectHideFlags: 1
