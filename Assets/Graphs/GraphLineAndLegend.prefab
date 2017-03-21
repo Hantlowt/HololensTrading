@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114557216778509900}
   - component: {fileID: 114306776022861054}
   - component: {fileID: 114409059655371678}
+  - component: {fileID: 114431649401071316}
   m_Layer: 5
   m_Name: MoveButton
   m_TagString: Untagged
@@ -1302,6 +1303,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myGraphChild: {fileID: 1112396066175020}
+--- !u!114 &114431649401071316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027424572590620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d6513c2cdf97f409654a2a4114d9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keywords:
+  - Keyword: Move
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114409059655371678}
+          m_MethodName: SayMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: yellow
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - Keyword: Place
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114409059655371678}
+          m_MethodName: SayPlace
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: yellow
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!114 &114446456876378244
 MonoBehaviour:
   m_ObjectHideFlags: 1
