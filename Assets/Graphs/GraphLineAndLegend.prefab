@@ -460,7 +460,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1526719817148046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5957074, y: -3.108767, z: 6.53442}
+  m_LocalPosition: {x: 5.4844027, y: -2.6754405, z: 7.7502756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4352729148593242}
@@ -1506,19 +1506,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114130130135180326}
-        m_MethodName: onClickDestroy
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1526719817148046}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: OnMouseDown
+      - m_Target: {fileID: 114602111784946594}
+        m_MethodName: Destroy_on_Network
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1638,7 +1627,8 @@ MonoBehaviour:
   data: []
   graph_name: SG (default data)
   ticker: GLE
-  online: 0
+  online: 1
+  SpawnManager: {fileID: 0}
 --- !u!114 &114621004862494398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1930,7 +1920,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114892617168800868}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1083521486391732}
@@ -1941,7 +1931,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 114892617168800868}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1568152570809768}
@@ -1952,7 +1942,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 114892617168800868}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1924432591960376}
@@ -1963,7 +1953,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 114892617168800868}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1027424572590620}
@@ -1974,7 +1964,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 114892617168800868}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1476182709583096}
@@ -2159,7 +2149,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114644686246469178}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1112396066175020}
@@ -2222,7 +2212,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114140024730944302}
-        m_MethodName: onClickHide
+        m_MethodName: Hide
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1346734556948758}
