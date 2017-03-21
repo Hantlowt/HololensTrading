@@ -15,17 +15,17 @@ namespace HoloToolkit.Unity.InputModule.Tests
             cachedMaterial = GetComponent<Renderer>().material;
         }
 
-		public void CloseObject()
+		public void CloseObject(GameObject myObject)
 		{
-			Destroy(gameObject);
+			Destroy(myObject);
 		}
 
         public void ChangeColor(string color)
         {
-            switch (color.ToLower())
+            switch (color)
             {
 				case "close":
-					CloseObject();
+					CloseObject(gameObject);
 					break;
 				case "red":
                     cachedMaterial.SetColor("_Color", Color.red);
@@ -36,12 +36,15 @@ namespace HoloToolkit.Unity.InputModule.Tests
                 case "green":
                     cachedMaterial.SetColor("_Color", Color.green);
                     break;
-            }
+				case "yellow":
+					cachedMaterial.SetColor("_Color", Color.yellow);
+					break;
+			}
         }
 
         public void OnSpeechKeywordRecognized(SpeechKeywordRecognizedEventData eventData)
         {
-            ChangeColor(eventData.RecognizedText);
+            ChangeColor(eventData.RecognizedText.ToLower());
         }
 
         private void OnDestroy()
