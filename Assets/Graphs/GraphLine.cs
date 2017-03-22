@@ -94,7 +94,7 @@ public class GraphLine : MonoBehaviour
         data = new double[nbr_points];
 		data[0] = ConfigAPI.PriceList[ticker];
 		for (int i = 1; i < nbr_points; i++)
-			data[i] = data[i - 1] + Random.Range(-0.75f, 0.75f);
+			data[i] = data[i - 1] + Random.Range(-1.75f, 1.75f);
 		vertices2d = new Vector2[nbr_points + 2];
         raycast = false;
 		//yield return StartCoroutine("getPricesDays", ticker);
@@ -126,7 +126,7 @@ public class GraphLine : MonoBehaviour
             if (www.downloadHandler.text != "")
                 d = parseRequestLastPrices(www.downloadHandler.text);
             else
-                d = data[data.Length - 1] + Random.Range(-0.75f, 0.75f);
+                d = data[data.Length - 1] + Random.Range(-1.75f, 1.75f);
 			InsertData(d < 0.0 ? 0.0 : d);
 			UpdateAllGraph();
 			yield return new WaitForSeconds(time_to_update);

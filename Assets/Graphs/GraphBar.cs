@@ -86,7 +86,7 @@ public class GraphBar : MonoBehaviour {
         bars = new GameObject[nbr_bar];
 		data[0] = ConfigAPI.PriceList[ticker];
         for (int i = 1; i < nbr_bar; i++) //On remplit les donnees avec des nombres fictifs mais cohérents.
-            data[i] = data[i - 1] + Random.Range(-0.75f, 0.75f);
+            data[i] = data[i - 1] + Random.Range(-1.75f, 1.75f);
         for (int i = 0; i < nbr_bar; i++)
         {
             bars[i] = Instantiate(bar_prefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
@@ -133,7 +133,7 @@ public class GraphBar : MonoBehaviour {
 			if (www.downloadHandler.text != "")
 				d = parseRequestLastPrices(www.downloadHandler.text);
 			else
-				d = data[data.Length - 1] + Random.Range(-0.75f, 0.75f);
+				d = data[data.Length - 1] + Random.Range(-1.75f, 1.75f);
 			InsertData(d < 0.0 ? 0.0 : d);
 			UpdateAllGraph();
 			yield return new WaitForSeconds(time_to_update);
