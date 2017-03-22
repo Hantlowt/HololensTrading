@@ -15,6 +15,7 @@ namespace HoloToolkit.Sharing.Tests
     /// </summary>
     public class RemoteHeadManager : Singleton<RemoteHeadManager>
     {
+        public GameObject head;
         public class RemoteHeadInfo
         {
             public long UserID;
@@ -140,7 +141,8 @@ namespace HoloToolkit.Sharing.Tests
         /// <returns></returns>
         private GameObject CreateRemoteHead()
         {
-            GameObject newHeadObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            //GameObject newHeadObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject newHeadObj = Instantiate(head);
             newHeadObj.transform.parent = gameObject.transform;
             newHeadObj.transform.localScale = Vector3.one * 0.2f;
             return newHeadObj;
