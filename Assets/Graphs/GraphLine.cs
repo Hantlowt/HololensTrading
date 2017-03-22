@@ -78,11 +78,12 @@ public class GraphLine : MonoBehaviour
 
 	IEnumerator Start() //Initialisation..
     {
-        
         online = true;
         SpawnManager = GameObject.Find("Sharing").GetComponent<PrefabSpawnManager>();
         sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphLine;
-        Selected_Data = transform.FindChild("Selected_Data");
+		ticker = (online ? sync.Ticker.Value : ticker);
+		graph_name = (online ? sync.GraphName.Value : graph_name);
+		Selected_Data = transform.FindChild("Selected_Data");
 		CylinderX = transform.FindChild("CylinderX");
 		CylinderY = transform.FindChild("CylinderY");
 		Name = transform.FindChild("Name");
@@ -91,10 +92,9 @@ public class GraphLine : MonoBehaviour
         linerender.enabled = false;
         linerender.numPositions = nbr_points;
         data = new double[nbr_points];
-		data[0] = 50.0f;
+		data[0] = ConfigAPI.PriceList[ticker];
 		for (int i = 1; i < nbr_points; i++)
-			data[i] = data[i - 1] + Random.Range(-2.5f, 2.5f);
-		
+			data[i] = data[i - 1] + Random.Range(-0.75f, 0.75f);
 		vertices2d = new Vector2[nbr_points + 2];
         raycast = false;
 		//yield return StartCoroutine("getPricesDays", ticker);
@@ -120,14 +120,13 @@ public class GraphLine : MonoBehaviour
 	{
 		while (true)
 		{
-            ticker = (online ? sync.Ticker.Value : ticker);
 			UnityWebRequest www = UnityWebRequest.Get(ConfigAPI.apiGoogleBasePath + ConfigAPI.getLastPrice + ConfigAPI.paramCompany + ticker);
 			yield return www.Send();
             double d = 0.0;
             if (www.downloadHandler.text != "")
                 d = parseRequestLastPrices(www.downloadHandler.text);
             else
-                d = data[data.Length - 1] + Random.Range(-0.50f, 0.50f);
+                d = data[data.Length - 1] + Random.Range(-0.75f, 0.75f);
 			InsertData(d < 0.0 ? 0.0 : d);
 			UpdateAllGraph();
 			yield return new WaitForSeconds(time_to_update);

@@ -1649,8 +1649,8 @@ MonoBehaviour:
   width: 0.3
   time_to_update: 5
   data: []
-  graph_name: SG (default data)
-  ticker: GLE
+  graph_name: "Soci\xE9t\xE9 G\xE9n\xE9rale"
+  ticker: GLE:EPA
   online: 1
   SpawnManager: {fileID: 0}
 --- !u!114 &114621004862494398

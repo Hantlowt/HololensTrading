@@ -1223,7 +1223,7 @@ MonoBehaviour:
   - 4.7997714430093765
   - 4.628542497754097
   bar_prefab: {fileID: 1794256890875864, guid: e4994fc9e0661ef408d28ea3d2e42541, type: 2}
-  graph_name: SG (Default data)
+  graph_name: "Soci\xE9t\xE9 G\xE9n\xE9rale"
   ticker: GLE:EPA
   ColorBar: {r: 1, g: 1, b: 1, a: 1}
   SpawnManager: {fileID: 0}

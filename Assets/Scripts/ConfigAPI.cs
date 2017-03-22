@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -45,6 +44,34 @@ public class ConfigAPI : MonoBehaviour {
 		{"EPA:AIR", "Airbus Group"},
 		{"EPA:HO", "Thales SA"},
 		{"TADAWUL:2010", "Saudi Basic Ind."}
+	};
+	public static Dictionary<string, double> PriceList = new Dictionary<string, double>()
+	{
+		{"TADAWUL:1120", 63.63},
+		{"NASDAQ:AAPL", 146.84},
+		{"GLE:EPA", 46.38},
+		{"NASDAQ:MSFT", 64.21},
+		{"NASDAQ:GOOG", 830.46},
+		{"NASDAQ:AMZN", 851.20},
+		{"EPA:AM", 1127.90},
+		{"INDEXEURO:PX1", 4961.47},
+		{"EPA:AIR", 68.85},
+		{"EPA:HO", 89.01},
+		{"TADAWUL:2010", 95.50}
+	};
+	public static Dictionary<string, double> PercentList = new Dictionary<string, double>()
+	{
+		{"TADAWUL:1120", 0.40},
+		{"NASDAQ:AAPL", 1.05},
+		{"GLE:EPA", -2.38},
+		{"NASDAQ:MSFT", -1.11},
+		{"NASDAQ:GOOG", -2.11},
+		{"NASDAQ:AMZN", 0.21},
+		{"EPA:AM", 0.94},
+		{"INDEXEURO:PX1", -0.82},
+		{"EPA:AIR", -1.09},
+		{"EPA:HO", 0.0},
+		{"TADAWUL:2010", -1.04}
 	};
 	//public static string[] TickersList = { "AAPL", "GLE", "MSFT", "GOOG", "AMZN", "YHOO", "INDEXEURO:PX1" };
 	//public static string[] CompanyNameList = { "Apple Inc", "Société Générale", "Microsoft Corp", "Google", "Amazone", "Yahoo", "CAC 40" };

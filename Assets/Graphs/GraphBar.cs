@@ -73,7 +73,9 @@ public class GraphBar : MonoBehaviour {
         online = true;
         SpawnManager = GameObject.Find("Sharing").GetComponent<PrefabSpawnManager>();
         sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphBar;
-        CylinderX = transform.FindChild("CylinderX");
+		ticker = (online ? sync.Ticker.Value : ticker);
+		graph_name = (online ? sync.GraphName.Value : graph_name);
+		CylinderX = transform.FindChild("CylinderX");
         CylinderY = transform.FindChild("CylinderY");
         Name = transform.FindChild("Name");
         nbr_bar_save = nbr_bar;
@@ -82,9 +84,9 @@ public class GraphBar : MonoBehaviour {
             for (int i = 0; i < bars.Length; i++)
                 Destroy(bars[i]);
         bars = new GameObject[nbr_bar];
-        data[0] = 5.0f;
+		data[0] = ConfigAPI.PriceList[ticker];
         for (int i = 1; i < nbr_bar; i++) //On remplit les donnees avec des nombres fictifs mais cohérents.
-            data[i] = data[i - 1] + Random.Range(-0.5f, 0.5f);
+            data[i] = data[i - 1] + Random.Range(-0.75f, 0.75f);
         for (int i = 0; i < nbr_bar; i++)
         {
             bars[i] = Instantiate(bar_prefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
@@ -125,14 +127,13 @@ public class GraphBar : MonoBehaviour {
     {
 		while (true)
 		{
-            ticker = (online ? sync.Ticker.Value : ticker);
             UnityWebRequest www = UnityWebRequest.Get(ConfigAPI.apiGoogleBasePath + ConfigAPI.getLastPrice + ConfigAPI.paramCompany + ticker);
 			yield return www.Send();
 			double d = 0.0;
 			if (www.downloadHandler.text != "")
 				d = parseRequestLastPrices(www.downloadHandler.text);
 			else
-				d = data[data.Length - 1] + Random.Range(-0.5f, 0.5f);
+				d = data[data.Length - 1] + Random.Range(-0.75f, 0.75f);
 			InsertData(d < 0.0 ? 0.0 : d);
 			UpdateAllGraph();
 			yield return new WaitForSeconds(time_to_update);

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -33,6 +32,12 @@ public class UpdateInfosBanner : MonoBehaviour {
 			yield return www.Send();
 			if (www.downloadHandler.text != "")
 				yield return StartCoroutine("ParseRequestLastPrices", www.downloadHandler.text);
+			else
+			{
+				newPrice = Math.Round(ConfigAPI.PriceList[ticker], 2);
+				newPercent = Math.Round(ConfigAPI.PercentList[ticker], 2);
+			}
+			yield return StartCoroutine("SaveNewDataInLedImage");
 			yield return new WaitForSeconds(15.0f); // on met à jour les textes des bannieres toutes les 15 secondes
 		}
 	}
@@ -46,7 +51,6 @@ public class UpdateInfosBanner : MonoBehaviour {
 		yield return new WaitForSeconds(1.0f);
 		newPrice = Math.Round(sharePrice.l_fix, 2);
 		newPercent = Math.Round(sharePrice.cp, 2);
-		yield return StartCoroutine("SaveNewDataInLedImage");
 	}
 
 	IEnumerator SaveNewDataInLedImage ()
