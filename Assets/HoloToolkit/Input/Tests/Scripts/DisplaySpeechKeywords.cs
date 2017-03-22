@@ -18,12 +18,12 @@ namespace HoloToolkit.Unity.InputModule.Tests
                 Debug.Log("Please check the variables in the Inspector on DisplaySpeechKeywords.cs on" + name + ".");
                 return;
             }
-            textMesh.text = "Look object and try saying:\n";
-            foreach (SpeechInputSource.KeywordAndKeyCode item in speechInputSource.Keywords)
+            textMesh.text = "Look graph and try saying:\nRed, Blue, Green, Yellow\nClose\n\n";
+            /*foreach (SpeechInputSource.KeywordAndKeyCode item in speechInputSource.Keywords)
             {
                 textMesh.text += " " + item.Keyword + "\n";
-            }
-			textMesh.text += "'open' only on New Graph Button";
+            }*/
+			textMesh.text += "Look New Graph Button and try saying :\n Open";
         }
     }
 }
