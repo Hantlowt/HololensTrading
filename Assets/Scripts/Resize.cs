@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 public class Resize : EventTrigger
 {
     HandsTrackingManager input;
-    Selector s;
+    //Selector s;
     GraphLine GL = null;
     GraphBar GB = null;
 
@@ -12,7 +12,7 @@ public class Resize : EventTrigger
     {
         Debug.Log("Start button");
         input = GameObject.Find("InputManager").GetComponent<HandsTrackingManager>();
-        s = GameObject.Find("Cursor").GetComponent<Selector>();
+        //s = GameObject.Find("Cursor").GetComponent<Selector>();
         if (transform.parent.parent.FindChild("GraphLine").GetComponent<GraphLine>() != null)
             GL = transform.parent.parent.FindChild("GraphLine").GetComponent<GraphLine>();
         if (transform.parent.parent.FindChild("GraphBar") != null)

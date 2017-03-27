@@ -6,12 +6,12 @@ using HoloToolkit.Unity.InputModule;
 public class GraphKeywords1 : MonoBehaviour, ISpeechHandler
 {
 	public GameObject myGraphChild;
-	HandsTrackingManager input;
+	//HandsTrackingManager input;
 	Selector s;
 
 	public void Start ()
 	{
-		input = GameObject.Find("InputManager").GetComponent<HandsTrackingManager>();
+		//input = GameObject.Find("InputManager").GetComponent<HandsTrackingManager>();
 		s = GameObject.Find("Cursor").GetComponent<Selector>();
 	}
 
