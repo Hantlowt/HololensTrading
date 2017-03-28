@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DrawPixel : MonoBehaviour {
+	public static bool PencilMode;
 	private bool OnDraw;
 	private Texture2D texture;
 	private Color[] TextureColors;
 	private int sizeTexture;
 	private Vector2 PreviousPoint;
+	private Vector2 VectorNull = new Vector2(0,0);
 	public static Color myColor;
 
 	// Use this for initialization
 	private void Start () {
+		PencilMode = false;
+		OnDraw = false;
 		texture = GetComponent<Renderer>().material.mainTexture as Texture2D;
 		TextureColors = texture.GetPixels();
 		sizeTexture = TextureColors.Length;
@@ -20,8 +24,7 @@ public class DrawPixel : MonoBehaviour {
 			throw new System.Exception("no texture for the Whiteboard!");
 		else
 			CleanWhiteBoard();
-		OnDraw = false;
-		PreviousPoint = new Vector2(-1, -1);
+		PreviousPoint = VectorNull;
 		myColor = Color.black;
 	}
 
@@ -30,9 +33,9 @@ public class DrawPixel : MonoBehaviour {
 		if (OnDraw)
 		{
 			Vector2 NewPoint = SearchImpact();
-			if (!(NewPoint.x == -1 || PreviousPoint.x == -1))
+			if (NewPoint != VectorNull && PreviousPoint != VectorNull)
 			{
-				DrawLine(NewPoint, PreviousPoint);
+				BresenhamLike.DrawLine(NewPoint, PreviousPoint, texture.width, TextureColors, myColor);
 				texture.SetPixels(TextureColors);
 				texture.Apply();
 				print("hit ok");
@@ -54,45 +57,7 @@ public class DrawPixel : MonoBehaviour {
 			//return (x + y * texture.width);
 			return (new Vector2(x, y));
 		}
-		return (new Vector2(-1, -1));
-	}
-
-	private void DrawLine (Vector2 Start, Vector2 End)
-	{
-		int w = (int)(End.x - Start.x);
-		int h = (int)(End.y - Start.y);
-		int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0 ;
-		if (w < 0) dx1 = -1; else if (w > 0) dx1 = 1;
-		if (h < 0) dy1 = -1; else if (h > 0) dy1 = 1;
-		if (w < 0) dx2 = -1; else if (w > 0) dx2 = 1;
-		int longest = System.Math.Abs((int)w) ;
-		int shortest = System.Math.Abs((int)h) ;
-		if (!(longest > shortest))
-		{
-			longest = System.Math.Abs((int)h);
-			shortest = System.Math.Abs((int)w);
-			if (h < 0) dy2 = -1; else if (h > 0) dy2 = 1;
-			dx2 = 0;
-		}
-		int numerator = longest >> 1 ;
-		for (int i = 0; i <= longest; i++)
-		{
-			int pixel = (int)(Start.x + Start.y * texture.width);
-			if (pixel >= 0 && pixel < sizeTexture)
-				TextureColors[pixel] = myColor;
-			numerator += shortest;
-			if (!(numerator < longest))
-			{
-				numerator -= longest;
-				Start.x += dx1;
-				Start.y += dy1;
-			}
-			else
-			{
-				Start.x += dx2;
-				Start.y += dy2;
-			}
-		}
+		return (VectorNull);
 	}
 
 	public void ChangeColorToErase ()
@@ -110,17 +75,28 @@ public class DrawPixel : MonoBehaviour {
 		texture.Apply();
 	}
 
+	public void ActivePencilMode ()
+	{
+		PencilMode = !PencilMode;
+		DrawLetter.KeyboardMode = false;
+	}
+
 	public void OnMouseDown ()
 	{
-		print("Onmouse");
-		PreviousPoint = SearchImpact();
-		OnDraw = true;
+		if (PencilMode)
+		{
+			print("Onmouse");
+			PreviousPoint = SearchImpact();
+			OnDraw = true;
+		}
 	}
 
 	public void OnMouseUp ()
 	{
-		print("Exitmouse");
-		OnDraw = false;
+		if (PencilMode)
+		{
+			print("Exitmouse");
+			OnDraw = false;
+		}
 	}
-
 }
