@@ -1,10 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BresenhamLike : MonoBehaviour {
+public static class BresenhamLike
+{
+	public static void DrawLineWithSize (int size, Vector2 Start, Vector2 End, int width, Color[] TabColors, Color myColor)
+	{
+		while (size != 0)
+		{
+			DrawLine(Start, End, width, TabColors, myColor);
+			Start.x += 1;
+			End.x += 1;
+			size -= 1;
+		}
+	}
 
-	public static void DrawLine (Vector2 Start, Vector2 End, int width, Color[] TabColors, Color myColor)
+	private static void DrawLine (Vector2 Start, Vector2 End, int width, Color[] TabColors, Color myColor)
 	{
 		int w = (int)(End.x - Start.x);
 		int h = (int)(End.y - Start.y);
@@ -41,4 +50,5 @@ public class BresenhamLike : MonoBehaviour {
 			}
 		}
 	}
+
 }

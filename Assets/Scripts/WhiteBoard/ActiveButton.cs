@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ActiveButton : MonoBehaviour {
-	public GameObject ButtonToDisable;
+	public GameObject[] ButtonToDisable;
 
 	private void start ()
 	{
 		GetComponent<Image>().color = Color.grey;
-		ButtonToDisable.GetComponent<Image>().color = Color.grey;
+		for (int i = 0; i < ButtonToDisable.Length; i++)
+			ButtonToDisable[i].GetComponent<Image>().color = Color.grey;
 	}
 
 	public void ModeIsActive ()
@@ -18,7 +19,10 @@ public class ActiveButton : MonoBehaviour {
 		if (tmp == Color.green)
 			GetComponent<Image>().color = Color.grey;
 		else
+		{
 			GetComponent<Image>().color = Color.green;
-		ButtonToDisable.GetComponent<Image>().color = Color.grey;
+			for (int i = 0; i < ButtonToDisable.Length; i++)
+				ButtonToDisable[i].GetComponent<Image>().color = Color.grey;
+		}
 	}
 }
