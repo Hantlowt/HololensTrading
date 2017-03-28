@@ -7,22 +7,31 @@ public class DrawPixel : MonoBehaviour {
 	public static Color[] TextureColors;
 	public static Color ColorToDraw;
 	public static Color ColorToErase = Color.white;
-	public static Color ColorToDrawPrevious;
-	public static int SizePencil;
+	
 
-	public static bool PencilMode;
-	public static bool RubberMode;
+	public Sprite[] Letters;
+
+	private bool PencilMode;
+	private bool RubberMode;
+	private bool KeyboardMode;
 	private bool OnDraw;
+	private bool OnTape;
+	private Color ColorToDrawPrevious;
+	private int SizePencil;
 	private Vector2 PreviousPoint;
+	private Vector2 CursorCoord;
 	private Vector2 VectorNull = new Vector2(0,0);
 
 	// Use this for initialization
 	private void Start () {
 		PencilMode = false;
 		RubberMode = false;
+		KeyboardMode = false;
+		OnTape = false;
 		OnDraw = false;
 		ColorToDraw = Color.black;
 		SizePencil = 2;
+		CursorCoord = VectorNull;
 		Texture = GetComponent<Renderer>().material.mainTexture as Texture2D;
 		TextureColors = Texture.GetPixels();
 		if (Texture == null)
@@ -45,6 +54,20 @@ public class DrawPixel : MonoBehaviour {
 			}
 			PreviousPoint = NewPoint;
 		}
+		else if (OnTape)
+		{
+			if (Input.anyKeyDown)
+			{
+				Debug.Log("A key or mouse click has been detected");
+			}
+			if (Input.GetKeyUp(KeyCode.Escape))
+			{
+				StopCoroutine("ActiveCursor");
+				OnTape = false;
+			}
+			if (Input.GetKeyUp(KeyCode.A))
+				DrawLetterATest();
+		}
 	}
 
 	private Vector2 SearchImpact()
@@ -63,6 +86,49 @@ public class DrawPixel : MonoBehaviour {
 		return (VectorNull);
 	}
 
+	private void DrawLetterATest ()
+	{
+		print("A is pressed");
+		Texture2D letters_tex = Letters[0].texture;
+		Color[] letter_A = letters_tex.GetPixels((int)Letters[1].rect.x, (int)Letters[1].rect.y, (int)Letters[1].rect.width, (int)Letters[1].rect.height);
+		for (int i = 0; i < TextureColors.Length; i++)
+		{
+			TextureColors[i] = Color.magenta;
+		}
+		print("x=" + (int)CursorCoord.x + ", y=" + (int)CursorCoord.y + "width=" + (int)Letters[0].rect.width + "height=" + (int)Letters[0].rect.height + "et texture.width = " + Texture.width);
+		Texture.SetPixels((int)CursorCoord.x, (int)CursorCoord.y, (int)Letters[1].rect.width, (int)Letters[1].rect.height, letter_A);
+		Texture.Apply();
+	}
+
+	private IEnumerator ActiveCursor ()
+	{
+		while (true)
+		{
+			print("Je suis pret à saisir vos lettres");
+			/* TO DO :
+			 * Faire clignoter un curseur
+			 * */
+			yield return null;
+		}
+	}
+
+	public void ActiveKeyboardMode ()
+	{
+		if (!KeyboardMode)
+		{
+			KeyboardMode = true;
+			OnDraw = false;
+			PencilMode = false;
+			RubberMode = false;
+		}
+		else
+		{
+			StopCoroutine("ActiveCursor");
+			KeyboardMode = false;
+			OnTape = false;
+		}
+	}
+
 	public void ActivePencilMode ()
 	{
 		if (!PencilMode)
@@ -70,7 +136,8 @@ public class DrawPixel : MonoBehaviour {
 			PencilMode = true;
 			ColorToDraw = ColorToDrawPrevious;
 			SizePencil = 2;
-			DrawLetter.KeyboardMode = false;
+			KeyboardMode = false;
+			OnTape = false;
 			RubberMode = false;
 		}
 		else
@@ -85,7 +152,8 @@ public class DrawPixel : MonoBehaviour {
 			ColorToDrawPrevious = ColorToDraw;
 			ColorToDraw = ColorToErase;
 			SizePencil = 10;
-			DrawLetter.KeyboardMode = false;
+			OnTape = false;
+			KeyboardMode = false;
 			PencilMode = false;
 		}
 		else
@@ -101,29 +169,22 @@ public class DrawPixel : MonoBehaviour {
 		Texture.SetPixels(TextureColors);
 		Texture.Apply();
 	}
-	/*
-	public void ChangeColorToErase ()
-	{
-		if (ColorToDraw != ColorToErase)
-		{
-			ColorToDrawPrevious = ColorToDraw;
-			ColorToDraw = ColorToErase;
-			SizePencil = 10;
-		}
-		else
-		{
-			ColorToDraw = ColorToDrawPrevious;
-			SizePencil = 2;
-		}
-	}*/
 
 	public void OnMouseDown ()
 	{
+		print("Onmouse");
 		if (PencilMode || RubberMode)
 		{
-			print("Onmouse");
+			print("On Pencil or Rubber mode");
 			PreviousPoint = SearchImpact();
 			OnDraw = true;
+		}
+		else if (KeyboardMode)
+		{
+			print("OnKeyboardMode");
+			CursorCoord = SearchImpact();
+			//StartCoroutine("ActiveCursor");
+			OnTape = true;
 		}
 	}
 
