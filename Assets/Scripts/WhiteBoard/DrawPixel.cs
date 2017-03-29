@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DrawPixel : MonoBehaviour {
-	public static Texture2D Texture;
-	public static Color[] TextureColors;
+	public static Texture2D WhiteBoardTexture;
+	public static Color[] WhiteBoardTabColors;
 	public static Color ColorToDraw;
 	public static Color ColorToErase = Color.white;
 	
@@ -32,9 +32,9 @@ public class DrawPixel : MonoBehaviour {
 		ColorToDraw = Color.black;
 		SizePencil = 2;
 		CursorCoord = VectorNull;
-		Texture = GetComponent<Renderer>().material.mainTexture as Texture2D;
-		TextureColors = Texture.GetPixels();
-		if (Texture == null)
+		WhiteBoardTexture = GetComponent<Renderer>().material.mainTexture as Texture2D;
+		WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
+		if (WhiteBoardTexture == null)
 			throw new System.Exception("no texture for the Whiteboard!");
 		else
 			CleanWhiteBoard();
@@ -42,76 +42,88 @@ public class DrawPixel : MonoBehaviour {
 
 	// Update is called once per frame
 	private void Update () {
-		if (OnDraw)
+		if (OnDraw)//Si on a cliqué sur le whiteboard et que le mode PENCIl ou RUBBER sont activés, on trace un trait avec la fontion de bresenham, tant que le clic n'est pas relaché
 		{
 			Vector2 NewPoint = SearchImpact();
 			if (NewPoint != VectorNull && PreviousPoint != VectorNull)
 			{
-				BresenhamLike.DrawLineWithSize(SizePencil, NewPoint, PreviousPoint, Texture.width, TextureColors, ColorToDraw);
-				Texture.SetPixels(TextureColors);
-				Texture.Apply();
-				print("hit ok");
+				BresenhamLike.DrawLineWithSize(SizePencil, NewPoint, PreviousPoint, WhiteBoardTexture.width, WhiteBoardTabColors, ColorToDraw);
+				WhiteBoardTexture.SetPixels(WhiteBoardTabColors);
+				WhiteBoardTexture.Apply();
 			}
 			PreviousPoint = NewPoint;
 		}
-		else if (OnTape)
+		else if (OnTape) //Si on a cliqué sur le whiteboard et que le mode clavier est activé on réalise l'action correspondante à la touche
 		{
-			if (Input.anyKeyDown)
-			{
-				Debug.Log("A key or mouse click has been detected");
-			}
 			if (Input.GetKeyUp(KeyCode.Escape))
 			{
 				StopCoroutine("ActiveCursor");
 				OnTape = false;
 			}
-			if (Input.GetKeyUp(KeyCode.A))
-				DrawLetterATest();
+			else if (Input.GetKeyUp(KeyCode.Backspace))
+			{
+				StopCoroutine("ActiveCursor");
+				CursorCoord.x -= (int)Letters[ConfigKeyboardDraw.LetterCursorBlank].rect.width;
+				DrawLetter(ConfigKeyboardDraw.LetterCursorBlank);
+				StartCoroutine("ActiveCursor");
+			}
+			else if (Input.anyKeyDown)
+			{
+				bool checkLetters = false;
+				foreach (KeyValuePair<KeyCode, int> value in ConfigKeyboardDraw.LetterIndex)
+				{
+					if (Input.GetKeyDown(value.Key))
+					{
+						DrawLetter(value.Value);
+						CursorCoord.x += (int)Letters[ConfigKeyboardDraw.LetterCursorBlank].rect.width;
+						checkLetters = true;
+						break;
+					}
+				}
+				if (!checkLetters)
+					print("La touche : '" + Input.inputString + "' n'est pas prise en charge.");
+			}
 		}
 	}
 
+	//Récupère la texture de la lettre demandée et la place sur le whiteboard à l'emplacement du curseur
+	private void DrawLetter (int index)
+	{
+		Texture2D letters_tex = Letters[index].texture;
+		Color[] letter = letters_tex.GetPixels((int)Letters[index].rect.x, (int)Letters[index].rect.y, (int)Letters[index].rect.width, (int)Letters[index].rect.height);
+		WhiteBoardTexture.SetPixels((int)CursorCoord.x, (int)CursorCoord.y, (int)Letters[index].rect.width, (int)Letters[index].rect.height, letter);
+		WhiteBoardTexture.Apply();
+	}
+
+	//Lance un rayon pour trouver les coordonnées du curseur sur la texture
 	private Vector2 SearchImpact()
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit, 100))
 		{
-			print("hit =" + (int)(hit.textureCoord2.x * Texture.width) + " , " + (int)(hit.textureCoord2.y * Texture.height));
-			print("hit2 =" + (int)(hit.textureCoord2.x) + " , " + (int)(hit.textureCoord2.y ));
-			int x = (int)(hit.textureCoord.x * Texture.width);
-			int y = (int)(hit.textureCoord.y * Texture.height);
-			//return (x + y * texture.width);
+			int x = (int)(hit.textureCoord.x * WhiteBoardTexture.width);
+			int y = (int)(hit.textureCoord.y * WhiteBoardTexture.height);
 			return (new Vector2(x, y));
 		}
 		return (VectorNull);
 	}
 
-	private void DrawLetterATest ()
-	{
-		print("A is pressed");
-		Texture2D letters_tex = Letters[0].texture;
-		Color[] letter_A = letters_tex.GetPixels((int)Letters[1].rect.x, (int)Letters[1].rect.y, (int)Letters[1].rect.width, (int)Letters[1].rect.height);
-		for (int i = 0; i < TextureColors.Length; i++)
-		{
-			TextureColors[i] = Color.magenta;
-		}
-		print("x=" + (int)CursorCoord.x + ", y=" + (int)CursorCoord.y + "width=" + (int)Letters[0].rect.width + "height=" + (int)Letters[0].rect.height + "et texture.width = " + Texture.width);
-		Texture.SetPixels((int)CursorCoord.x, (int)CursorCoord.y, (int)Letters[1].rect.width, (int)Letters[1].rect.height, letter_A);
-		Texture.Apply();
-	}
-
+	// Pour afficher un curseur qui clignote et indiquer l'activation de la frappe à l'utilisateur :)
 	private IEnumerator ActiveCursor ()
 	{
 		while (true)
 		{
-			print("Je suis pret à saisir vos lettres");
-			/* TO DO :
-			 * Faire clignoter un curseur
-			 * */
+			DrawLetter(ConfigKeyboardDraw.LetterCursorBlank);
+			yield return new WaitForSeconds(0.3f);
+			DrawLetter(ConfigKeyboardDraw.LetterCursorIndex);
+			yield return new WaitForSeconds(0.3f);
+			DrawLetter(ConfigKeyboardDraw.LetterCursorBlank);
 			yield return null;
 		}
 	}
 
+	//activer le mode frappe du clavier et désactiver le stylo / gomme
 	public void ActiveKeyboardMode ()
 	{
 		if (!KeyboardMode)
@@ -129,6 +141,7 @@ public class DrawPixel : MonoBehaviour {
 		}
 	}
 
+	//active le mode dessin au stylo et désactive la frappe clavier / gomme
 	public void ActivePencilMode ()
 	{
 		if (!PencilMode)
@@ -144,6 +157,7 @@ public class DrawPixel : MonoBehaviour {
 			PencilMode = false;
 	}
 
+	//active le mode dessin à la gomme et désactive la frappe clavier / dessin stylo
 	public void ActiveRubberMode ()
 	{
 		if (!RubberMode)
@@ -160,30 +174,31 @@ public class DrawPixel : MonoBehaviour {
 			RubberMode = false;
 	}
 
+	//nettoie tout le whiteboard = mode éponge
 	public void CleanWhiteBoard ()
 	{
-		for (int i = 0; i < TextureColors.Length; i++)
+		for (int i = 0; i < WhiteBoardTabColors.Length; i++)
 		{
-			TextureColors[i] = ColorToErase;
+			WhiteBoardTabColors[i] = ColorToErase;
 		}
-		Texture.SetPixels(TextureColors);
-		Texture.Apply();
+		WhiteBoardTexture.SetPixels(WhiteBoardTabColors);
+		WhiteBoardTexture.Apply();
 	}
 
+	// Au clic de la souris, récupére la position du cursor sur la texture et configure les paramètre pour les différents modes
 	public void OnMouseDown ()
 	{
-		print("Onmouse");
 		if (PencilMode || RubberMode)
 		{
-			print("On Pencil or Rubber mode");
 			PreviousPoint = SearchImpact();
 			OnDraw = true;
 		}
 		else if (KeyboardMode)
 		{
-			print("OnKeyboardMode");
+			StopCoroutine("ActiveCursor");
+			DrawLetter(ConfigKeyboardDraw.LetterCursorBlank);
 			CursorCoord = SearchImpact();
-			//StartCoroutine("ActiveCursor");
+			StartCoroutine("ActiveCursor");
 			OnTape = true;
 		}
 	}

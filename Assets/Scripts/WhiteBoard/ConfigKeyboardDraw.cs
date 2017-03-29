@@ -4,12 +4,25 @@ using UnityEngine;
 
 public class ConfigKeyboardDraw : MonoBehaviour {
 
-	public static Dictionary<string,Vector2> LetterCoord = new Dictionary<string, Vector2>()
+	public static int LetterCursorBlank = 62;
+	public static int LetterCursorIndex = 63;
+	public static Dictionary<KeyCode,int> LetterIndex = new Dictionary<KeyCode, int>()
 	{
-		{"a", new Vector2(0,0)},
-		{"A", new Vector2(0,0)},
-		{"z", new Vector2(0,0)},
-		{"Z", new Vector2(0,0)},
 	};
-
+	void Start()
+	{
+		int i2 = 0;
+		for (int i = 0; KeyCode.A + i != KeyCode.Z + 1; i++)
+		{
+			print("add: " + (KeyCode.A + i) + "," + i +".");
+			LetterIndex.Add((KeyCode.A + i), i);
+			i2++;
+		}
+		i2 += 26;
+		for (int i = 0; KeyCode.Alpha0 + i != KeyCode.Alpha9 + 1; i++)
+		{
+			print("add: " + (KeyCode.Alpha0 + i) + "," + i2 + i + ".");
+			LetterIndex.Add((KeyCode.Alpha0 + i), i2);
+		}
+	}
 }
