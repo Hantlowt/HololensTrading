@@ -670,8 +670,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.8, y: 0.55, z: 0.1}
+  m_Center: {x: 0.4, y: 0.26, z: 0}
 --- !u!102 &102710518004920088
 TextMesh:
   serializedVersion: 3
@@ -2375,7 +2375,7 @@ RectTransform:
   m_GameObject: {fileID: 1557519966313204}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 224089075209140832}
   - {fileID: 224844509553015796}
@@ -2388,7 +2388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.321, y: -0.141}
+  m_AnchoredPosition: {x: 0.195, y: -0.098}
   m_SizeDelta: {x: 0.819, y: 0.128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224629465268639200

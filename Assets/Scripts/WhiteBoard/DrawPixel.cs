@@ -161,6 +161,7 @@ public class DrawPixel : MonoBehaviour {
 	{
 		if (!PencilMode)
 		{
+			WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
 			PencilMode = true;
 			ColorToDraw = ColorToDrawPrevious;
 			SizePencil = 2;
