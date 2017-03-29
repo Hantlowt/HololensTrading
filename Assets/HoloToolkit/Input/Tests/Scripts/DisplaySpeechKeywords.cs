@@ -23,7 +23,7 @@ namespace HoloToolkit.Unity.InputModule.Tests
             {
                 textMesh.text += " " + item.Keyword + "\n";
             }*/
-			textMesh.text += "Look New Graph Button and try saying :\n Open";
+			textMesh.text += "Look New Graph Button,\n and try saying :\n Open";
         }
     }
 }

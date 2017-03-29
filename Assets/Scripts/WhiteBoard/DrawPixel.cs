@@ -18,6 +18,7 @@ public class DrawPixel : MonoBehaviour {
 	private bool OnTape;
 	private Color ColorToDrawPrevious;
 	private int SizePencil;
+	private int CursorCoordStartXOnTape;
 	private Vector2 PreviousPoint;
 	private Vector2 CursorCoord;
 	private Vector2 VectorNull = new Vector2(0,0);
@@ -31,7 +32,8 @@ public class DrawPixel : MonoBehaviour {
 		OnDraw = false;
 		ColorToDraw = Color.black;
 		SizePencil = 2;
-		CursorCoord = VectorNull;
+		//initialisation temporaire du curseur, test input keyboard in hololens (le curseur de la souris n'est pas automatiquement pris en compte)
+		CursorCoord = new Vector2(25, 200);
 		WhiteBoardTexture = GetComponent<Renderer>().material.mainTexture as Texture2D;
 		WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
 		if (WhiteBoardTexture == null)
@@ -59,6 +61,19 @@ public class DrawPixel : MonoBehaviour {
 			{
 				StopCoroutine("ActiveCursor");
 				OnTape = false;
+			}
+			else if (Input.GetKeyUp(KeyCode.Space))
+			{
+				DrawLetter(ConfigKeyboardDraw.LetterCursorBlank);
+				CursorCoord.x += (int)Letters[ConfigKeyboardDraw.LetterCursorBlank].rect.width;
+			}
+			else if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp(KeyCode.KeypadEnter))
+			{
+				StopCoroutine("ActiveCursor");
+				DrawLetter(ConfigKeyboardDraw.LetterCursorBlank);
+				CursorCoord.x = CursorCoordStartXOnTape;
+				CursorCoord.y -= (int)Letters[ConfigKeyboardDraw.LetterCursorBlank].rect.height;
+				StartCoroutine("ActiveCursor");
 			}
 			else if (Input.GetKeyUp(KeyCode.Backspace))
 			{
@@ -198,6 +213,7 @@ public class DrawPixel : MonoBehaviour {
 			StopCoroutine("ActiveCursor");
 			DrawLetter(ConfigKeyboardDraw.LetterCursorBlank);
 			CursorCoord = SearchImpact();
+			CursorCoordStartXOnTape = (int)CursorCoord.x;
 			StartCoroutine("ActiveCursor");
 			OnTape = true;
 		}
