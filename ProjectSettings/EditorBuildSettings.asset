@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/HoloToolkit/Sharing/Tests/Scenes/SharingTest.unity
   - enabled: 0
     path: Assets/HoloToolkit/Sharing/Tests/Scenes/SharingSpawnTest.unity
+  - enabled: 0
+    path: Assets/PUNVoice/DemoVoice/DemoVoice-Scene.unity
