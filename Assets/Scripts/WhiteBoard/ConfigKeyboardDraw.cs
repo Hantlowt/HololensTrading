@@ -14,15 +14,13 @@ public class ConfigKeyboardDraw : MonoBehaviour {
 		int i2 = 0;
 		for (int i = 0; KeyCode.A + i != KeyCode.Z + 1; i++)
 		{
-			print("add: " + (KeyCode.A + i) + "," + i +".");
 			LetterIndex.Add((KeyCode.A + i), i);
 			i2++;
 		}
 		i2 += 26;
 		for (int i = 0; KeyCode.Alpha0 + i != KeyCode.Alpha9 + 1; i++)
 		{
-			print("add: " + (KeyCode.Alpha0 + i) + "," + i2 + i + ".");
-			LetterIndex.Add((KeyCode.Alpha0 + i), i2);
+			LetterIndex.Add((KeyCode.Alpha0 + i), i2 + i);
 		}
 	}
 }

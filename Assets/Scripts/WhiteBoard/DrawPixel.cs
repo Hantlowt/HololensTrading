@@ -82,7 +82,7 @@ public class DrawPixel : MonoBehaviour {
 				DrawLetter(ConfigKeyboardDraw.LetterCursorBlank);
 				StartCoroutine("ActiveCursor");
 			}
-			else if (Input.anyKeyDown)
+			else if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKeyDown(KeyCode.Mouse1))
 			{
 				bool checkLetters = false;
 				foreach (KeyValuePair<KeyCode, int> value in ConfigKeyboardDraw.LetterIndex)
@@ -143,6 +143,7 @@ public class DrawPixel : MonoBehaviour {
 	{
 		if (!KeyboardMode)
 		{
+			WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
 			KeyboardMode = true;
 			OnDraw = false;
 			PencilMode = false;
@@ -178,6 +179,7 @@ public class DrawPixel : MonoBehaviour {
 	{
 		if (!RubberMode)
 		{
+			WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
 			RubberMode = true;
 			ColorToDrawPrevious = ColorToDraw;
 			ColorToDraw = ColorToErase;
@@ -224,7 +226,6 @@ public class DrawPixel : MonoBehaviour {
 	{
 		if (PencilMode || RubberMode)
 		{
-			print("Exitmouse");
 			OnDraw = false;
 		}
 	}
