@@ -22,6 +22,7 @@ public class DrawPixel : MonoBehaviour {
 	private Vector2 PreviousPoint;
 	private Vector2 CursorCoord;
 	private Vector2 VectorNull = new Vector2(0,0);
+    private GameObject Pencil;
 
 	// Use this for initialization
 	private void Start () {
@@ -32,6 +33,7 @@ public class DrawPixel : MonoBehaviour {
 		OnDraw = false;
 		ColorToDraw = Color.black;
 		SizePencil = 2;
+        Pencil = transform.FindChild("pencil").gameObject;
 		//initialisation temporaire du curseur, test input keyboard in hololens (le curseur de la souris n'est pas automatiquement pris en compte)
 		CursorCoord = new Vector2(25, 200);
 		WhiteBoardTexture = GetComponent<Renderer>().material.mainTexture as Texture2D;
@@ -42,18 +44,31 @@ public class DrawPixel : MonoBehaviour {
 			CleanWhiteBoard();
 	}
 
+    private Vector2 return_PosPencil()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Pencil.transform.position, Vector3.forward, out hit, 100))
+            return (new Vector2((int)(hit.textureCoord.x * WhiteBoardTexture.width), (int)(hit.textureCoord.y * WhiteBoardTexture.height)));
+        else
+            return (VectorNull);
+    }
+
 	// Update is called once per frame
 	private void Update () {
-		if (OnDraw)//Si on a cliqué sur le whiteboard et que le mode PENCIl ou RUBBER sont activés, on trace un trait avec la fontion de bresenham, tant que le clic n'est pas relaché
+        Vector3 newPosPencil = new Vector3(Mathf.Clamp(Pencil.transform.localPosition.x + Input.GetAxis("Mouse X") * -1.0f,
+            -5.0f, 5.0f), 0.03f, Mathf.Clamp(Pencil.transform.localPosition.z + Input.GetAxis("Mouse Y") * -1.0f, -5.0f, 5.0f));
+        //Debug.Log(Mathf.Clamp(Pencil.transform.localPosition.y + Input.GetAxis("Mouse X") * -1.0f, -5.0f, 5.0f));
+        Pencil.transform.localPosition = newPosPencil;
+        if (OnDraw)//Si on a cliqué sur le whiteboard et que le mode PENCIl ou RUBBER sont activés, on trace un trait avec la fontion de bresenham, tant que le clic n'est pas relaché
 		{
-			Vector2 NewPoint = SearchImpact();
-			if (NewPoint != VectorNull && PreviousPoint != VectorNull)
-			{
+            //Vector2 NewPoint = SearchImpact();
+
+            Vector2 NewPoint = return_PosPencil();
+            if (NewPoint != VectorNull && PreviousPoint != VectorNull)
 				BresenhamLike.DrawLineWithSize(SizePencil, NewPoint, PreviousPoint, WhiteBoardTexture.width, WhiteBoardTabColors, ColorToDraw);
-				WhiteBoardTexture.SetPixels(WhiteBoardTabColors);
-				WhiteBoardTexture.Apply();
-			}
-			PreviousPoint = NewPoint;
+            WhiteBoardTexture.SetPixels(WhiteBoardTabColors);
+            WhiteBoardTexture.Apply();
+            PreviousPoint = NewPoint;
 		}
 		else if (OnTape) //Si on a cliqué sur le whiteboard et que le mode clavier est activé on réalise l'action correspondante à la touche
 		{
@@ -208,14 +223,15 @@ public class DrawPixel : MonoBehaviour {
 	{
 		if (PencilMode || RubberMode)
 		{
-			PreviousPoint = SearchImpact();
+            //PreviousPoint = SearchImpact();
+            PreviousPoint = return_PosPencil();
 			OnDraw = true;
 		}
 		else if (KeyboardMode)
 		{
 			StopCoroutine("ActiveCursor");
 			DrawLetter(ConfigKeyboardDraw.LetterCursorBlank);
-			CursorCoord = SearchImpact();
+			CursorCoord = return_PosPencil();
 			CursorCoordStartXOnTape = (int)CursorCoord.x;
 			StartCoroutine("ActiveCursor");
 			OnTape = true;
