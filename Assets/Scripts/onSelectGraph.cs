@@ -41,7 +41,7 @@ public class onSelectGraph : MonoBehaviour {
 		GameObject graphChild;
         if (!online)
         {
-            GameObject temp = Instantiate(Graph_Prefab, new Vector3(0.8f, 0.25f, 4.0f), transform.rotation, transform.parent.transform.parent.transform.parent) as GameObject;
+            GameObject temp = Instantiate(Graph_Prefab, new Vector3(0.8f, 0f, 4.0f), transform.rotation, transform.parent.transform.parent.transform.parent) as GameObject;
             graphChild = temp.transform.GetChild(0).gameObject;
             graphChild.GetComponent<GraphLine>().online = false;
             graphChild.GetComponent<GraphLine>().height = 0.35f;
@@ -61,7 +61,7 @@ public class onSelectGraph : MonoBehaviour {
             sync.Color_R.Value = 1.0f;
             sync.Color_G.Value = 0.0f;
             sync.Color_B.Value = 0.0f;
-            SpawnManager.Spawn(sync, new Vector3(0.8f, 0.25f, 4.0f), transform.rotation, transform.parent.transform.parent.transform.parent.gameObject, "SyncGraphLine", false);
+            SpawnManager.Spawn(sync, new Vector3(0.8f, 0f, 4.0f), transform.rotation, transform.parent.transform.parent.transform.parent.gameObject, "SyncGraphLine", false);
         }
     }
 
@@ -70,7 +70,7 @@ public class onSelectGraph : MonoBehaviour {
 		FindTitleAndTicker(CompanyName);
 		if (!online)
         {
-            GameObject temp = Instantiate(Graph_Prefab, new Vector3(0.8f, 0.25f, 4.0f), transform.rotation, transform.parent.transform.parent.transform.parent) as GameObject;
+            GameObject temp = Instantiate(Graph_Prefab, new Vector3(0.8f, 0f, 4.0f), transform.rotation, transform.parent.transform.parent.transform.parent) as GameObject;
             GameObject graphChild = temp.transform.GetChild(0).gameObject;
 			graphChild.GetComponent<GraphBar>().graph_name = graphTitle;
             graphChild.GetComponent<GraphBar>().ticker = graphTicker;
@@ -84,7 +84,7 @@ public class onSelectGraph : MonoBehaviour {
             sync.Color_R.Value = 1.0f;
             sync.Color_G.Value = 0.0f;
             sync.Color_B.Value = 0.0f;
-            SpawnManager.Spawn(sync, new Vector3(0.8f, 0.25f, 4.0f), transform.rotation, transform.parent.transform.parent.transform.parent.gameObject, "SyncGraphBar", false);
+            SpawnManager.Spawn(sync, new Vector3(0.8f, 0f, 4.0f), transform.rotation, transform.parent.transform.parent.transform.parent.gameObject, "SyncGraphBar", false);
         }
 	}
 

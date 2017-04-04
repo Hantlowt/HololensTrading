@@ -6,7 +6,7 @@ using HoloToolkit.Sharing;
 using HoloToolkit.Sharing.Spawning;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using UnityEngine.UI;
 
 namespace HoloToolkit.Sharing.Spawning
 {
@@ -55,8 +55,9 @@ public class GraphBar : MonoBehaviour {
     public SyncGraphBar sync;
     public PrefabSpawnManager SpawnManager;
     public bool online;
+	public Text DateText;
 
-    void Restart()
+	void Restart()
     {
         StopAllCoroutines();
         Start();
@@ -71,7 +72,11 @@ public class GraphBar : MonoBehaviour {
     IEnumerator Start() //Initialisation..
     {
         online = true;
-        SpawnManager = GameObject.Find("Sharing").GetComponent<PrefabSpawnManager>();
+		//DateTextMesh = DateText.GetComponent<Text>();
+		//print(DateText);
+		DateText.text = System.DateTime.Today.ToString();
+		print(DateText.text);
+		SpawnManager = GameObject.Find("Sharing").GetComponent<PrefabSpawnManager>();
         sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphBar;
 		ticker = (online ? sync.Ticker.Value : ticker);
 		graph_name = (online ? sync.GraphName.Value : graph_name);
