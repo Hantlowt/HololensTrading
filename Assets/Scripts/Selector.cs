@@ -52,7 +52,7 @@ public class Selector : MonoBehaviour, IInputHandler
             selected_object = o;
             selected_object.transform.parent = Camera.main.transform;
             distance_selected = Vector3.Distance(transform.position, Camera.main.transform.position);
-            lockrot = selected_object.transform.rotation;
+			lockrot = selected_object.transform.rotation;
             selected_object.GetComponent<SharePosition>().receive_data = false;
             selected_object.GetComponent<BoxCollider>().enabled = false;
 
