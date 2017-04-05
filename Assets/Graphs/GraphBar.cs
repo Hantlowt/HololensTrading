@@ -44,7 +44,7 @@ public class GraphBar : MonoBehaviour {
     public float width = 1.0f; //largeur de celui-ci
     public float time_to_update = 15.0f; //Pour les besoins de la demo = 15 secondes !!! entre 2 RealValues
     public double[] data; //Les fameuses data
-    private GameObject[] bars;
+	private GameObject[] bars;
     public GameObject bar_prefab;
     public string graph_name; //Nom du graphique (peut etre modifie a n'importe quel moment dans Unity)
     private Transform CylinderX;
