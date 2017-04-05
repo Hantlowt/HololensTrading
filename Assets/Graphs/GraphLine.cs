@@ -32,6 +32,7 @@ namespace HoloToolkit.Sharing.Spawning
 
         [SyncData]
         public SyncFloat Color_B;
+
     }
 }
 

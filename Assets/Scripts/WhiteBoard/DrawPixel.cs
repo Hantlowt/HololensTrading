@@ -1,6 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using HoloToolkit.Sharing.SyncModel;
+using HoloToolkit.Sharing;
+using HoloToolkit.Sharing.Spawning;
+using UnityEngine.Networking;
 using UnityEngine;
+
+namespace HoloToolkit.Sharing.Spawning
+{
+    [SyncDataClass]
+    public class SyncWhiteboard : SyncSpawnedObject //Pour le partage des donnees sur le network
+    {
+        [SyncData]
+        public SyncString data;
+
+    }
+}
 
 public class DrawPixel : MonoBehaviour {
 	public static Texture2D WhiteBoardTexture;
