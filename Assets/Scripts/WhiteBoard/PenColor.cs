@@ -5,6 +5,7 @@ public class PenColor : MonoBehaviour {
 
 	public void ChangePenColor ()
 	{
-		DrawPixel.ColorToDraw = GetComponent<Image>().color;
+		if (DrawPixel.ColorToDraw != Color.white) // si la couleur pour effacer n'est pas sélectionner
+			DrawPixel.ColorToDraw = GetComponent<Image>().color;
 	}
 }

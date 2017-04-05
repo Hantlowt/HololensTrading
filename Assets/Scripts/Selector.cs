@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using HoloToolkit.Unity.InputModule;
-using HoloToolkit.Sharing.SyncModel;
 using HoloToolkit.Sharing;
 using HoloToolkit.Sharing.Spawning;
-using UnityEngine.VR.WSA;
-using UnityEngine.VR.WSA.Input;
 
 public class Selector : MonoBehaviour, IInputHandler
 {
@@ -57,7 +52,7 @@ public class Selector : MonoBehaviour, IInputHandler
             selected_object = o;
             selected_object.transform.parent = Camera.main.transform;
             distance_selected = Vector3.Distance(transform.position, Camera.main.transform.position);
-            lockrot = selected_object.transform.rotation;
+			lockrot = selected_object.transform.rotation;
             selected_object.GetComponent<SharePosition>().receive_data = false;
             selected_object.GetComponent<BoxCollider>().enabled = false;
 
@@ -110,9 +105,6 @@ public class Selector : MonoBehaviour, IInputHandler
                 selected_object.GetComponent<SharePosition>().receive_data = true;
                 selected_object = null;
             }
-        }*/
-        
-    }
-
-        
+        }*/  
+    }  
 }
