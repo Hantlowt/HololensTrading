@@ -1,14 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using HoloToolkit.Sharing.SyncModel;
-using HoloToolkit.Sharing;
-using HoloToolkit.Sharing.Spawning;
-using UnityEngine.Networking;
 using UnityEngine;
 
 namespace HoloToolkit.Sharing.Spawning
 {
-    [SyncDataClass]
+	[SyncDataClass]
     public class SyncWhiteboard : SyncSpawnedObject //Pour le partage des donnees sur le network
     {
         [SyncData]
@@ -18,14 +15,15 @@ namespace HoloToolkit.Sharing.Spawning
 }
 
 public class DrawPixel : MonoBehaviour {
-	public static Texture2D WhiteBoardTexture;
-	public static Color[] WhiteBoardTabColors;
 	public static Color ColorToDraw;
 	public static Color ColorToErase = Color.white;
 
 	public Sprite[] Letters;
 	public GameObject PencilSprite;
 	public Sprite[] CursorSprites;
+
+	private Texture2D WhiteBoardTexture;
+	private Color[] WhiteBoardTabColors;
 
 	private bool PencilMode;
 	private bool RubberMode;
@@ -57,9 +55,8 @@ public class DrawPixel : MonoBehaviour {
 		WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
 		if (WhiteBoardTexture == null)
 			throw new System.Exception("no texture for the Whiteboard!");
-		/*else
+		else
 			CleanWhiteBoard();
-			*///Enlever check si save texture d'une session à l'autre.
 	}
 
     private Vector2 return_PosPencil()
@@ -80,7 +77,8 @@ public class DrawPixel : MonoBehaviour {
 
 		if (OnDraw)//Si on a cliqué sur le whiteboard et que le mode PENCIl ou RUBBER sont activés, on trace un trait avec la fontion de bresenham, tant que le clic n'est pas relaché
 		{
-            Vector2 NewPoint = return_PosPencil();
+			WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
+			Vector2 NewPoint = return_PosPencil();
             if (NewPoint != VectorNull && PreviousPoint != VectorNull)
 				BresenhamLike.DrawLineWithSize(SizePencil, NewPoint, PreviousPoint, WhiteBoardTexture.width, WhiteBoardTabColors, ColorToDraw);
             WhiteBoardTexture.SetPixels(WhiteBoardTabColors);
@@ -89,6 +87,7 @@ public class DrawPixel : MonoBehaviour {
 		}
 		else if (OnTape) //Si on a cliqué sur le whiteboard et que le mode clavier est activé on réalise l'action correspondante à la touche
 		{
+			WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
 			if (Input.GetKeyUp(KeyCode.Escape))
 			{
 				StopCoroutine("ActiveCursor");
@@ -232,13 +231,12 @@ public class DrawPixel : MonoBehaviour {
 		WhiteBoardTexture.SetPixels(WhiteBoardTabColors);
 		WhiteBoardTexture.Apply();
 	}
-
+	
 	// Au clic de la souris, récupére la position du cursor sur la texture et configure les paramètre pour les différents modes
 	public void OnMouseDown ()
 	{
 		if (PencilMode || RubberMode)
 		{
-            //PreviousPoint = SearchImpact();
             PreviousPoint = return_PosPencil();
 			OnDraw = true;
 		}

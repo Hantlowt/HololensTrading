@@ -25,4 +25,23 @@ public class ActiveButton : MonoBehaviour {
 				ButtonToDisable[i].GetComponent<Image>().color = Color.grey;
 		}
 	}
+
+	public void ActiveButtonJustOneSecond ()
+	{
+		GetComponent<Image>().color = Color.green;
+		new WaitForSeconds(2.0f);
+		GetComponent<Image>().color = Color.white;
+	}
+
+	public void ActiveButtonOnDown ()
+	{
+		GetComponent<Image>().color = Color.green;
+		for (int i = 0; i < ButtonToDisable.Length; i++)
+			ButtonToDisable[i].GetComponent<Image>().color = Color.grey;
+	}
+
+	public void DesActiveButtonOnUp ()
+	{
+		GetComponent<Image>().color = Color.white;
+	}
 }
