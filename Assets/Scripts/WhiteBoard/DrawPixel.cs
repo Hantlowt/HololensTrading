@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using HoloToolkit.Sharing.SyncModel;
+using HoloToolkit.Sharing.Spawning;
+using HoloToolkit.Sharing;
 using UnityEngine;
 
 namespace HoloToolkit.Sharing.Spawning
