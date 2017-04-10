@@ -40,27 +40,75 @@ public class DrawPixel : MonoBehaviour {
 	private Vector2 VectorNull = new Vector2(0,0);
     private GameObject Pencil;
 	private Texture2D CursorTexture;
+    public SyncWhiteboard sync;
+    public byte[] greydata;
+    public string actual_data;
 
-	// Use this for initialization
-	private void Start () {
+    // Use this for initialization
+    private void Start () {
 		PencilMode = false;
 		RubberMode = false;
 		KeyboardMode = false;
 		OnTape = false;
 		OnDraw = false;
-		ColorToDraw = Color.grey;
+		ColorToDraw = Color.black;
 		ColorToDrawPrevious = ColorToDraw;
 		SizePencil = 2;
         Pencil = transform.FindChild("pencil").gameObject;
 		PencilSprite.GetComponent<SpriteRenderer>().sprite = CursorSprites[0];
 		WhiteBoardTexture = GetComponent<Renderer>().material.mainTexture as Texture2D;
 		WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
-		if (WhiteBoardTexture == null)
+        sync = GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncWhiteboard;
+        greydata = new byte[WhiteBoardTabColors.Length / 8];
+        StartCoroutine("SharingWhiteboard");
+        if (WhiteBoardTexture == null)
 			throw new System.Exception("no texture for the Whiteboard!");
-		/*else
-			CleanWhiteBoard();
-			*///Enlever check si save texture d'une session à l'autre.
 	}
+
+    public void send_data()
+    {
+        int o = 0;
+        for (int i = 0; i < WhiteBoardTabColors.Length; i += 8)
+        {
+            greydata[o] = (byte)0;
+            for (int j = 0; j < 8; j++)
+            {
+                greydata[o] |= (byte)((WhiteBoardTabColors[i + j] == Color.white ? (byte)0 : (byte)1) << j);
+            }
+            o++;
+        }
+        sync.data.Value = System.Convert.ToBase64String(greydata);
+        actual_data = sync.data.Value;
+    }
+
+ 
+
+    private IEnumerator SharingWhiteboard()
+    {
+        while (true)
+        {
+            if (!OnDraw && !OnTape)
+            {
+                if (sync.data.Value != "")
+                {
+                    byte[] a = System.Convert.FromBase64String(sync.data.Value);
+                    int o = 0;
+                    for (int i = 0; i < WhiteBoardTabColors.Length; i += 8)
+                    {
+                        for (int j = 0; j < 8; j++)
+                           WhiteBoardTabColors[i + j] = (byte)((a[o] >> j) & 0x1) == 0x0 ? Color.white : Color.black;
+                        o++;
+                    }
+                    WhiteBoardTexture.SetPixels(WhiteBoardTabColors);
+                    WhiteBoardTexture.Apply();
+                }
+
+                
+            }
+            yield return new WaitForSeconds(1.0f);
+        }
+            
+        }
 
     private Vector2 return_PosPencil()
     {
@@ -189,6 +237,7 @@ public class DrawPixel : MonoBehaviour {
 			KeyboardMode = false;
 			OnTape = false;
 			RubberMode = false;
+            send_data();
 		}
 		else
 		{
@@ -214,6 +263,7 @@ public class DrawPixel : MonoBehaviour {
 			OnTape = false;
 			KeyboardMode = false;
 			PencilMode = false;
+            send_data();
 		}
 		else
 		{
@@ -231,6 +281,7 @@ public class DrawPixel : MonoBehaviour {
 		}
 		WhiteBoardTexture.SetPixels(WhiteBoardTabColors);
 		WhiteBoardTexture.Apply();
+        send_data();
 	}
 
 	// Au clic de la souris, récupére la position du cursor sur la texture et configure les paramètre pour les différents modes
@@ -255,7 +306,8 @@ public class DrawPixel : MonoBehaviour {
 
 	public void OnMouseUp ()
 	{
-		if (PencilMode || RubberMode)
+        send_data();
+        if (PencilMode || RubberMode)
 		{
 			OnDraw = false;
 		}
