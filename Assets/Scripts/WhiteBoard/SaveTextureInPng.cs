@@ -1,30 +1,30 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 
-public class SaveTextureInPng : MonoBehaviour {
+public class SaveTextureInPng : MonoBehaviour
+{
 
 	private Texture2D tex;
-	private int indexImageSaved;
-
-	// Use this for initialization
-	void Start () {
-		indexImageSaved = 0;
+	private string path;
+	
+	void Start ()
+	{
 		tex = transform.parent.parent.parent.gameObject.GetComponent<Renderer>().material.mainTexture as Texture2D;
+		path = Application.dataPath + "/../Assets/Resources/Boards/";
 	}
 
 	public void OnMouseDown ()
 	{
+		int indexImageSaved = 0;
 		byte[] bytes = tex.EncodeToPNG();
-		string path = Application.dataPath + "./Resources/Texture/";
-		string nameImage = "";
-		nameImage = path + "BoardSaved" + indexImageSaved.ToString() + ".png";
-		// For testing purposes, also write to a file in the project folder
-		while (File.Exists(nameImage))
+		string NewNameFile = "Board" + indexImageSaved.ToString();
+
+		while ((Resources.Load<Texture2D>("Boards/" + NewNameFile)) != null)
 		{
-			nameImage = path + indexImageSaved.ToString() + ".png";
 			indexImageSaved++;
+			NewNameFile = "Board" + indexImageSaved.ToString();
 		}
-		File.WriteAllBytes(nameImage, bytes);
+		File.WriteAllBytes(path + NewNameFile + ".png", bytes);
+		print("save to" + path + NewNameFile + ".png");
 	}
 }
