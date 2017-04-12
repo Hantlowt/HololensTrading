@@ -29,8 +29,7 @@ public class ActiveButton : MonoBehaviour {
 	public void ActiveButtonJustOneSecond ()
 	{
 		GetComponent<Image>().color = Color.green;
-		new WaitForSeconds(2.0f);
-		GetComponent<Image>().color = Color.white;
+		DesActiveButtonOnUp();
 	}
 
 	public void ActiveButtonOnDown ()

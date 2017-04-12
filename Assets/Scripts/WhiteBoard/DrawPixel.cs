@@ -121,9 +121,8 @@ public class DrawPixel : MonoBehaviour {
 
 	// Update is called once per frame
 	private void Update () {
-
-		Vector3 newPosPencil = new Vector3(Mathf.Clamp(Pencil.transform.localPosition.x + Input.GetAxis("Mouse X") * -1.0f,
-            -5.0f, 5.0f), 0.03f, Mathf.Clamp(Pencil.transform.localPosition.z + Input.GetAxis("Mouse Y") * -1.0f, -5.0f, 5.0f));
+		Vector3 newPosPencil = new Vector3(Mathf.Clamp(Pencil.transform.localPosition.x + Input.GetAxis("Mouse X") * 0.0285f * -1.0f,
+            -0.5f, 0.5f), Mathf.Clamp(Pencil.transform.localPosition.y + Input.GetAxis("Mouse Y") * 0.0285f * -1.0f, -0.5f, 0.5f), -0.8f);
         Pencil.transform.localPosition = newPosPencil;
 
 		if (OnDraw)//Si on a cliqué sur le whiteboard et que le mode PENCIl ou RUBBER sont activés, on trace un trait avec la fontion de bresenham, tant que le clic n'est pas relaché
@@ -132,7 +131,7 @@ public class DrawPixel : MonoBehaviour {
 			Vector2 NewPoint = return_PosPencil();
             if (NewPoint != VectorNull && PreviousPoint != VectorNull)
 				BresenhamLike.DrawLineWithSize(SizePencil, NewPoint, PreviousPoint, WhiteBoardTexture.width, WhiteBoardTabColors, ColorToDraw);
-            WhiteBoardTexture.SetPixels(WhiteBoardTabColors);
+			WhiteBoardTexture.SetPixels(WhiteBoardTabColors);
             WhiteBoardTexture.Apply();
             PreviousPoint = NewPoint;
 		}
@@ -232,10 +231,13 @@ public class DrawPixel : MonoBehaviour {
 	{
 		if (!PencilMode)
 		{
+			StopCoroutine("ActiveCursor");
 			PencilMode = true;
 			WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
 			PencilSprite.GetComponent<SpriteRenderer>().sprite = CursorSprites[2];
-			SizePencil = 2;
+			ColorToDraw = ColorToDrawPrevious;
+			PencilSprite.GetComponent<SpriteRenderer>().color = ColorToDraw;
+			SizePencil = 3;
 			KeyboardMode = false;
 			OnTape = false;
 			RubberMode = false;
@@ -253,6 +255,7 @@ public class DrawPixel : MonoBehaviour {
 	{
 		if (!RubberMode)
 		{
+			StopCoroutine("ActiveCursor");
 			RubberMode = true;
 			WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
 			PencilSprite.GetComponent<SpriteRenderer>().sprite = CursorSprites[3];
@@ -261,7 +264,7 @@ public class DrawPixel : MonoBehaviour {
 				ColorToDrawPrevious = ColorToDraw;
 				ColorToDraw = ColorToErase;
 			}
-			SizePencil = 12;
+			SizePencil = 14;
 			OnTape = false;
 			KeyboardMode = false;
 			PencilMode = false;
@@ -299,6 +302,7 @@ public class DrawPixel : MonoBehaviour {
 			StopCoroutine("ActiveCursor");
 			DrawLetter(ConfigKeyboardDraw.LetterCursorBlank);
 			CursorCoord = return_PosPencil();
+			CursorCoord.y -= 1;
 			CursorCoordStartXOnTape = (int)CursorCoord.x;
 			StartCoroutine("ActiveCursor");
 			OnTape = true;

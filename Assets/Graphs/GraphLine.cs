@@ -317,17 +317,17 @@ public class GraphLine : MonoBehaviour
 			case "1D":
 				nbr_points = 24 * 60; time_to_update = 15.0f; RefChangeDate = "minute"; break;
 			case "5D":
-				nbr_points = 24 * 5; time_to_update = 60.0f; RefChangeDate = "hour"; break;
+				nbr_points = 24 * 60 * 5; time_to_update = 60.0f; RefChangeDate = "hour"; break;
 			case "1M":
-				nbr_points = 30; time_to_update = 60.0f; RefChangeDate = "day"; break;
+				nbr_points = 30 * 24; time_to_update = 60.0f; RefChangeDate = "day"; break;
 			case "6M":
-				nbr_points = 30 * 6; time_to_update = 60.0f; RefChangeDate = "day"; break;
+				nbr_points = 30 * 24 * 6; time_to_update = 60.0f; RefChangeDate = "day"; break;
 			case "1Y":
 				nbr_points = 30 * 12; time_to_update = 60.0f; RefChangeDate = "day"; break;
 			case "2Y":
-				nbr_points = 24; time_to_update = 60.0f; RefChangeDate = "month"; break;
+				nbr_points = 24 * 30; time_to_update = 60.0f; RefChangeDate = "month"; break;
 			case "5Y":
-				nbr_points = 12 * 5; time_to_update = 60.0f; RefChangeDate = "month"; break;
+				nbr_points = 12 * 5 * 30; time_to_update = 60.0f; RefChangeDate = "month"; break;
 			case "10Y":
 				nbr_points = 10; time_to_update = 60.0f; RefChangeDate = "year"; break;
 			case "MAX":
