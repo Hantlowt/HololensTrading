@@ -58,7 +58,7 @@ public class DrawPixel : MonoBehaviour {
 		PencilSprite.GetComponent<SpriteRenderer>().sprite = CursorSprites[0];
 		WhiteBoardTexture = GetComponent<Renderer>().material.mainTexture as Texture2D;
 		WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
-        sync = GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncWhiteboard;
+        sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncWhiteboard;
         greydata = new byte[WhiteBoardTabColors.Length / 8];
         StartCoroutine("SharingWhiteboard");
         if (WhiteBoardTexture == null)
