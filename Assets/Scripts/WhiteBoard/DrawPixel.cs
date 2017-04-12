@@ -74,9 +74,7 @@ public class DrawPixel : MonoBehaviour {
         {
             greydata[o] = (byte)0;
             for (int j = 0; j < 8; j++)
-            {
                 greydata[o] |= (byte)((WhiteBoardTabColors[i + j] == Color.white ? (byte)0 : (byte)1) << j);
-            }
             o++;
         }
         sync.data.Value = System.Convert.ToBase64String(greydata);

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Graph
   - Button
+  - VoiceInstance
   layers:
   - Default
   - TransparentFX

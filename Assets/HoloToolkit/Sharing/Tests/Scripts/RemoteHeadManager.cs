@@ -16,6 +16,7 @@ namespace HoloToolkit.Sharing.Tests
     public class RemoteHeadManager : Singleton<RemoteHeadManager>
     {
         public GameObject head;
+        public long[] userslist = new long[20];
         public class RemoteHeadInfo
         {
             public long UserID;
@@ -33,6 +34,8 @@ namespace HoloToolkit.Sharing.Tests
 
             // SharingStage should be valid at this point.
             SharingStage.Instance.SharingManagerConnected += Connected;
+            for (int i = 0; i < userslist.Length; i++)
+                userslist[i] = 0;
         }
 
         private void Connected(object sender, EventArgs e)
@@ -133,6 +136,19 @@ namespace HoloToolkit.Sharing.Tests
             RemoteHeadInfo headInfo = GetRemoteHeadInfo(userID);
             headInfo.HeadObject.transform.localPosition = headPos;
             headInfo.HeadObject.transform.localRotation = headRot;
+            GameObject[] l = GameObject.FindGameObjectsWithTag("VoiceInstance");
+            //Debug.Log(userID);
+            //Debug.Log(l[l.Length - userID].GetComponent<PhotonView>().ownerId);
+            /*foreach (GameObject g in l)
+            {
+                //Debug.Log(g.GetComponent<PhotonView>().ownerId);
+                if (g.GetComponent<PhotonView>().ownerId - 1 == userID)
+                {
+                    Debug.Log("ashdkj");
+                    g.transform.position = headPos;
+                    g.transform.rotation = headRot;
+                }
+            }*/
         }
 
         /// <summary>

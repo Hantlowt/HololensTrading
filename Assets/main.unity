@@ -2410,7 +2410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClientRole: 0
-  ServerAddress: 192.168.0.100
+  ServerAddress: 192.168.137.1
   ServerPort: 20602
   connectOnAwake: 1
   AutoDiscoverServer: 0
@@ -3569,6 +3569,23 @@ Prefab:
       value: 
       objectReference: {fileID: 1310499666290078, guid: 85cb4635a57dbc842ba7d9dbb356fc27,
         type: 2}
+    - target: {fileID: 4719402570239668, guid: fea25cf156e68364e89fee93def0bedc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -3.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 4719402570239668, guid: fea25cf156e68364e89fee93def0bedc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 4719402570239668, guid: fea25cf156e68364e89fee93def0bedc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -13.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865330736188608, guid: fea25cf156e68364e89fee93def0bedc,
+        type: 2}
+      propertyPath: PositionOffset
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fea25cf156e68364e89fee93def0bedc, type: 2}
   m_IsPrefabParent: 0

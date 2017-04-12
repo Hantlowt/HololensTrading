@@ -29,8 +29,8 @@ public class ConnectAndJoinRandom : Photon.MonoBehaviour
             Debug.Log("Update() was called by Unity. Scene is loaded. Let's connect to the Photon Master Server. Calling: PhotonNetwork.ConnectUsingSettings();");
 
             ConnectInUpdate = false;
-            //PhotonNetwork.ConnectUsingSettings(Version + "." + SceneManagerHelper.ActiveSceneBuildIndex);
-            PhotonNetwork.ConnectToMaster("192.168.0.100", 5055, "HololensTrading", Version + "." + SceneManagerHelper.ActiveSceneBuildIndex);
+            PhotonNetwork.ConnectUsingSettings(Version + "." + SceneManagerHelper.ActiveSceneBuildIndex);
+            //PhotonNetwork.ConnectToMaster("192.168.0.100", 5055, "HololensTrading", Version + "." + SceneManagerHelper.ActiveSceneBuildIndex);
         }
     }
 
