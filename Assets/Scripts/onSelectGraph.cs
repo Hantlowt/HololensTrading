@@ -21,7 +21,7 @@ public class onSelectGraph : MonoBehaviour {
     {
         SyncWhiteboard sync = new SyncWhiteboard();
         //sync.r.Add(0.5f);
-        SpawnManager.Spawn(sync, new Vector3(-1.0f, 0f, 4.0f), Quaternion.Euler(90.0f, 180.0f, 30.0f), transform.parent.transform.parent.transform.parent.gameObject, "SyncWhiteboard", false);
+        SpawnManager.Spawn(sync, new Vector3(-0.5f, 0f, 3.0f), Quaternion.Euler(0.0f, 0.0f, 0.0f), transform.parent.transform.parent.transform.parent.gameObject, "SyncWhiteboard", false);
 
     }
 

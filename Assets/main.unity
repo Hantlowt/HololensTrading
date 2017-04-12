@@ -2189,8 +2189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de00d310dfda25445a2e617b1c887b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropDown: {fileID: 0}
-  options: []
 --- !u!114 &916864053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2400,7 +2398,7 @@ MonoBehaviour:
   - DataModelClassName: SyncGraphBar
     Prefab: {fileID: 1130231892817502, guid: 39a78266705504a4a8ff7ffafa364139, type: 2}
   - DataModelClassName: SyncWhiteboard
-    Prefab: {fileID: 1214805072890684, guid: 62b4b46d81af3114881947536c48ecdb, type: 2}
+    Prefab: {fileID: 1799530166853446, guid: 2dfb5638cdbcd7547b08fa10ff8f5a16, type: 2}
 --- !u!114 &1053577281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3133,8 +3131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aee98500c91ba64d8af4908e29de71e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tex: {fileID: 0}
-  indexImageSaved: 0
 --- !u!1 &1313263854
 GameObject:
   m_ObjectHideFlags: 0
@@ -3523,15 +3519,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4699544095394322, guid: fea25cf156e68364e89fee93def0bedc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.9347398
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4699544095394322, guid: fea25cf156e68364e89fee93def0bedc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.0990574
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4699544095394322, guid: fea25cf156e68364e89fee93def0bedc, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 13.701368
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4699544095394322, guid: fea25cf156e68364e89fee93def0bedc, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3574,6 +3570,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1310499666290078, guid: 85cb4635a57dbc842ba7d9dbb356fc27,
         type: 2}
+    - target: {fileID: 114865330736188608, guid: fea25cf156e68364e89fee93def0bedc,
+        type: 2}
+      propertyPath: PositionOffset
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fea25cf156e68364e89fee93def0bedc, type: 2}
   m_IsPrefabParent: 0
