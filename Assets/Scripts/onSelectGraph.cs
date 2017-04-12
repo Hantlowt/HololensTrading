@@ -16,7 +16,16 @@ public class onSelectGraph : MonoBehaviour {
 	private string graphTitle = "Société Générale"; //tmp test graph si pas de société choisit
     public bool online;
     public PrefabSpawnManager SpawnManager;
-	/* Au click pour ajouter un graph on récupère le nom de la société et le
+
+    public void drawNewWhiteboard()
+    {
+        SyncWhiteboard sync = new SyncWhiteboard();
+        //sync.r.Add(0.5f);
+        SpawnManager.Spawn(sync, new Vector3(-1.0f, 0f, 4.0f), Quaternion.Euler(90.0f, 180.0f, 30.0f), transform.parent.transform.parent.transform.parent.gameObject, "SyncWhiteboard", false);
+
+    }
+
+    /* Au click pour ajouter un graph on récupère le nom de la société et le
 	 * ticker correspondant pour lancer l'instanciation du nouveau graph
 	 */
 

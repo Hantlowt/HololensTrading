@@ -35,7 +35,7 @@ namespace HoloToolkit.Sharing.Tests
 
         private static void NotifyUserJoined(User user)
         {
-            Debug.LogFormat("User {0} has joined the room.", user.GetName());
+            Debug.LogFormat("User {0} has joined the room, with id {1}", user.GetName(), user.GetID());
         }
 
         private static void NotifyUserLeft(User user)
