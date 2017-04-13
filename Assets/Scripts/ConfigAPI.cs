@@ -33,9 +33,9 @@ public class ConfigAPI : MonoBehaviour {
 	public static string paramCompany = "q=";
 	public static Dictionary<string, string> CompanyList = new Dictionary<string, string>()
 	{
-		{"TADAWUL:1120", "Al Rajhi Banking"},
+		{"EPA:CAP", "Cap Gemini SA"},
 		{"NASDAQ:AAPL", "Apple Inc"},
-		{"GLE:EPA", "Société Générale"},
+		{"EPA:GLE", "Société Générale"},
 		{"NASDAQ:MSFT", "Microsoft Corp"},
 		{"NASDAQ:GOOG", "Google"},
 		{"NASDAQ:AMZN", "Amazone"},
@@ -43,35 +43,35 @@ public class ConfigAPI : MonoBehaviour {
 		{"INDEXEURO:PX1", "CAC 40"},
 		{"EPA:AIR", "Airbus Group"},
 		{"EPA:HO", "Thales SA"},
-		{"TADAWUL:2010", "Saudi Basic Ind."}
+		{"EPA:ORA", "Orange SA."}
 	};
 	public static Dictionary<string, double> PriceList = new Dictionary<string, double>()
 	{
-		{"TADAWUL:1120", 63.63},
-		{"NASDAQ:AAPL", 146.84},
-		{"GLE:EPA", 46.38},
-		{"NASDAQ:MSFT", 64.21},
+		{"EPA:CAP", 86.26},
+		{"NASDAQ:AAPL", 141.80},
+		{"EPA:GLE", 43.31},
+		{"NASDAQ:MSFT", 65.23},
 		{"NASDAQ:GOOG", 830.46},
 		{"NASDAQ:AMZN", 851.20},
 		{"EPA:AM", 1127.90},
-		{"INDEXEURO:PX1", 4961.47},
-		{"EPA:AIR", 68.85},
+		{"INDEXEURO:PX1", 5070.79},
+		{"EPA:AIR", 71.64},
 		{"EPA:HO", 89.01},
-		{"TADAWUL:2010", 95.50}
+		{"EPA:ORA", 14.22}
 	};
 	public static Dictionary<string, double> PercentList = new Dictionary<string, double>()
 	{
-		{"TADAWUL:1120", 0.40},
-		{"NASDAQ:AAPL", 1.05},
-		{"GLE:EPA", -2.38},
+		{"EPA:CAP", -1.28},
+		{"NASDAQ:AAPL", 0.00},
+		{"EPA:GLE", -3.01},
 		{"NASDAQ:MSFT", -1.11},
 		{"NASDAQ:GOOG", -2.11},
 		{"NASDAQ:AMZN", 0.21},
 		{"EPA:AM", 0.94},
-		{"INDEXEURO:PX1", -0.82},
-		{"EPA:AIR", -1.09},
+		{"INDEXEURO:PX1", -0.59},
+		{"EPA:AIR", -0.40},
 		{"EPA:HO", 0.0},
-		{"TADAWUL:2010", -1.04}
+		{"EPA:ORA", -1.01}
 	};
 	//public static string[] TickersList = { "AAPL", "GLE", "MSFT", "GOOG", "AMZN", "YHOO", "INDEXEURO:PX1" };
 	//public static string[] CompanyNameList = { "Apple Inc", "Société Générale", "Microsoft Corp", "Google", "Amazone", "Yahoo", "CAC 40" };

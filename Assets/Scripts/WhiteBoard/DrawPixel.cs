@@ -70,8 +70,6 @@ public class DrawPixel : MonoBehaviour {
     public void send_data()
     {
         int o = 0;
-		//WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
-		//greydata = new byte[WhiteBoardTabColors.Length / 8];
 		for (int i = 0; i < WhiteBoardTabColors.Length; i += 8)
         {
             greydata[o] = (byte)0;

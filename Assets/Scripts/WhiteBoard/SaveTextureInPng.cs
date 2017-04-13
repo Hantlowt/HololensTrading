@@ -25,6 +25,5 @@ public class SaveTextureInPng : MonoBehaviour
 			NewNameFile = "Board" + indexImageSaved.ToString();
 		}
 		File.WriteAllBytes(path + NewNameFile + ".png", bytes);
-		//print("save to" + path + NewNameFile + ".png");
 	}
 }
