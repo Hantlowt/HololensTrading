@@ -73,10 +73,4 @@ public class ConfigAPI : MonoBehaviour {
 		{"EPA:HO", 0.0},
 		{"EPA:ORA", -1.01}
 	};
-	//public static string[] TickersList = { "AAPL", "GLE", "MSFT", "GOOG", "AMZN", "YHOO", "INDEXEURO:PX1" };
-	//public static string[] CompanyNameList = { "Apple Inc", "Société Générale", "Microsoft Corp", "Google", "Amazone", "Yahoo", "CAC 40" };
-	//public static string paramDateStart = "&startdate=";
-	//public static string paramDateEnd = "&enddate=";
-	//public static string paramFormatJson = "&format=json";
-
 }
