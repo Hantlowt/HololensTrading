@@ -60,17 +60,19 @@ public class DrawPixel : MonoBehaviour {
 		WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
         sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncWhiteboard;
         greydata = new byte[WhiteBoardTabColors.Length / 8];
-        StartCoroutine("SharingWhiteboard");
-        if (WhiteBoardTexture == null)
+		if (WhiteBoardTexture == null)
 			throw new System.Exception("no texture for the Whiteboard!");
 		else
 			CleanWhiteBoard();
+		StartCoroutine("SharingWhiteboard");
 	}
 
     public void send_data()
     {
         int o = 0;
-        for (int i = 0; i < WhiteBoardTabColors.Length; i += 8)
+		//WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
+		//greydata = new byte[WhiteBoardTabColors.Length / 8];
+		for (int i = 0; i < WhiteBoardTabColors.Length; i += 8)
         {
             greydata[o] = (byte)0;
             for (int j = 0; j < 8; j++)
@@ -90,8 +92,10 @@ public class DrawPixel : MonoBehaviour {
             if (!OnDraw && !OnTape)
             {
                 if (sync.data.Value != "")
-                {
-                    byte[] a = System.Convert.FromBase64String(sync.data.Value);
+				{
+					WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
+					send_data();
+					byte[] a = System.Convert.FromBase64String(sync.data.Value);
                     int o = 0;
                     for (int i = 0; i < WhiteBoardTabColors.Length; i += 8)
                     {
@@ -118,7 +122,6 @@ public class DrawPixel : MonoBehaviour {
 
 	// Update is called once per frame
 	private void Update () {
-		WhiteBoardTexture.Apply();
 		Vector3 newPosPencil = new Vector3(Mathf.Clamp(Pencil.transform.localPosition.x + Input.GetAxis("Mouse X") * 0.0285f * -1.0f,
             -0.5f, 0.5f), Mathf.Clamp(Pencil.transform.localPosition.y + Input.GetAxis("Mouse Y") * 0.0285f * -1.0f, -0.5f, 0.5f), -0.8f);
         Pencil.transform.localPosition = newPosPencil;

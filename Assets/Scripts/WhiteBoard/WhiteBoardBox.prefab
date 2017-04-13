@@ -780,7 +780,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799530166853446}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0, z: 1.503}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224611732679993788}
@@ -864,8 +864,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.79416484, y: 0.8084569, z: 0.006910689}
-  m_Center: {x: -0.9419266, y: 0.16053939, z: -0.0043160915}
+  m_Size: {x: 0.7941649, y: 0.8084569, z: 0.012150688}
+  m_Center: {x: -0.9419266, y: 0.16053939, z: 0.014773369}
 --- !u!65 &65620871917091482
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -876,8 +876,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 2.675911}
+  m_Center: {x: 0, y: 0, z: -0.83794594}
 --- !u!114 &114000310720527682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1354,23 +1354,6 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 114569986763743452}
           m_MethodName: DesActiveButtonOnUp
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 114569986763743452}
-          m_MethodName: ActiveButtonOnDown
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

@@ -25,6 +25,6 @@ public class FindAndDisplayTextureList : MonoBehaviour {
 		}
 		dropDown.AddOptions(options);
 
-		print("update check list index = " + indexImageSaved);
+		//print("update check list index = " + indexImageSaved);
 	}
 }
