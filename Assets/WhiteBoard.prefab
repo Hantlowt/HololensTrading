@@ -84,6 +84,8 @@ GameObject:
   - component: {fileID: 114843912303305132}
   - component: {fileID: 114031994173124994}
   - component: {fileID: 114516172576506032}
+  - component: {fileID: 65069693851334744}
+  - component: {fileID: 114260513776512742}
   m_Layer: 0
   m_Name: WhiteBoard
   m_TagString: Untagged
@@ -527,6 +529,18 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65069693851334744
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1214805072890684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 0.0000025224992, z: 10.000003}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114013197881810262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -641,6 +655,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2b2c15e792f7da04289871688aeaf698, type: 3}
   - {fileID: 21300000, guid: 86827cabc4603fa47a0a76c8e53fc3eb, type: 3}
   - {fileID: 21300000, guid: e12adaa41334e55448ecb86e4732b305, type: 3}
+  greydata: 
+  actual_data: 
 --- !u!114 &114048808142273226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -666,6 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa70f3118ca4d448b8507d0f7ceef91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PencilSprite: {fileID: 0}
 --- !u!114 &114085780372902492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -704,6 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa70f3118ca4d448b8507d0f7ceef91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PencilSprite: {fileID: 0}
 --- !u!114 &114094425884530290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -876,6 +894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa70f3118ca4d448b8507d0f7ceef91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PencilSprite: {fileID: 0}
 --- !u!114 &114142270646447018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1129,6 +1148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa70f3118ca4d448b8507d0f7ceef91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PencilSprite: {fileID: 0}
 --- !u!114 &114194646680356730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1140,6 +1160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa70f3118ca4d448b8507d0f7ceef91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PencilSprite: {fileID: 0}
 --- !u!114 &114207961116700008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1178,6 +1199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa70f3118ca4d448b8507d0f7ceef91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PencilSprite: {fileID: 0}
 --- !u!114 &114243726861717140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1263,6 +1285,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 10
+--- !u!114 &114260513776512742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1214805072890684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a60b4385a87e3748a39cac79f7a72ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  receive_data: 1
 --- !u!114 &114261541594040848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1767,6 +1801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa70f3118ca4d448b8507d0f7ceef91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PencilSprite: {fileID: 0}
 --- !u!114 &114628127294439420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2506,6 +2541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa70f3118ca4d448b8507d0f7ceef91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PencilSprite: {fileID: 0}
 --- !u!114 &114972271572558382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2517,6 +2553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa70f3118ca4d448b8507d0f7ceef91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PencilSprite: {fileID: 0}
 --- !u!212 &212278046487773424
 SpriteRenderer:
   m_ObjectHideFlags: 1

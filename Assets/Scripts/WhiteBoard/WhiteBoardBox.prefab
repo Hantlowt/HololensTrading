@@ -631,6 +631,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4250921624297254}
+  - component: {fileID: 114593752360735982}
+  - component: {fileID: 65328742384307522}
+  - component: {fileID: 114427222465784330}
   m_Layer: 0
   m_Name: WhiteBoardBox
   m_TagString: Untagged
@@ -851,6 +854,18 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65328742384307522
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1799530166853446}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.79416484, y: 0.8084569, z: 0.006910689}
+  m_Center: {x: -0.9419266, y: 0.16053939, z: -0.0043160915}
 --- !u!65 &65620871917091482
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1448,6 +1463,12 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
 --- !u!114 &114186430289305388
 MonoBehaviour:
@@ -1563,6 +1584,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2b2c15e792f7da04289871688aeaf698, type: 3}
   - {fileID: 21300000, guid: 86827cabc4603fa47a0a76c8e53fc3eb, type: 3}
   - {fileID: 21300000, guid: e12adaa41334e55448ecb86e4732b305, type: 3}
+  greydata: 
+  actual_data: 
 --- !u!114 &114204292837932916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2343,6 +2366,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114427222465784330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1799530166853446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff591f43ecba96d4ca3984aa7cbbc770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114439622765607338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3006,6 +3040,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114593752360735982
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1799530166853446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a60b4385a87e3748a39cac79f7a72ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  receive_data: 1
 --- !u!114 &114611341162034488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3159,18 +3205,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114345194742806788}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114729542256698040}
-        m_MethodName: ModeIsActive
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114650678363139702
@@ -3511,9 +3546,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonToDisable:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1183969948861936}
+  - {fileID: 1947463985281162}
+  - {fileID: 1498570660189068}
 --- !u!114 &114745354178428800
 MonoBehaviour:
   m_ObjectHideFlags: 1

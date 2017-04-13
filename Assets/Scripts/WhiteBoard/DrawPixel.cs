@@ -102,13 +102,10 @@ public class DrawPixel : MonoBehaviour {
                     WhiteBoardTexture.SetPixels(WhiteBoardTabColors);
                     WhiteBoardTexture.Apply();
                 }
-
-                
             }
             yield return new WaitForSeconds(1.0f);
         }
-            
-        }
+	}
 
     private Vector2 return_PosPencil()
     {
@@ -121,6 +118,7 @@ public class DrawPixel : MonoBehaviour {
 
 	// Update is called once per frame
 	private void Update () {
+		WhiteBoardTexture.Apply();
 		Vector3 newPosPencil = new Vector3(Mathf.Clamp(Pencil.transform.localPosition.x + Input.GetAxis("Mouse X") * 0.0285f * -1.0f,
             -0.5f, 0.5f), Mathf.Clamp(Pencil.transform.localPosition.y + Input.GetAxis("Mouse Y") * 0.0285f * -1.0f, -0.5f, 0.5f), -0.8f);
         Pencil.transform.localPosition = newPosPencil;
