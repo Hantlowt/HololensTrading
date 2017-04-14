@@ -4,6 +4,8 @@ using HoloToolkit.Sharing.SyncModel;
 using HoloToolkit.Sharing.Spawning;
 using HoloToolkit.Sharing;
 using UnityEngine;
+using System.IO;
+using UnityEngine.UI;
 
 namespace HoloToolkit.Sharing.Spawning
 {
@@ -92,13 +94,18 @@ public class DrawPixel : MonoBehaviour {
                 if (sync.data.Value != "")
 				{
 					WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
-					send_data();
+					//send_data();
 					byte[] a = System.Convert.FromBase64String(sync.data.Value);
                     int o = 0;
                     for (int i = 0; i < WhiteBoardTabColors.Length; i += 8)
                     {
+
                         for (int j = 0; j < 8; j++)
-                           WhiteBoardTabColors[i + j] = (byte)((a[o] >> j) & 0x1) == 0x0 ? Color.white : Color.black;
+                        {
+                            WhiteBoardTabColors[i + j] = (byte)((a[o] >> j) & 0x1) == 0x0 ? Color.white : Color.black;
+                            if ((i + j) % 3000 == 0)
+                                yield return null;
+                        }
                         o++;
                     }
                     WhiteBoardTexture.SetPixels(WhiteBoardTabColors);
@@ -120,8 +127,8 @@ public class DrawPixel : MonoBehaviour {
 
 	// Update is called once per frame
 	private void Update () {
-		Vector3 newPosPencil = new Vector3(Mathf.Clamp(Pencil.transform.localPosition.x + Input.GetAxis("Mouse X") * 0.0285f * -1.0f,
-            -0.5f, 0.5f), Mathf.Clamp(Pencil.transform.localPosition.y + Input.GetAxis("Mouse Y") * 0.0285f * -1.0f, -0.5f, 0.5f), -0.8f);
+		Vector3 newPosPencil = new Vector3(Mathf.Clamp(Pencil.transform.localPosition.x + Input.GetAxis("Mouse X") * -0.1f,
+            -0.5f, 0.5f), Mathf.Clamp(Pencil.transform.localPosition.y + Input.GetAxis("Mouse Y") * -0.1f, -0.5f, 0.5f), -0.8f);
         Pencil.transform.localPosition = newPosPencil;
 
 		if (OnDraw)//Si on a cliqué sur le whiteboard et que le mode PENCIl ou RUBBER sont activés, on trace un trait avec la fontion de bresenham, tant que le clic n'est pas relaché
@@ -316,4 +323,24 @@ public class DrawPixel : MonoBehaviour {
 			OnDraw = false;
 		}
 	}
+
+    public void SaveData()
+    {
+        using (FileStream fs = new FileStream(Application.persistentDataPath + "/boards.save", FileMode.Append, FileAccess.Write))
+        using (StreamWriter sw = new StreamWriter(fs))
+        {
+            send_data();
+            sw.WriteLine(System.Convert.ToBase64String(greydata));
+        }
+    }
+
+    public void LoadData(Text TextureLabel)
+    {
+        int id = System.Convert.ToInt32(TextureLabel.text.Replace("Board", ""));
+        if (File.Exists(Application.persistentDataPath + "/boards.save"))
+        {
+            string[] all_file = File.ReadAllLines(Application.persistentDataPath + "/boards.save");
+            sync.data.Value = all_file[id];
+        }
+    }
 }

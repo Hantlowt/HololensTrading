@@ -185,7 +185,6 @@ GameObject:
   - component: {fileID: 114080263680710582}
   - component: {fileID: 114186430289305388}
   - component: {fileID: 114784501437605766}
-  - component: {fileID: 114944968889744464}
   m_Layer: 5
   m_Name: SaveButton
   m_TagString: Untagged
@@ -780,7 +779,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799530166853446}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.503}
+  m_LocalPosition: {x: 2.8627658, y: -2.692637, z: 3.9885964}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224611732679993788}
@@ -1323,8 +1322,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114944968889744464}
-        m_MethodName: OnMouseDown
+      - m_Target: {fileID: 114193779546025582}
+        m_MethodName: SaveData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1832,8 +1831,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114204292837932916}
-        m_MethodName: LoadPNG
+      - m_Target: {fileID: 114193779546025582}
+        m_MethodName: LoadData
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 114885713755106732}
@@ -4160,17 +4159,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114944968889744464
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1257896884768444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd25217c653f4c045be2f5348f58c858, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114962900002386830
 MonoBehaviour:
   m_ObjectHideFlags: 1
