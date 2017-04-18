@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using HoloToolkit.Sharing.SyncModel;
 using HoloToolkit.Sharing;
@@ -10,7 +9,7 @@ using UnityEngine.UI;
 
 namespace HoloToolkit.Sharing.Spawning
 {
-    [SyncDataClass]
+	[SyncDataClass]
     public class SyncGraphBar : SyncSpawnedObject //Pour le partage des donnees sur le network
     {
         [SyncData]
@@ -38,12 +37,14 @@ namespace HoloToolkit.Sharing.Spawning
 
 public class GraphBar : MonoBehaviour {
 
-    public int nbr_bar = 50; //Nombre de bar dans le graph
+    public int nbr_bar = 24; //Nombre de bar dans le graph
     private int nbr_bar_save;
     public float height = 1.0f; //hauteur de celui-ci
     public float width = 1.0f; //largeur de celui-ci
     public float time_to_update = 15.0f; //Pour les besoins de la demo = 15 secondes !!! entre 2 RealValues
-    public double[] data; //Les fameuses data
+    public double[] data; //Les fameuses dataprivate
+	string[] dataDate;//Les dates associées
+	private string RefChangeDate = "hour";
 	private GameObject[] bars;
     public GameObject bar_prefab;
     public string graph_name; //Nom du graphique (peut etre modifie a n'importe quel moment dans Unity)
@@ -55,12 +56,11 @@ public class GraphBar : MonoBehaviour {
     public SyncGraphBar sync;
     public PrefabSpawnManager SpawnManager;
     public bool online;
-	public Text DateText;
 
 	void Restart()
     {
-        StopAllCoroutines();
-        Start();
+		InitBars();
+		UpdateAllGraph();
     }
 
     public void Destroy_on_Network()
@@ -72,10 +72,6 @@ public class GraphBar : MonoBehaviour {
     IEnumerator Start() //Initialisation..
     {
         online = true;
-		//DateTextMesh = DateText.GetComponent<Text>();
-		//print(DateText);
-		DateText.text = System.DateTime.Today.ToString();
-		print(DateText.text);
 		SpawnManager = GameObject.Find("Sharing").GetComponent<PrefabSpawnManager>();
         sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncGraphBar;
 		ticker = (online ? sync.Ticker.Value : ticker);
@@ -83,26 +79,32 @@ public class GraphBar : MonoBehaviour {
 		CylinderX = transform.FindChild("CylinderX");
         CylinderY = transform.FindChild("CylinderY");
         Name = transform.FindChild("Name");
-        nbr_bar_save = nbr_bar;
-        data = new double[nbr_bar];
-        if (bars != null)
-            for (int i = 0; i < bars.Length; i++)
-                Destroy(bars[i]);
-        bars = new GameObject[nbr_bar];
-		data[0] = ConfigAPI.PriceList[ticker];
-        for (int i = 1; i < nbr_bar; i++) //On remplit les donnees avec des nombres fictifs mais cohérents.
-            data[i] = data[i - 1] + Random.Range(-1.75f, 1.75f);
-        for (int i = 0; i < nbr_bar; i++)
-        {
-            bars[i] = Instantiate(bar_prefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
-            bars[i].transform.parent = transform;
-            bars[i].transform.localScale = new Vector3(width / nbr_bar, 1.0f, width / nbr_bar);
-            bars[i].transform.localPosition = new Vector3(i * bars[i].transform.localScale.x, 0.0f, 0.0f);
-            bars[i].GetComponent<Bar>().data = data[i];
-			bars[i].GetComponent<Bar>().ColorBar = ColorBar;
-		}
+		InitBars();
 		yield return StartCoroutine("RealValues");
     }
+
+	void InitBars()
+	{
+		nbr_bar_save = nbr_bar;
+		data = new double[nbr_bar];
+		if (bars != null)
+			for (int i = 0; i < bars.Length; i++)
+				Destroy(bars[i]);
+		bars = new GameObject[nbr_bar];
+		data[0] = ConfigAPI.PriceList[ticker];
+		for (int i = 1; i < nbr_bar; i++) //On remplit les donnees avec des nombres fictifs mais cohérents.
+			data[i] = data[i - 1] + Random.Range(-1.75f, 1.75f);
+		for (int i = 0; i < nbr_bar; i++)
+		{
+			bars[i] = Instantiate(bar_prefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
+			bars[i].transform.parent = transform;
+			bars[i].transform.localScale = new Vector3(width / nbr_bar, 1.0f, width / nbr_bar);
+			bars[i].transform.localPosition = new Vector3(i * bars[i].transform.localScale.x, 0.0f, 0.0f);
+			bars[i].GetComponent<Bar>().dataDevice = data[i];
+			bars[i].GetComponent<Bar>().ColorBar = ColorBar;
+		}
+		RemplitDatesSelonEchelle(RefChangeDate);
+	}
 
     double MoreDistantData()
     {
@@ -156,7 +158,6 @@ public class GraphBar : MonoBehaviour {
 
 	void Update_bar() // Met à jour la taille et la position des bars selon leurs nouvelles valeurs
 	{
-        
         for (int i = 0; i < nbr_bar; i++)
         {
             bars[i].transform.localScale = new Vector3(bars[i].transform.localScale.x,
@@ -164,10 +165,11 @@ public class GraphBar : MonoBehaviour {
 				bars[i].transform.localScale.z);
             bars[i].transform.localPosition = new Vector3(bars[i].transform.localPosition.x,
                 bars[i].transform.localScale.y, bars[i].transform.localPosition.z);
-            bars[i].GetComponent<Bar>().data = data[i];
+            bars[i].GetComponent<Bar>().dataDevice = data[i];
 			bars[i].GetComponent<Bar>().ColorBar = ColorBar;
 		}
-    }
+		RemplitDatesSelonEchelle(RefChangeDate);
+	}
 
     void Update_cylinder() //Deformation et positionnement des supports cylindriques
     {
@@ -198,4 +200,79 @@ public class GraphBar : MonoBehaviour {
         if (nbr_bar_save != nbr_bar)
             Restart();
     }
+
+	public void ChangeNbrPoints (string name)
+	{
+		switch (name.ToUpper())
+		{
+			case "1H":
+				nbr_bar = 60; time_to_update = 15.0f; RefChangeDate = "minute"; break;
+			case "1D":
+				nbr_bar = 24; time_to_update = 15.0f; RefChangeDate = "hour"; break;
+			case "5D":
+				nbr_bar = 24 * 5; time_to_update = 60.0f; RefChangeDate = "hour"; break;
+			case "1M":
+				nbr_bar = 30; time_to_update = 60.0f; RefChangeDate = "day"; break;
+			case "6M":
+				nbr_bar = 30 * 6; time_to_update = 60.0f; RefChangeDate = "day"; break;
+			case "1Y":
+				nbr_bar = 30 * 12; time_to_update = 60.0f; RefChangeDate = "day"; break;
+			case "2Y":
+				nbr_bar = 24; time_to_update = 60.0f; RefChangeDate = "month"; break;
+			case "5Y":
+				nbr_bar = 12 * 5; time_to_update = 60.0f; RefChangeDate = "month"; break;
+			case "MAX":
+				nbr_bar = 60; time_to_update = 60.0f; RefChangeDate = "year"; break;
+			default:
+				nbr_bar = 70; time_to_update = 60.0f; RefChangeDate = "hour"; break;
+		}
+		Restart();
+	}
+
+	private void RemplitDatesSelonEchelle (string format)
+	{
+		dataDate = new string[nbr_bar];
+		dataDate[nbr_bar - 1] = System.DateTime.Today.ToString();
+		switch (format.ToLower())
+		{
+			case "minute":
+				for (int i = nbr_bar - 1, i2 = 0; i >= 0; i--, i2++)
+				{
+					dataDate[i] = System.DateTime.Today.AddMinutes(-i2).ToString();
+					bars[i].GetComponent<Bar>().dataTime = dataDate[i];
+				}
+				break;
+			case "hour":
+				for (int i = nbr_bar - 1, i2 = 0; i >= 0; i--, i2++)
+				{
+					dataDate[i] = System.DateTime.Today.AddHours(-i2).ToString();
+					bars[i].GetComponent<Bar>().dataTime = dataDate[i];
+				}
+				break;
+			case "day":
+				for (int i = nbr_bar - 1, i2 = 0; i >= 0; i--, i2++)
+				{
+
+					dataDate[i] = System.DateTime.Today.AddDays(-i2).ToString();
+					bars[i].GetComponent<Bar>().dataTime = dataDate[i];
+				}
+				break;
+			case "month":
+				for (int i = nbr_bar - 1, i2 = 0; i >= 0; i--, i2++)
+				{
+
+					dataDate[i] = System.DateTime.Today.AddMonths(-i2).ToString();
+					bars[i].GetComponent<Bar>().dataTime = dataDate[i];
+				}
+				break;
+			case "year":
+				for (int i = nbr_bar - 1, i2 = 0; i >= 0; i--, i2++)
+				{
+
+					dataDate[i] = System.DateTime.Today.AddYears(-i2).ToString();
+					bars[i].GetComponent<Bar>().dataTime = dataDate[i];
+				}
+				break;
+		}
+	}
 }

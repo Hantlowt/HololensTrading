@@ -512,7 +512,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114168722151245630}
-          m_MethodName: onClickHide
+          m_MethodName: Hide
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 1782058993374032}

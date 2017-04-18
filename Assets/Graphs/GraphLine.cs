@@ -70,16 +70,7 @@ public class GraphLine : MonoBehaviour
 
 	void Restart()
 	{
-		linerenderData = GetComponent<LineRenderer>();
-		nbr_points_save = nbr_points;
-		linerenderData.enabled = false;
-		linerenderData.numPositions = nbr_points;
-		data = new double[nbr_points];
-		data[0] = ConfigAPI.PriceList[ticker];
-		for (int i = 1; i < nbr_points; i++)
-			data[i] = data[i - 1] + Random.Range(-1.75f, 1.75f);
-		RemplitDatesSelonEchelle(RefChangeDate);
-		vertices2d = new Vector2[nbr_points + 2];
+		InitLine();
 		UpdateAllGraph();
 	}
 
@@ -100,18 +91,23 @@ public class GraphLine : MonoBehaviour
 		CylinderX = transform.FindChild("CylinderX");
 		CylinderY = transform.FindChild("CylinderY");
 		Name = transform.FindChild("Name");
-        linerenderData = GetComponent<LineRenderer>();
+		InitLine();
+        raycast = false;
+		yield return StartCoroutine("RealValues");
+	}
+
+	void InitLine()
+	{
+		linerenderData = GetComponent<LineRenderer>();
 		nbr_points_save = nbr_points;
 		linerenderData.enabled = false;
-        linerenderData.numPositions = nbr_points;
+		linerenderData.numPositions = nbr_points;
 		data = new double[nbr_points];
 		data[0] = ConfigAPI.PriceList[ticker];
 		for (int i = 1; i < nbr_points; i++)
 			data[i] = data[i - 1] + Random.Range(-1.75f, 1.75f);
 		RemplitDatesSelonEchelle(RefChangeDate);
 		vertices2d = new Vector2[nbr_points + 2];
-        raycast = false;
-		yield return StartCoroutine("RealValues");
 	}
 
 	private void Put_Name () //On change le nom du graph et on le scale correctement

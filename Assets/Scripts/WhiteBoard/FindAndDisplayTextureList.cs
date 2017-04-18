@@ -28,13 +28,6 @@ public class FindAndDisplayTextureList : MonoBehaviour {
                 indexImageSaved++;
             }
         }
-          /*  while ((Resources.Load<Texture2D>("Boards/" + "Board" + indexImageSaved.ToString())) != null)
-		{
-			options.Add("Board" + indexImageSaved.ToString());
-			indexImageSaved++;
-		}*/
 		dropDown.AddOptions(options);
-
-		//print("update check list index = " + indexImageSaved);
 	}
 }
