@@ -337,28 +337,28 @@ public class GraphLine : MonoBehaviour
 	private void RemplitDatesSelonEchelle (string format)
 	{
 		dataDate = new string[nbr_points];
-		dataDate[nbr_points - 1] = System.DateTime.Today.ToString();
+		dataDate[nbr_points - 1] = System.DateTime.Today.ToString("d MMM yyyy HH:mm");
 		switch (format.ToLower())
 		{
 			case "minute":
 				for (int i = nbr_points -1 , i2 = 0; i >= 0; i--, i2++)
-					dataDate[i] = System.DateTime.Today.AddMinutes(-i2).ToString();
+					dataDate[i] = System.DateTime.Today.AddMinutes(-i2).ToString("d MMM yyyy HH:mm");
 				break;
 			case "hour":
 				for (int i = nbr_points - 1, i2 = 0; i >= 0; i--, i2++)
-					dataDate[i] = System.DateTime.Today.AddHours(-i2).ToString();
+					dataDate[i] = System.DateTime.Today.AddHours(-i2).ToString("d MMM yyyy HH:mm");
 				break;
 			case "day":
 				for (int i = nbr_points - 1, i2 = 0; i >= 0; i--, i2++)
-					dataDate[i] = System.DateTime.Today.AddDays(-i2).ToString();
+					dataDate[i] = System.DateTime.Today.AddDays(-i2).ToString("d MMM yyyy");
 				break;
 			case "month":
 				for (int i = nbr_points -1 , i2 = 0; i >= 0; i--, i2++)
-					dataDate[i] = System.DateTime.Today.AddMonths(-i2).ToString();
+					dataDate[i] = System.DateTime.Today.AddMonths(-i2).ToString("MMM yyyy");
 				break;
 			case "year":
 				for (int i = nbr_points -1 , i2 = 0; i >= 0; i--, i2++)
-					dataDate[i] = System.DateTime.Today.AddYears(-i2).ToString();
+					dataDate[i] = System.DateTime.Today.AddYears(-i2).ToString("yyyy");
 				break;
 		}
 	}

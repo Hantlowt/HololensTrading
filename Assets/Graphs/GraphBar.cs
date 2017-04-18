@@ -232,20 +232,20 @@ public class GraphBar : MonoBehaviour {
 	private void RemplitDatesSelonEchelle (string format)
 	{
 		dataDate = new string[nbr_bar];
-		dataDate[nbr_bar - 1] = System.DateTime.Today.ToString();
+		dataDate[nbr_bar - 1] = System.DateTime.Today.ToString("d MMM yyyy HH:mm");
 		switch (format.ToLower())
 		{
 			case "minute":
 				for (int i = nbr_bar - 1, i2 = 0; i >= 0; i--, i2++)
 				{
-					dataDate[i] = System.DateTime.Today.AddMinutes(-i2).ToString();
+					dataDate[i] = System.DateTime.Today.AddMinutes(-i2).ToString("d MMM yyyy HH:mm");
 					bars[i].GetComponent<Bar>().dataTime = dataDate[i];
 				}
 				break;
 			case "hour":
 				for (int i = nbr_bar - 1, i2 = 0; i >= 0; i--, i2++)
 				{
-					dataDate[i] = System.DateTime.Today.AddHours(-i2).ToString();
+					dataDate[i] = System.DateTime.Today.AddHours(-i2).ToString("d MMM yyyy HH");
 					bars[i].GetComponent<Bar>().dataTime = dataDate[i];
 				}
 				break;
@@ -253,7 +253,7 @@ public class GraphBar : MonoBehaviour {
 				for (int i = nbr_bar - 1, i2 = 0; i >= 0; i--, i2++)
 				{
 
-					dataDate[i] = System.DateTime.Today.AddDays(-i2).ToString();
+					dataDate[i] = System.DateTime.Today.AddDays(-i2).ToString("d MMM yyyy");
 					bars[i].GetComponent<Bar>().dataTime = dataDate[i];
 				}
 				break;
@@ -261,7 +261,7 @@ public class GraphBar : MonoBehaviour {
 				for (int i = nbr_bar - 1, i2 = 0; i >= 0; i--, i2++)
 				{
 
-					dataDate[i] = System.DateTime.Today.AddMonths(-i2).ToString();
+					dataDate[i] = System.DateTime.Today.AddMonths(-i2).ToString("MMM yyyy");
 					bars[i].GetComponent<Bar>().dataTime = dataDate[i];
 				}
 				break;
@@ -269,7 +269,7 @@ public class GraphBar : MonoBehaviour {
 				for (int i = nbr_bar - 1, i2 = 0; i >= 0; i--, i2++)
 				{
 
-					dataDate[i] = System.DateTime.Today.AddYears(-i2).ToString();
+					dataDate[i] = System.DateTime.Today.AddYears(-i2).ToString("yyyy");
 					bars[i].GetComponent<Bar>().dataTime = dataDate[i];
 				}
 				break;
