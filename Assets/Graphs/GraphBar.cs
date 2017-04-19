@@ -166,9 +166,10 @@ public class GraphBar : MonoBehaviour {
             bars[i].transform.localPosition = new Vector3(bars[i].transform.localPosition.x,
                 bars[i].transform.localScale.y, bars[i].transform.localPosition.z);
             bars[i].GetComponent<Bar>().dataDevice = data[i];
+			bars[i].GetComponent<Bar>().dataTime = dataDate[i];
 			bars[i].GetComponent<Bar>().ColorBar = ColorBar;
 		}
-		RemplitDatesSelonEchelle(RefChangeDate);
+		//RemplitDatesSelonEchelle(RefChangeDate);
 	}
 
     void Update_cylinder() //Deformation et positionnement des supports cylindriques
@@ -245,7 +246,7 @@ public class GraphBar : MonoBehaviour {
 			case "hour":
 				for (int i = nbr_bar - 1, i2 = 0; i >= 0; i--, i2++)
 				{
-					dataDate[i] = System.DateTime.Today.AddHours(-i2).ToString("d MMM yyyy HH");
+					dataDate[i] = System.DateTime.Today.AddHours(-i2).ToString("d MMM yyyy HHh");
 					bars[i].GetComponent<Bar>().dataTime = dataDate[i];
 				}
 				break;
