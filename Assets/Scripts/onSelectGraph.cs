@@ -16,13 +16,24 @@ public class onSelectGraph : MonoBehaviour {
 	private string graphTitle = "Société Générale"; //tmp test graph si pas de société choisit
     public bool online;
     public PrefabSpawnManager SpawnManager;
+	public static bool First;
+	public GameObject ChildOfButonSpawnBoard;
 
-    public void drawNewWhiteboard()
+
+	private void Start ()
+	{
+		First = true;
+	}
+
+	public void drawNewWhiteboard()
     {
-        SyncWhiteboard sync = new SyncWhiteboard();
-        //sync.r.Add(0.5f);
-        SpawnManager.Spawn(sync, new Vector3(-0.5f, 0f, 3.0f), Quaternion.Euler(0.0f, 0.0f, 0.0f), transform.parent.transform.parent.transform.parent.gameObject, "SyncWhiteboard", false);
-
+		if (First)
+		{
+			First = false;
+			SyncWhiteboard sync = new SyncWhiteboard();
+			SpawnManager.Spawn(sync, new Vector3(-0.5f, 0f, 3.0f), Quaternion.Euler(0.0f, 0.0f, 0.0f), transform.parent.transform.parent.transform.parent.gameObject, "SyncWhiteboard", false);
+			ChildOfButonSpawnBoard.GetComponent<Image>().color = Color.grey;
+		}
     }
 
     /* Au click pour ajouter un graph on récupère le nom de la société et le
