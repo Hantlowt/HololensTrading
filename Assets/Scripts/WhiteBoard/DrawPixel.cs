@@ -133,6 +133,10 @@ public class DrawPixel : MonoBehaviour {
 
 	// Update is called once per frame
 	private void Update () {
+        if (Input.GetMouseButtonDown(0))
+            OnMouseDown();
+        if (Input.GetMouseButtonUp(0))
+            OnMouseUp();
 		Vector3 newPosPencil = new Vector3(Mathf.Clamp(Pencil.transform.localPosition.x + Input.GetAxis("Mouse X") * -0.1f,
             -0.5f, 0.5f), Mathf.Clamp(Pencil.transform.localPosition.y + Input.GetAxis("Mouse Y") * -0.1f, -0.5f, 0.5f), -0.8f);
         Pencil.transform.localPosition = newPosPencil;
