@@ -45,9 +45,10 @@ public class DrawPixel : MonoBehaviour {
     public SyncWhiteboard sync;
     public byte[] greydata;
     public string actual_data;
+	public PrefabSpawnManager SpawnManager;
 
-    // Use this for initialization
-    private void Start () {
+	// Use this for initialization
+	private void Start () {
 		PencilMode = false;
 		RubberMode = false;
 		KeyboardMode = false;
@@ -60,7 +61,8 @@ public class DrawPixel : MonoBehaviour {
 		PencilSprite.GetComponent<SpriteRenderer>().sprite = CursorSprites[0];
 		WhiteBoardTexture = GetComponent<Renderer>().material.mainTexture as Texture2D;
 		WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
-        sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncWhiteboard;
+		SpawnManager = GameObject.Find("Sharing").GetComponent<PrefabSpawnManager>();
+		sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncWhiteboard;
         greydata = new byte[WhiteBoardTabColors.Length / 8];
 		if (WhiteBoardTexture == null)
 			throw new System.Exception("no texture for the Whiteboard!");
@@ -69,7 +71,13 @@ public class DrawPixel : MonoBehaviour {
 		StartCoroutine("SharingWhiteboard");
 	}
 
-    public void send_data()
+	public void Destroy_on_Network ()
+	{
+		SpawnManager.Delete(sync);
+		Destroy(this.transform.parent);
+	}
+
+	public void send_data()
     {
         int o = 0;
 		for (int i = 0; i < WhiteBoardTabColors.Length; i += 8)
