@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 114340315877692608}
   - component: {fileID: 114477207855658584}
   - component: {fileID: 114416732679795490}
+  - component: {fileID: 114052854918727612}
   m_Layer: 0
   m_Name: GraphLineAndLegend
   m_TagString: Graph
@@ -765,7 +766,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1526719817148046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.668861, y: -3.9519172, z: 7.783947}
+  m_LocalPosition: {x: 6.8270006, y: -5.7512126, z: 7.289075}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4352729148593242}
@@ -1115,7 +1116,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.3992975, y: 0.7546867, z: 0.07524586}
-  m_Center: {x: 0.5011687, y: 0.32265663, z: 0.36902714}
+  m_Center: {x: 0.53, y: 0.32265663, z: 0}
 --- !u!102 &102091181561378124
 TextMesh:
   serializedVersion: 3
@@ -1252,6 +1253,17 @@ MonoBehaviour:
   - {fileID: 1989707445898528}
   - {fileID: 1048526249774970}
   - {fileID: 1762481189583654}
+--- !u!114 &114052854918727612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526719817148046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e44ec1644e47a743af4f9e6c746a4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114053906835310698
 MonoBehaviour:
   m_ObjectHideFlags: 1
