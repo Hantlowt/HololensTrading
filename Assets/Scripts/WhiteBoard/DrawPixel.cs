@@ -45,8 +45,7 @@ public class DrawPixel : MonoBehaviour {
     public SyncWhiteboard sync;
     public byte[] greydata;
     public string actual_data;
-	public PrefabSpawnManager SpawnManager;
-	//public GameObject ChildOfButonSpawnBoard;
+	private PrefabSpawnManager SpawnManager;
 
 	// Use this for initialization
 	private void Start () {
@@ -76,7 +75,6 @@ public class DrawPixel : MonoBehaviour {
 	public void Destroy_on_Network ()
 	{
 		onSelectGraph.First = true;
-		//ChildOfButonSpawnBoard.GetComponent<Image>().color = Color.blue;
 		SpawnManager.Delete(sync);
 		Destroy(this.transform.parent, 0.3f);
 	}

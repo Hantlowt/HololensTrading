@@ -17,12 +17,20 @@ public class onSelectGraph : MonoBehaviour {
     public bool online;
     public PrefabSpawnManager SpawnManager;
 	public static bool First;
-	public GameObject ChildOfButonSpawnBoard;
+	public Image ButtonColor;
 
 
 	private void Start ()
 	{
 		First = true;
+	}
+
+	private void Update ()
+	{
+		if (First)
+		{
+			ButtonColor.color = Color.blue;
+		}
 	}
 
 	public void drawNewWhiteboard()
@@ -32,7 +40,7 @@ public class onSelectGraph : MonoBehaviour {
 			First = false;
 			SyncWhiteboard sync = new SyncWhiteboard();
 			SpawnManager.Spawn(sync, new Vector3(-0.5f, 0f, 3.0f), Quaternion.Euler(0.0f, 0.0f, 0.0f), transform.parent.transform.parent.transform.parent.gameObject, "SyncWhiteboard", false);
-			ChildOfButonSpawnBoard.GetComponent<Image>().color = Color.grey;
+			ButtonColor.color = Color.grey;
 		}
     }
 

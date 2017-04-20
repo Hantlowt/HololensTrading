@@ -1627,7 +1627,7 @@ MonoBehaviour:
   greydata: 
   actual_data: 
   SpawnManager: {fileID: 0}
-  ChildOfButonSpawnBoard: {fileID: 0}
+  ButtonColor: {fileID: 0}
 --- !u!114 &114204292837932916
 MonoBehaviour:
   m_ObjectHideFlags: 1
