@@ -14,13 +14,13 @@ namespace HoloToolkit.Sharing.Spawning
     {
         [SyncData]
         public SyncString data;
-
     }
 }
 
 public class DrawPixel : MonoBehaviour {
 	public static Color ColorToDraw;
 	public static Color ColorToErase = Color.white;
+	private static bool first = true;
 
 	public Sprite[] Letters;
 	public GameObject PencilSprite;
@@ -45,36 +45,38 @@ public class DrawPixel : MonoBehaviour {
     public SyncWhiteboard sync;
     public byte[] greydata;
     public string actual_data;
-	public PrefabSpawnManager SpawnManager;
+	private PrefabSpawnManager SpawnManager;
 
 	// Use this for initialization
 	private void Start () {
-		PencilMode = false;
-		RubberMode = false;
-		KeyboardMode = false;
-		OnTape = false;
-		OnDraw = false;
-		ColorToDraw = Color.black;
-		ColorToDrawPrevious = ColorToDraw;
-		SizePencil = 2;
-        Pencil = transform.FindChild("pencil").gameObject;
-		PencilSprite.GetComponent<SpriteRenderer>().sprite = CursorSprites[0];
-		WhiteBoardTexture = GetComponent<Renderer>().material.mainTexture as Texture2D;
-		WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
-		SpawnManager = GameObject.Find("Sharing").GetComponent<PrefabSpawnManager>();
-		sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncWhiteboard;
-        greydata = new byte[WhiteBoardTabColors.Length / 8];
-		if (WhiteBoardTexture == null)
-			throw new System.Exception("no texture for the Whiteboard!");
-		else
-			CleanWhiteBoard();
+			first = false;
+			PencilMode = false;
+			RubberMode = false;
+			KeyboardMode = false;
+			OnTape = false;
+			OnDraw = false;
+			ColorToDraw = Color.black;
+			ColorToDrawPrevious = ColorToDraw;
+			SizePencil = 2;
+			Pencil = transform.FindChild("pencil").gameObject;
+			PencilSprite.GetComponent<SpriteRenderer>().sprite = CursorSprites[0];
+			WhiteBoardTexture = GetComponent<Renderer>().material.mainTexture as Texture2D;
+			WhiteBoardTabColors = WhiteBoardTexture.GetPixels();
+			SpawnManager = GameObject.Find("Sharing").GetComponent<PrefabSpawnManager>();
+			sync = transform.parent.GetComponent<DefaultSyncModelAccessor>().SyncModel as SyncWhiteboard;
+			greydata = new byte[WhiteBoardTabColors.Length / 8];
+			if (WhiteBoardTexture == null)
+				throw new System.Exception("no texture for the Whiteboard!");
+			else
+				CleanWhiteBoard();
 		StartCoroutine("SharingWhiteboard");
 	}
 
 	public void Destroy_on_Network ()
 	{
+		onSelectGraph.First = true;
 		SpawnManager.Delete(sync);
-		Destroy(this.transform.parent);
+		Destroy(this.transform.parent, 0.3f);
 	}
 
 	public void send_data()
@@ -91,8 +93,6 @@ public class DrawPixel : MonoBehaviour {
         actual_data = sync.data.Value;
     }
 
- 
-
     private IEnumerator SharingWhiteboard()
     {
         while (true)
@@ -107,7 +107,6 @@ public class DrawPixel : MonoBehaviour {
                     int o = 0;
                     for (int i = 0; i < WhiteBoardTabColors.Length; i += 8)
                     {
-
                         for (int j = 0; j < 8; j++)
                         {
                             WhiteBoardTabColors[i + j] = (byte)((a[o] >> j) & 0x1) == 0x0 ? Color.white : Color.black;

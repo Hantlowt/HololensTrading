@@ -4391,6 +4391,7 @@ MonoBehaviour:
     type: 2}
   online: 1
   SpawnManager: {fileID: 1053577280}
+  ButtonColor: {fileID: 3892278}
 --- !u!114 &1864072356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4589,6 +4590,7 @@ MonoBehaviour:
     type: 2}
   online: 1
   SpawnManager: {fileID: 1053577280}
+  ButtonColor: {fileID: 760091763}
 --- !u!114 &1872004477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5210,6 +5212,7 @@ MonoBehaviour:
     type: 2}
   online: 1
   SpawnManager: {fileID: 1053577280}
+  ButtonColor: {fileID: 899330847}
 --- !u!114 &2129549214
 MonoBehaviour:
   m_ObjectHideFlags: 0
