@@ -60,6 +60,28 @@ public class onSelectGraph : MonoBehaviour {
 		}
 	}
 
+    float GetPosSpawn()
+    {
+        float i = 0.8f;
+        GameObject[] graphs = GameObject.FindGameObjectsWithTag("Graph");
+        bool ok = false;
+        bool exist = false;
+        while (!ok)
+        {
+            foreach (GameObject g in graphs)
+                if (g.transform.position == new Vector3(i, 0f, 4.0f))
+                    exist = true;
+            if (exist)
+            {
+                i += 0.9f;
+                exist = false;
+            }
+            else
+                ok = true;
+        }
+        return i;
+    }
+
 	/* on instancie avec des valeurs par défaut le nouveau Graph dont le prefab est en paramètre,
 	 * on lui donne son bon nom et on lance la mise à jour de ses données selon le ticker en paramètre
 	 */
@@ -89,7 +111,7 @@ public class onSelectGraph : MonoBehaviour {
             sync.Color_R.Value = 1.0f;
             sync.Color_G.Value = 0.0f;
             sync.Color_B.Value = 0.0f;
-            SpawnManager.Spawn(sync, new Vector3(0.8f, 0f, 4.0f), transform.rotation, transform.parent.transform.parent.transform.parent.gameObject, "SyncGraphLine", false);
+            SpawnManager.Spawn(sync, new Vector3(GetPosSpawn(), 0f, 4.0f), transform.rotation, transform.parent.transform.parent.transform.parent.gameObject, "SyncGraphLine", false);
         }
     }
 
@@ -112,7 +134,7 @@ public class onSelectGraph : MonoBehaviour {
             sync.Color_R.Value = 1.0f;
             sync.Color_G.Value = 0.0f;
             sync.Color_B.Value = 0.0f;
-            SpawnManager.Spawn(sync, new Vector3(0.8f, 0f, 4.0f), transform.rotation, transform.parent.transform.parent.transform.parent.gameObject, "SyncGraphBar", false);
+            SpawnManager.Spawn(sync, new Vector3(GetPosSpawn(), 0f, 4.0f), transform.rotation, transform.parent.transform.parent.transform.parent.gameObject, "SyncGraphBar", false);
         }
 	}
 
