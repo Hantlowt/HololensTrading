@@ -18,6 +18,7 @@ public class onSelectGraph : MonoBehaviour {
     public PrefabSpawnManager SpawnManager;
 	public static bool First;
 	public Image ButtonColor;
+    public ShowOrHide Menu;
 
 
 	private void Start ()
@@ -87,6 +88,7 @@ public class onSelectGraph : MonoBehaviour {
 	 */
 	public void drawNewGraphLine (Text CompanyName)
 	{
+        Menu.Hide();
 		FindTitleAndTicker(CompanyName);
 		GameObject graphChild;
         if (!online)
@@ -117,6 +119,7 @@ public class onSelectGraph : MonoBehaviour {
 
 	public void drawNewGraphBar (Text CompanyName)
 	{
+        Menu.Hide();
 		FindTitleAndTicker(CompanyName);
 		if (!online)
         {

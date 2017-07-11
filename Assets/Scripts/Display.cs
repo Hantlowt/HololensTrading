@@ -43,14 +43,14 @@ public class Display : MonoBehaviour
 	{
 		for (int i = 0; i < nbr_instance; i++)
 		{
-			if (led_image[i].transform.localPosition.x - 0.1 > cubeInvisibleLeft.transform.localPosition.x)
+			if (led_image[i].transform.localPosition.x - 0.1f > cubeInvisibleLeft.transform.localPosition.x)
 			{
-				if (i > 0 && led_image[i - 1].transform.localPosition.x <= 1.85f)
+				if (i > 0 && led_image[i - 1].transform.localPosition.x <= 4.5f)
 						led_image[i].transform.localPosition = new Vector3(led_image[i].transform.localPosition.x - Time.deltaTime * speed, led_image[i].transform.localPosition.y, led_image[i].transform.localPosition.z);
 				else if (i == 0)
 					led_image[i].transform.localPosition = new Vector3(led_image[i].transform.localPosition.x - Time.deltaTime * speed, led_image[i].transform.localPosition.y, led_image[i].transform.localPosition.z);
 			}
-			else if (led_image[nbr_instance - 1].transform.localPosition.x - 0.1 <= cubeInvisibleLeft.transform.localPosition.x)
+			else if (led_image[nbr_instance - 1].transform.localPosition.x - 0.1f <= cubeInvisibleLeft.transform.localPosition.x)
 				led_image[i].transform.localPosition = posStart;
 		}
 	}

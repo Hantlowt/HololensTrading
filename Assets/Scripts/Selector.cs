@@ -2,6 +2,7 @@
 using HoloToolkit.Unity.InputModule;
 using HoloToolkit.Sharing;
 using HoloToolkit.Sharing.Spawning;
+using System.Collections;
 
 public class Selector : MonoBehaviour, IInputHandler
 {
@@ -12,6 +13,10 @@ public class Selector : MonoBehaviour, IInputHandler
     private bool raycast;
     private RaycastHit hit;
     public AudioClip sound_click;
+    public float time_tap = 0.5f;
+    private int nbr_tap = 0;
+    private bool coroutine_launched = false;
+    public ShowOrHide Menu;
 
     // Use this for initialization
     void Start () {
@@ -39,10 +44,8 @@ public class Selector : MonoBehaviour, IInputHandler
                 selected_object.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;*/
             //selected_object.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance_selected;
         }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            this.GetComponent<AudioSource>().Play();
-        }
+        if (Input.GetKey(KeyCode.X))
+            Menu.Switch();
     }
 
     public void enable_disable(GameObject o)
@@ -71,9 +74,28 @@ public class Selector : MonoBehaviour, IInputHandler
         }
     }
 
+    private IEnumerator InputCoroutine()
+    {
+        coroutine_launched = true;
+        yield return new WaitForSeconds(time_tap);
+        switch(nbr_tap)
+        {
+            case 1:
+                enable_disable(null);
+                break;
+            case 2:
+                Menu.Switch();
+                break;
+        }
+        nbr_tap = 0;
+        coroutine_launched = false;
+    }
+
     public void OnInputUp(InputEventData eventData)
     {
-        enable_disable(null);
+        nbr_tap++;
+        if (!coroutine_launched)
+            StartCoroutine(InputCoroutine());
         Debug.Log("Deselect");
 
     }
