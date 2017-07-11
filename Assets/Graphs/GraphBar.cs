@@ -182,8 +182,8 @@ public class GraphBar : MonoBehaviour {
 
     void Put_Name() //On change le nom du graph et on le scale correctement
     {
-        float def = width < height ? width / 10.0f : height / 10.0f;
-        Name.transform.localScale = new Vector3(def, def);
+        //float def = width < height ? width / 10.0f : height / 10.0f;
+        //Name.transform.localScale = new Vector3(def, def);
         Name.GetComponent<TextMesh>().text = (online ? sync.GraphName.Value : graph_name);
     }
 
