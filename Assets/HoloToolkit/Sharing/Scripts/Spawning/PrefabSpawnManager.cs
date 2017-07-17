@@ -36,6 +36,8 @@ namespace HoloToolkit.Sharing.Spawning
 
         private Dictionary<string, GameObject> typeToPrefab;
 
+        public GameObject lastSpawn = null;
+
         /// <summary>
         /// Counter used to create objects and make sure that no two objects created
         /// by the local application have the same name.
@@ -222,7 +224,7 @@ namespace HoloToolkit.Sharing.Spawning
             instance.gameObject.name = objectName;
 
             dataModel.GameObject = instance;
-
+            lastSpawn = instance;
             // Set the data model on the various ISyncModelAccessor components of the spawned game obejct
             ISyncModelAccessor[] syncModelAccessors = instance.GetComponentsInChildren<ISyncModelAccessor>(true);
             if (syncModelAccessors.Length <= 0)

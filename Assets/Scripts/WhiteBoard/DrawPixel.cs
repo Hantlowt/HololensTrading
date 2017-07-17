@@ -74,7 +74,7 @@ public class DrawPixel : MonoBehaviour {
 
 	public void Destroy_on_Network ()
 	{
-		onSelectGraph.First = true;
+		onSelectGraph.whiteboardSpawned = false;
 		SpawnManager.Delete(sync);
 		Destroy(this.transform.parent, 0.3f);
 	}

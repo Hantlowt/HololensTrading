@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using HoloToolkit.Sharing.Utilities;
 using HoloToolkit.Unity;
+using System.IO;
 
 namespace HoloToolkit.Sharing
 {
@@ -46,6 +47,8 @@ namespace HoloToolkit.Sharing
         [Tooltip("Should the app connect to the server at startup")]
         [SerializeField]
         private bool connectOnAwake = true;
+
+        private bool ifLoadServerAdressFromFile = true;
 
         /// <summary>
         /// Sharing manager used by the application.
@@ -151,10 +154,29 @@ namespace HoloToolkit.Sharing
             }
         }
 
+        private void LoadServerAdressFromFile(string filename)
+        {
+            if(!File.Exists(Application.persistentDataPath + "/" + filename))
+            {
+                using (FileStream fs = new FileStream(Application.persistentDataPath + "/" + filename, FileMode.Append, FileAccess.Write))
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.WriteLine(ServerAddress+":"+ServerPort);
+                }
+            }
+            else
+            {
+                string[] file = File.ReadAllLines(Application.persistentDataPath + "/" + filename);
+                ServerAddress = file[0].Split(':')[0];
+                ServerPort = int.Parse(file[0].Split(':')[1]);
+            }
+        }
+
         protected override void Awake()
         {
             base.Awake();
-
+            if (ifLoadServerAdressFromFile)
+                LoadServerAdressFromFile("SharingServer.conf");
             AppInstanceUniqueId = Guid.NewGuid().ToString();
             logWriter = new ConsoleLogWriter();
             logWriter.ShowDetailedLogs = ShowDetailedLogs;

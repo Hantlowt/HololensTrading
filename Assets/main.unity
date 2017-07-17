@@ -1374,7 +1374,7 @@ RectTransform:
   m_Children:
   - {fileID: 129738661}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -1667,7 +1667,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4533734426463534, guid: 95381d4881c5a1b42b64cf21831740d3, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95381d4881c5a1b42b64cf21831740d3, type: 2}
@@ -2010,6 +2010,7 @@ MonoBehaviour:
     Prefab: {fileID: 1130231892817502, guid: 39a78266705504a4a8ff7ffafa364139, type: 2}
   - DataModelClassName: SyncWhiteboard
     Prefab: {fileID: 1799530166853446, guid: 2dfb5638cdbcd7547b08fa10ff8f5a16, type: 2}
+  lastSpawn: {fileID: 0}
 --- !u!114 &1053577281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2022,7 +2023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClientRole: 0
-  ServerAddress: hantlowt.tk
+  ServerAddress: 192.168.0.100
   ServerPort: 20602
   connectOnAwake: 1
   AutoDiscoverServer: 0
@@ -2451,9 +2452,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Graph_Prefab: {fileID: 1130231892817502, guid: 39a78266705504a4a8ff7ffafa364139,
     type: 2}
-  online: 1
   SpawnManager: {fileID: 1053577280}
   Menu: {fileID: 2016311113}
+  linkedButton: {fileID: 0}
 --- !u!1 &1273575843
 GameObject:
   m_ObjectHideFlags: 0
@@ -3234,7 +3235,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4699544095394322, guid: fea25cf156e68364e89fee93def0bedc, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114865330736188608, guid: fea25cf156e68364e89fee93def0bedc,
         type: 2}
@@ -3288,9 +3289,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Graph_Prefab: {fileID: 1526719817148046, guid: 533977f4ac004804890a419ab0372f04,
     type: 2}
-  online: 1
   SpawnManager: {fileID: 1053577280}
   Menu: {fileID: 2016311113}
+  linkedButton: {fileID: 0}
 --- !u!1 &1437389488
 GameObject:
   m_ObjectHideFlags: 0
@@ -3794,6 +3795,11 @@ Prefab:
       propertyPath: m_Color.b
       value: 0.22745098
       objectReference: {fileID: 0}
+    - target: {fileID: 114365492537071544, guid: 7e4936cbf22b6e141b0be86a19fc5620,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7e4936cbf22b6e141b0be86a19fc5620, type: 2}
   m_IsPrefabParent: 0
@@ -4296,9 +4302,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Graph_Prefab: {fileID: 1214805072890684, guid: 62b4b46d81af3114881947536c48ecdb,
     type: 2}
-  online: 1
   SpawnManager: {fileID: 1053577280}
   Menu: {fileID: 2016311113}
+  linkedButton: {fileID: 1719515290}
+--- !u!114 &1719515290 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114365492537071544, guid: 7e4936cbf22b6e141b0be86a19fc5620,
+    type: 2}
+  m_PrefabInternal: {fileID: 1600432778}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1883481571
 GameObject:
   m_ObjectHideFlags: 0
@@ -4524,7 +4536,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

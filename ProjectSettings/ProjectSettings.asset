@@ -11,7 +11,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Societe Generale
-  productName: HololensTrading
+  productName: HoloTrading
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21176471, a: 1}
@@ -457,17 +457,17 @@ PlayerSettings:
   additionalIl2CppArgs: 
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: HololensTrading
+  metroPackageName: HoloTrading
   metroPackageVersion: 1.3.0.0
   metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
   metroCertificateSubject: Societe Generale
   metroCertificateIssuer: Societe Generale
   metroCertificateNotAfter: 80dc63f4589fd301
-  metroApplicationDescription: HololensTrading
+  metroApplicationDescription: HoloTrading
   wsaImages:
     2162888: Assets/Images/ico.png
-  metroTileShortName: HololensTrading
+  metroTileShortName: HoloTrading
   metroCommandLineArgsFile: 
   metroTileShowName: 0
   metroMediumTileShowName: 0

@@ -33,12 +33,12 @@ public class ConfigAPI : MonoBehaviour {
 	public static string paramCompany = "q=";
 	public static Dictionary<string, string> CompanyList = new Dictionary<string, string>()
 	{
-		{"EPA:CAP", "Cap Gemini SA"},
+        {"EPA:GLE", "Société Générale"},
+        {"EPA:CAP", "Cap Gemini SA"},
 		{"NASDAQ:AAPL", "Apple Inc"},
-		{"EPA:GLE", "Société Générale"},
 		{"NASDAQ:MSFT", "Microsoft Corp"},
 		{"NASDAQ:GOOG", "Google"},
-		{"NASDAQ:AMZN", "Amazone"},
+		{"NASDAQ:AMZN", "Amazon"},
 		{"EPA:AM", "Dassault Aviation SA"},
 		{"INDEXEURO:PX1", "CAC 40"},
 		{"EPA:AIR", "Airbus Group"},

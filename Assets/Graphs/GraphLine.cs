@@ -255,7 +255,7 @@ public class GraphLine : MonoBehaviour
 	
 	/* Alors... Cette fonction de barbare permet de faire un truc super classe :
 	 * Afficher les donnees du graph !
-	 * Bon en gros, si le curseur est passe sur le graph, data_selected est vrai
+	 * Bon en gros, si le curseur est sur le graph, data_selected est vrai
 	 * Ainsi, on affiche le gameobject child de la data selected qui est composee de :
 	 * - la valeur que l'on observe (il faut donc modifier le texte);
 	 * - ainsi que d'un trait indicateur, realise par un line_renderer. Il faut donc changer le position de ce trait avec la position du texte,
